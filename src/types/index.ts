@@ -42,7 +42,7 @@ export interface Project {
   image?: string;
   github?: string;
   demo?: string;
-  category: 'data' | 'web' | 'automation' | 'iot';
+  category: 'data' | 'web' | 'automation';
 }
 
 // Experience Types

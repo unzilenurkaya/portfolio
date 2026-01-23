@@ -41,7 +41,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {project.category === 'data' && '📊'}
                 {project.category === 'web' && '🌐'}
                 {project.category === 'automation' && '⚙️'}
-                {project.category === 'iot' && '📡'}
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-white">

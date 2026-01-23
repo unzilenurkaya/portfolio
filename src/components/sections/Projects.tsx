@@ -14,14 +14,13 @@ const ProjectModal = dynamic(() => import('./ProjectModal'), {
   ssr: false,
 });
 
-type FilterCategory = 'all' | 'data' | 'web' | 'automation' | 'iot';
+type FilterCategory = 'all' | 'data' | 'web' | 'automation';
 
 const filterButtons: { key: FilterCategory; icon: string }[] = [
   { key: 'all', icon: '🔮' },
   { key: 'data', icon: '📊' },
   { key: 'web', icon: '🌐' },
   { key: 'automation', icon: '⚙️' },
-  { key: 'iot', icon: '📡' },
 ];
 
 export default function Projects() {
@@ -105,7 +104,6 @@ export default function Projects() {
                       {project.category === 'data' && '📊'}
                       {project.category === 'web' && '🌐'}
                       {project.category === 'automation' && '⚙️'}
-                      {project.category === 'iot' && '📡'}
                     </div>
                     
                     {/* Hover Overlay */}

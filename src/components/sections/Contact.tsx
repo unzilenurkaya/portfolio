@@ -72,19 +72,6 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-
-              {/* Location Info */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl text-secondary">
-                  📍
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider">
-                    {t('about.location')}
-                  </p>
-                  <p className="text-white text-lg">{t('about.locationValue')}</p>
-                </div>
-              </div>
             </div>
 
             {/* Social Links */}

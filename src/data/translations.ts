@@ -40,8 +40,6 @@ export const translations = {
       description: 'Bandırma Onyedi Eylül Üniversitesi Yönetim Bilişim Sistemleri bölümü 4. sınıf öğrencisiyim. Python ve SQL ile iş süreçlerini analiz eden, yazılım ve otomasyon çözümleri geliştiren projeler üzerinde çalışıyorum.',
       description2: 'Yapay zekâ ve LLM tabanlı araçları yazılım geliştirme süreçlerinde destekleyici olarak kullanıyor, bu alanda uzmanlaşmayı hedefliyorum. Amacım, teknoloji ile iş dünyası arasında köprü kuran akıllı yazılım sistemleri geliştirmek.',
       education: 'Eğitim',
-      location: 'Konum',
-      locationValue: 'Bandırma, Türkiye',
       headline: 'Teknoloji ile Akıllı Sistemler',
       headlineHighlight: 'Geliştirmek',
       interests: 'İlgi Alanları',
@@ -95,7 +93,6 @@ export const translations = {
         data: 'Veri Analizi',
         web: 'Web',
         automation: 'Otomasyon',
-        iot: 'IoT',
       },
     },
 
@@ -252,8 +249,6 @@ export const translations = {
       description: "I'm a senior Management Information Systems student at Bandırma Onyedi Eylül University. I work on projects that analyze business processes with Python and SQL, developing software and automation solutions.",
       description2: 'I use AI and LLM-based tools as support in software development processes and aim to specialize in this field. My goal is to develop intelligent software systems that bridge technology and business.',
       education: 'Education',
-      location: 'Location',
-      locationValue: 'Bandirma, Turkey',
       headline: 'Developing Smart Systems',
       headlineHighlight: 'with Technology',
       interests: 'Interests',
@@ -307,7 +302,6 @@ export const translations = {
         data: 'Data Analysis',
         web: 'Web',
         automation: 'Automation',
-        iot: 'IoT',
       },
     },
 
