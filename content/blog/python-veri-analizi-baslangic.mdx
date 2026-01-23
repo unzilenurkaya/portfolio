@@ -1,0 +1,107 @@
+---
+title: "Python ile Veri Analizi: Başlangıç Rehberi"
+description: "Veri analizine Python ile başlamak isteyenler için temel kavramlar, kütüphaneler ve ilk adımlar."
+date: 2024-01-15
+tags: ["Python", "Veri Analizi", "Pandas", "Başlangıç"]
+published: true
+image: "/images/blog/python-data-analysis.png"
+---
+
+Veri analizi, günümüzün en değerli becerilerinden biri haline geldi. Python, bu alanda en popüler programlama dili olarak öne çıkıyor. Bu yazıda, Python ile veri analizine nasıl başlayacağınızı adım adım anlatacağım.
+
+## Neden Python?
+
+Python'un veri analizi için tercih edilmesinin birkaç önemli nedeni var:
+
+- **Kolay öğrenilebilir sözdizimi**: Diğer dillere göre daha okunabilir
+- **Geniş kütüphane ekosistemi**: Pandas, NumPy, Matplotlib gibi güçlü araçlar
+- **Aktif topluluk**: Sorunlarınıza hızlı çözümler bulabilirsiniz
+- **Ücretsiz ve açık kaynak**: Herhangi bir lisans ücreti yok
+
+## Temel Kütüphaneler
+
+Veri analizi için ihtiyacınız olan temel kütüphaneler:
+
+### 1. Pandas
+
+Pandas, veri manipülasyonu için vazgeçilmez bir kütüphanedir.
+
+```python
+import pandas as pd
+
+# CSV dosyası okuma
+df = pd.read_csv('veriler.csv')
+
+# İlk 5 satırı görüntüleme
+print(df.head())
+
+# Temel istatistikler
+print(df.describe())
+```
+
+### 2. NumPy
+
+Sayısal hesaplamalar için NumPy kullanılır.
+
+```python
+import numpy as np
+
+# Dizi oluşturma
+arr = np.array([1, 2, 3, 4, 5])
+
+# Ortalama hesaplama
+ortalama = np.mean(arr)
+print(f"Ortalama: {ortalama}")
+```
+
+### 3. Matplotlib
+
+Veri görselleştirme için Matplotlib kullanabilirsiniz.
+
+```python
+import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+plt.plot(x, y)
+plt.xlabel('X Ekseni')
+plt.ylabel('Y Ekseni')
+plt.title('Basit Çizgi Grafiği')
+plt.show()
+```
+
+## İlk Proje: CSV Analizi
+
+Öğrendiklerimizi bir projede uygulayalım:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Veriyi yükle
+df = pd.read_csv('satis_verileri.csv')
+
+# Eksik verileri kontrol et
+print(df.isnull().sum())
+
+# Aylık satış toplamları
+aylik_satis = df.groupby('ay')['satis'].sum()
+
+# Görselleştir
+aylik_satis.plot(kind='bar')
+plt.title('Aylık Satış Grafiği')
+plt.show()
+```
+
+## Sonuç
+
+Python ile veri analizine başlamak düşündüğünüzden daha kolay. Önemli olan:
+
+1. Temel Python bilgisine sahip olmak
+2. Pandas ve NumPy'ı öğrenmek
+3. Pratik yapmak için gerçek veri setleriyle çalışmak
+
+Bir sonraki yazıda daha ileri seviye veri analizi tekniklerini inceleyeceğiz.
+
+> "Veri yeni petrol, ama petrol gibi rafine edilmesi gerekiyor." - Clive Humby

@@ -1,0 +1,114 @@
+---
+title: "Excel'den Python'a Geçiş: Otomasyon İpuçları"
+description: "Excel işlemlerinizi Python ile otomatikleştirmek için pratik ipuçları ve örnek kodlar."
+date: 2024-02-10
+tags: ["Python", "Excel", "Otomasyon", "Pandas"]
+published: true
+image: "/images/blog/excel-python.png"
+---
+
+Excel harika bir araç, ancak tekrarlayan görevlerde zaman kaybına yol açabiliyor. Python ile bu işlemleri otomatikleştirerek saatler kazanabilirsiniz. Bu yazıda, Excel'den Python'a geçiş sürecini ve otomasyon ipuçlarını paylaşacağım.
+
+## Neden Excel'den Python'a Geçmeli?
+
+| Özellik | Excel | Python |
+|---------|-------|--------|
+| Tekrarlayan işlemler | Manuel | Otomatik |
+| Büyük veri setleri | Yavaş | Hızlı |
+| Hata riski | Yüksek | Düşük |
+| Ölçeklenebilirlik | Sınırlı | Sınırsız |
+
+## Temel Dönüşümler
+
+### VLOOKUP → merge()
+
+Excel'de VLOOKUP kullanıyorsanız, Python'da `merge()` fonksiyonunu kullanabilirsiniz:
+
+```python
+import pandas as pd
+
+# İki veri setini birleştirme
+sonuc = pd.merge(df1, df2, on='ortak_sutun', how='left')
+```
+
+### PivotTable → pivot_table()
+
+```python
+# Pivot tablo oluşturma
+pivot = df.pivot_table(
+    values='satis',
+    index='kategori',
+    columns='ay',
+    aggfunc='sum'
+)
+```
+
+### SUMIF → groupby()
+
+```python
+# Koşullu toplam
+kategori_toplam = df.groupby('kategori')['tutar'].sum()
+```
+
+## Pratik Otomasyon Örneği
+
+İşte günlük raporlama için kullanabileceğiniz bir script:
+
+```python
+import pandas as pd
+from datetime import datetime
+import os
+
+def gunluk_rapor():
+    # Bugünün tarihi
+    bugun = datetime.now().strftime('%Y-%m-%d')
+    
+    # Verileri oku
+    df = pd.read_excel('satis_verileri.xlsx')
+    
+    # Bugünün verilerini filtrele
+    gunluk = df[df['tarih'] == bugun]
+    
+    # Özet istatistikler
+    ozet = {
+        'Toplam Satış': gunluk['tutar'].sum(),
+        'Ortalama': gunluk['tutar'].mean(),
+        'İşlem Sayısı': len(gunluk)
+    }
+    
+    # Raporu kaydet
+    rapor = pd.DataFrame([ozet])
+    rapor.to_excel(f'rapor_{bugun}.xlsx', index=False)
+    
+    print(f"Rapor oluşturuldu: rapor_{bugun}.xlsx")
+
+# Scripti çalıştır
+gunluk_rapor()
+```
+
+## Zamanlama ile Tam Otomasyon
+
+Script'inizi belirli aralıklarla çalıştırmak için:
+
+### Windows (Task Scheduler)
+
+1. Task Scheduler'ı açın
+2. "Create Basic Task" seçin
+3. Python script'inizin yolunu belirtin
+
+### Cron Job (Linux/Mac)
+
+```bash
+# Her gün saat 09:00'da çalıştır
+0 9 * * * /usr/bin/python3 /path/to/script.py
+```
+
+## Sonuç
+
+Excel'den Python'a geçiş başta korkutucu görünebilir, ama faydaları çok büyük:
+
+- **Zaman tasarrufu**: Saatler süren işlemler dakikalara iner
+- **Tutarlılık**: Aynı script her seferinde aynı sonucu verir
+- **Ölçeklenebilirlik**: Binlerce dosyayı işleyebilirsiniz
+
+Bir sonraki adım olarak, bu script'leri daha da geliştirip e-posta ile otomatik rapor gönderme özelliği ekleyebilirsiniz.
