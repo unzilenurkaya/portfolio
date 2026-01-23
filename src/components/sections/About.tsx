@@ -15,10 +15,10 @@ export default function About() {
   ];
 
   const interests = [
-    { icon: '🤖', name: 'AI & ML' },
-    { icon: '📈', name: 'Data Science' },
-    { icon: '⚡', name: 'Automation' },
-    { icon: '🌐', name: 'Web Dev' },
+    { icon: '🤖', name: 'AI & Machine Learning' },
+    { icon: '💬', name: 'LLM & Prompt Engineering' },
+    { icon: '💻', name: 'Software Engineering' },
+    { icon: '🌐', name: 'Web Development' },
   ];
 
   return (

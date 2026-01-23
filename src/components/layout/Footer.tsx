@@ -18,7 +18,7 @@ export default function Footer() {
               ÜNZİLE NUR<span className="text-primary">.</span>
             </Link>
             <p className="text-gray-500 max-w-sm mb-6">
-              Veri analizi, otomasyon ve web teknolojileri ile dijital çözümler üreten YBS öğrencisi.
+              AI destekli yazılım sistemleri geliştirmeyi hedefleyen Yönetim Bilişim Sistemleri öğrencisi.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (

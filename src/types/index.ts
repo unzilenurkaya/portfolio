@@ -72,6 +72,7 @@ export interface Certificate {
   date: string;
   image?: string;
   url?: string;
+  featured?: boolean;
 }
 
 // Social Links

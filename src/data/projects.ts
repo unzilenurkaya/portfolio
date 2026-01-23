@@ -2,110 +2,83 @@ import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    id: 'puantaj-takip',
+    id: 'puantaj-otomasyon',
     title: {
-      tr: 'Puantaj Takip Otomasyonu',
-      en: 'Attendance Tracking Automation',
+      tr: 'Puantaj Otomasyon Sistemi',
+      en: 'Attendance Automation System',
     },
     description: {
-      tr: 'Çalışan puantaj verilerini otomatik olarak takip eden ve raporlayan Python tabanlı otomasyon sistemi.',
-      en: 'Python-based automation system that automatically tracks and reports employee attendance data.',
+      tr: 'Manuel olarak yürütülen veri eşleştirme ve vardiya kontrol sürecini Python otomasyonu ile optimize eden bir prototip.',
+      en: 'A prototype that optimizes manual data matching and shift control processes with Python automation.',
     },
     problem: {
-      tr: 'Manuel puantaj takibi zaman alıcı ve hata yapmaya açık bir süreçti. Çalışan sayısı arttıkça takip zorlaşıyordu.',
-      en: 'Manual attendance tracking was time-consuming and error-prone. Tracking became difficult as the number of employees increased.',
+      tr: 'Günlük 100+ personel turnike giriş/çıkış verisi manuel olarak kontrol ediliyor, bu süreç zaman alıcı ve hataya açıktı.',
+      en: 'Daily 100+ employee turnstile entry/exit data was manually checked, which was time-consuming and error-prone.',
     },
     solution: {
-      tr: 'Python ve Pandas kullanarak otomatik veri toplama, işleme ve Excel raporlama sistemi geliştirdim.',
-      en: 'I developed an automatic data collection, processing, and Excel reporting system using Python and Pandas.',
+      tr: 'Python, Pandas ve Openpyxl kullanarak otomatik veri temizleme, eşleştirme ve Excel raporlama sistemi geliştirdim.',
+      en: 'I developed an automatic data cleaning, matching, and Excel reporting system using Python, Pandas, and Openpyxl.',
     },
     result: {
-      tr: '%70 zaman tasarrufu sağlandı. Hata oranı sıfıra indirildi. Günlük raporlar otomatik oluşturulmaya başlandı.',
-      en: '70% time savings achieved. Error rate reduced to zero. Daily reports started to be generated automatically.',
+      tr: 'Manuel süreç otomatikleştirildi, veri temizleme ve analiz çalışmaları ile yazılım süreçleri iyileştirildi.',
+      en: 'Manual process was automated, software processes improved through data cleaning and analysis work.',
     },
-    technologies: ['Python', 'Pandas', 'Excel', 'Automation'],
+    technologies: ['Python', 'Pandas', 'Openpyxl'],
     image: '/images/projects/puantaj.png',
     category: 'automation',
   },
   {
     id: 'otel-iptal-tahmini',
     title: {
-      tr: 'Otel İptal Tahmini AI',
-      en: 'Hotel Cancellation Prediction AI',
+      tr: 'Otel Rezervasyon İptali Tahmini',
+      en: 'Hotel Reservation Cancellation Prediction',
     },
     description: {
-      tr: 'Makine öğrenmesi ile otel rezervasyon iptallerini önceden tahmin eden web uygulaması.',
-      en: 'Web application that predicts hotel reservation cancellations in advance using machine learning.',
+      tr: '36.000\'den fazla satırlık Kaggle veri seti üzerinde makine öğrenmesi algoritmalarıyla rezervasyon iptal tahminlemesi ve veri analizi çalışması.',
+      en: 'Reservation cancellation prediction and data analysis work using machine learning algorithms on a Kaggle dataset with over 36,000 rows.',
     },
     problem: {
-      tr: 'Oteller, son dakika iptallerinden dolayı gelir kaybı yaşıyordu. İptalleri önceden tahmin etmek mümkün değildi.',
-      en: 'Hotels were experiencing revenue loss due to last-minute cancellations. It was not possible to predict cancellations in advance.',
+      tr: 'Oteller, son dakika iptallerinden dolayı gelir kaybı yaşıyor ve bu iptalleri önceden tahmin etmek zor.',
+      en: 'Hotels experience revenue loss due to last-minute cancellations, and predicting these cancellations is difficult.',
     },
     solution: {
-      tr: 'XGBoost algoritması ile eğitilmiş bir model ve Streamlit ile interaktif tahmin arayüzü geliştirdim.',
-      en: 'I developed a model trained with XGBoost algorithm and an interactive prediction interface with Streamlit.',
+      tr: 'Scikit-learn ve XGBoost algoritmaları ile eğitilmiş bir model, Streamlit ile interaktif tahmin arayüzü geliştirdim.',
+      en: 'I developed a model trained with Scikit-learn and XGBoost algorithms, and an interactive prediction interface with Streamlit.',
     },
     result: {
-      tr: '%85 doğruluk oranı ile iptal tahminleri yapıldı. Oteller proaktif önlemler alabilir hale geldi.',
-      en: 'Cancellation predictions were made with 85% accuracy. Hotels became able to take proactive measures.',
+      tr: 'Makine öğrenmesi ile iptal tahminleri yapıldı, veri analizi becerileri geliştirildi.',
+      en: 'Cancellation predictions were made with machine learning, data analysis skills were improved.',
     },
-    technologies: ['Python', 'XGBoost', 'Streamlit', 'Machine Learning', 'Pandas'],
+    technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit'],
     image: '/images/projects/hotel-ai.png',
     github: 'https://github.com/unzilenurkaya/hotel-cancellation-prediction',
     category: 'data',
   },
   {
-    id: 'sokak-hayvanlari-iot',
+    id: 'sokak-hayvanlari-otomasyon',
     title: {
-      tr: 'Sokak Hayvanları IoT Sistemi',
-      en: 'Stray Animals IoT System',
+      tr: 'Sokak Hayvanları Otomasyon Sistemi',
+      en: 'Stray Animals Automation System',
     },
     description: {
-      tr: 'Arduino tabanlı akıllı yemlik ve su sistemi ile sokak hayvanlarının beslenmesini otomatikleştiren IoT projesi.',
-      en: 'IoT project that automates feeding of stray animals with Arduino-based smart feeder and water system.',
+      tr: 'Madeni para ile çalışan mekanik otomat sistemlerinden esinlenerek sokak hayvanları için mama sağlayan ünitenin tasarım ve prototip geliştirme projesi.',
+      en: 'A design and prototype development project for a unit that provides food for stray animals, inspired by coin-operated mechanical vending machines.',
     },
     problem: {
-      tr: 'Sokak hayvanları düzensiz besleniyor, yemlik ve suluklar boş kalıyordu. Manuel takip mümkün değildi.',
-      en: 'Stray animals were fed irregularly, feeders and water bowls were left empty. Manual tracking was not possible.',
+      tr: 'Sokak hayvanları düzensiz besleniyor, otomatik ve sürdürülebilir bir çözüm gerekiyor.',
+      en: 'Stray animals are fed irregularly, an automatic and sustainable solution is needed.',
     },
     solution: {
-      tr: 'Sensörlerle yemek ve su seviyesini izleyen, otomatik dolum yapan ve mobil bildirim gönderen sistem tasarladım.',
-      en: 'I designed a system that monitors food and water levels with sensors, automatically refills, and sends mobile notifications.',
+      tr: 'TÜBİTAK 4006 kapsamında mekanik otomat prensibinden yola çıkarak mama dağıtım ünitesi tasarladım.',
+      en: 'I designed a food distribution unit based on mechanical vending machine principles within the scope of TÜBİTAK 4006.',
     },
     result: {
-      tr: 'Hayvanların düzenli beslenmesi sağlandı. Belediye ile pilot uygulama için görüşmeler yapıldı.',
-      en: 'Regular feeding of animals was ensured. Discussions were held with the municipality for pilot implementation.',
+      tr: 'Prototip başarıyla geliştirildi, TÜBİTAK 4006 projesine katılım sağlandı.',
+      en: 'Prototype was successfully developed, participation in TÜBİTAK 4006 project was achieved.',
     },
-    technologies: ['Arduino', 'C++', 'IoT', 'Sensors', 'Mobile App'],
-    image: '/images/projects/iot-animals.png',
+    technologies: ['TÜBİTAK 4006', 'Prototip Geliştirme'],
+    image: '/images/projects/sokak-hayvanlari.png',
     category: 'iot',
-  },
-  {
-    id: 'sponsorluk-yonetimi',
-    title: {
-      tr: 'Sponsorluk Yönetim Sistemi',
-      en: 'Sponsorship Management System',
-    },
-    description: {
-      tr: 'Etkinlik ve proje sponsorluklarını takip eden, raporlayan tam kapsamlı web tabanlı yönetim sistemi.',
-      en: 'Comprehensive web-based management system that tracks and reports event and project sponsorships.',
-    },
-    problem: {
-      tr: 'Sponsorluklarla ilgili bilgiler dağınık, takip ve raporlama zor, iletişim koordinasyonu yetersizdi.',
-      en: 'Information about sponsorships was scattered, tracking and reporting was difficult, communication coordination was insufficient.',
-    },
-    solution: {
-      tr: 'React ve Node.js ile modern bir dashboard, sponsor takip sistemi ve otomatik raporlama modülü geliştirdim.',
-      en: 'I developed a modern dashboard with React and Node.js, sponsor tracking system, and automatic reporting module.',
-    },
-    result: {
-      tr: 'Tüm sponsorluklar tek platformda toplandı. Raporlama süresi %60 azaldı.',
-      en: 'All sponsorships were gathered on a single platform. Reporting time decreased by 60%.',
-    },
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Tailwind CSS'],
-    image: '/images/projects/sponsorship.png',
-    github: 'https://github.com/unzilenurkaya/sponsorship-management',
-    category: 'web',
   },
 ];
 

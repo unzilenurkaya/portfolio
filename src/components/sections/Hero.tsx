@@ -10,7 +10,7 @@ export default function Hero() {
 
   const stats = [
     { labelKey: 'hero.stats.internship', value: '3+' },
-    { labelKey: 'hero.stats.projects', value: '15+' },
+    { labelKey: 'hero.stats.projects', value: '5+' },
     { labelKey: 'hero.stats.university', value: '2' },
   ];
 

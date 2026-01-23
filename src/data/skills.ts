@@ -4,73 +4,109 @@ export const skills: Skill[] = [
   // Core Skills - Ana Yetenekler
   {
     name: 'Python',
-    level: 80,
+    level: 85,
     category: 'core',
     icon: '🐍',
   },
   {
     name: 'SQL',
-    level: 75,
+    level: 80,
     category: 'core',
     icon: '🗄️',
   },
   {
-    name: 'Pandas / Excel',
-    level: 80,
+    name: 'C#',
+    level: 70,
     category: 'core',
-    icon: '📊',
+    icon: '🟣',
   },
   {
-    name: 'Otomasyon',
+    name: 'JavaScript',
     level: 75,
     category: 'core',
-    icon: '⚙️',
+    icon: '🟨',
   },
-
-  // Supporting Skills - Destekleyici
   {
     name: 'React',
-    level: 65,
-    category: 'supporting',
+    level: 70,
+    category: 'core',
     icon: '⚛️',
   },
   {
     name: 'HTML / CSS',
-    level: 70,
-    category: 'supporting',
+    level: 80,
+    category: 'core',
     icon: '🎨',
   },
   {
-    name: 'JavaScript',
-    level: 65,
-    category: 'supporting',
-    icon: '🟨',
+    name: 'Git',
+    level: 75,
+    category: 'core',
+    icon: '📝',
   },
 
-  // Familiar - Aşina
+  // AI / Data Skills - AI & Veri Destekleyici
   {
-    name: 'SAP ABAP',
-    level: 40,
-    category: 'familiar',
-    icon: '🔷',
-  },
-  {
-    name: 'C#',
-    level: 55,
-    category: 'familiar',
-    icon: '🟣',
-  },
-  {
-    name: 'Git',
-    level: 60,
-    category: 'familiar',
-    icon: '📝',
+    name: 'Pandas',
+    level: 80,
+    category: 'supporting',
+    icon: '🐼',
   },
   {
     name: 'Power BI',
-    level: 45,
-    category: 'familiar',
+    level: 70,
+    category: 'supporting',
     icon: '📈',
+  },
+  {
+    name: 'Scikit-learn',
+    level: 65,
+    category: 'supporting',
+    icon: '🤖',
+  },
+  {
+    name: 'XGBoost',
+    level: 65,
+    category: 'supporting',
+    icon: '🚀',
+  },
+  {
+    name: 'Prompt Engineering',
+    level: 75,
+    category: 'supporting',
+    icon: '💬',
+  },
+  {
+    name: 'LLM Tools (ChatGPT)',
+    level: 80,
+    category: 'supporting',
+    icon: '🧠',
+  },
+
+  // Tools - Araçlar & Diğer
+  {
+    name: 'Streamlit',
+    level: 70,
+    category: 'familiar',
+    icon: '🌊',
+  },
+  {
+    name: 'Excel',
+    level: 85,
+    category: 'familiar',
+    icon: '📊',
+  },
+  {
+    name: 'Word',
+    level: 90,
+    category: 'familiar',
+    icon: '📄',
+  },
+  {
+    name: 'PowerPoint',
+    level: 85,
+    category: 'familiar',
+    icon: '📽️',
   },
 ];
 
