@@ -15,12 +15,6 @@ export const skills: Skill[] = [
     icon: '🗄️',
   },
   {
-    name: 'C#',
-    level: 70,
-    category: 'core',
-    icon: '🟣',
-  },
-  {
     name: 'JavaScript',
     level: 75,
     category: 'core',
@@ -95,18 +89,6 @@ export const skills: Skill[] = [
     level: 85,
     category: 'familiar',
     icon: '📊',
-  },
-  {
-    name: 'Word',
-    level: 90,
-    category: 'familiar',
-    icon: '📄',
-  },
-  {
-    name: 'PowerPoint',
-    level: 85,
-    category: 'familiar',
-    icon: '📽️',
   },
 ];
 

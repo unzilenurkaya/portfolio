@@ -12,7 +12,7 @@ export const translations = {
       contact: 'İletişim',
       cv: 'CV',
     },
-    
+
     // Hero Section
     hero: {
       greeting: 'Merhaba, ben',
@@ -33,7 +33,7 @@ export const translations = {
       dataAnalysis: 'Yapay Zekâ Destekli Yazılım',
       scroll: 'Kaydır',
     },
-    
+
     // About Section
     about: {
       title: 'Hakkımda',
@@ -62,16 +62,22 @@ export const translations = {
         anadoluProgram: 'Bilgisayar Prog. • 2022-Devam',
       },
     },
-    
+
     // Skills Section
     skills: {
       title: 'Yetenekler',
       subtitle: 'Teknik yetkinliklerim ve uzmanlık alanlarım',
       core: 'Ana Yetenekler',
+      coreDescription: 'Temel uzmanlık alanları',
       supporting: 'Destekleyici',
       familiar: 'Aşina',
+      familiarDescription: 'Öğrenme & keşfetme',
+      stats: {
+        internship: 'Staj Deneyimi',
+        projects: 'Tamamlanan Proje',
+      },
     },
-    
+
     // Projects Section
     projects: {
       title: 'Projeler',
@@ -92,23 +98,29 @@ export const translations = {
         iot: 'IoT',
       },
     },
-    
+
     // Experience Section
     experience: {
       title: 'Deneyim',
-      subtitle: 'Eğitim ve iş deneyimlerim',
+      subtitle: 'Staj ve iş deneyimlerim',
       internship: 'Staj',
       education: 'Eğitim',
       present: 'Devam',
     },
-    
+
+    // Education Section
+    education: {
+      title: 'Eğitim',
+      subtitle: 'Akademik geçmişim',
+    },
+
     // Certificates Section
     certificates: {
       title: 'Sertifikalar',
       subtitle: 'Aldığım sertifikalar ve başarılar',
       viewCertificate: 'Sertifikayı Gör',
     },
-    
+
     // Contact Section
     contact: {
       title: 'İletişim',
@@ -136,7 +148,7 @@ export const translations = {
         messageMin: 'Mesaj en az 10 karakter olmalı',
       },
     },
-    
+
     // Blog
     blog: {
       title: 'Blog',
@@ -146,7 +158,7 @@ export const translations = {
       backToBlog: 'Bloga Dön',
       noPosts: 'Henüz yazı yok.',
     },
-    
+
     // CV Page
     cv: {
       title: 'Özgeçmiş',
@@ -158,14 +170,14 @@ export const translations = {
       skills: 'Yetenekler',
       projects: 'Projeler',
     },
-    
+
     // Footer
     footer: {
       copyright: '© 2024 Ünzile Nur KAYA. Tüm hakları saklıdır.',
       madeWith: 'ile yapıldı',
       privacy: 'Gizlilik Politikası',
     },
-    
+
     // Common
     common: {
       loading: 'Yükleniyor...',
@@ -175,7 +187,7 @@ export const translations = {
       menu: 'Menü',
       language: 'Dil',
     },
-    
+
     // 404 Page
     notFound: {
       title: '404',
@@ -183,13 +195,13 @@ export const translations = {
       description: 'Aradığınız sayfa mevcut değil veya taşınmış olabilir.',
       backHome: 'Ana Sayfaya Dön',
     },
-    
+
     // Privacy Page
     privacy: {
       title: 'Gizlilik Politikası',
       lastUpdated: 'Son güncelleme',
     },
-    
+
     // Cookie Banner
     cookie: {
       message: 'Bu site deneyiminizi iyileştirmek için çerezler kullanır.',
@@ -198,7 +210,7 @@ export const translations = {
       learnMore: 'Daha Fazla',
     },
   },
-  
+
   en: {
     // Navigation
     nav: {
@@ -212,7 +224,7 @@ export const translations = {
       contact: 'Contact',
       cv: 'Resume',
     },
-    
+
     // Hero Section
     hero: {
       greeting: "Hi, I'm",
@@ -233,7 +245,7 @@ export const translations = {
       dataAnalysis: 'AI-Powered Software',
       scroll: 'Scroll',
     },
-    
+
     // About Section
     about: {
       title: 'About Me',
@@ -262,16 +274,22 @@ export const translations = {
         anadoluProgram: 'Computer Prog. • 2022-Ongoing',
       },
     },
-    
+
     // Skills Section
     skills: {
       title: 'Skills',
       subtitle: 'My technical competencies and areas of expertise',
       core: 'Core Skills',
+      coreDescription: 'Main expertise areas',
       supporting: 'Supporting',
       familiar: 'Familiar',
+      familiarDescription: 'Learning & exploring',
+      stats: {
+        internship: 'Internship Experience',
+        projects: 'Completed Projects',
+      },
     },
-    
+
     // Projects Section
     projects: {
       title: 'Projects',
@@ -292,23 +310,29 @@ export const translations = {
         iot: 'IoT',
       },
     },
-    
+
     // Experience Section
     experience: {
       title: 'Experience',
-      subtitle: 'My education and work experience',
+      subtitle: 'My internships and work experience',
       internship: 'Internship',
       education: 'Education',
       present: 'Present',
     },
-    
+
+    // Education Section
+    education: {
+      title: 'Education',
+      subtitle: 'My academic background',
+    },
+
     // Certificates Section
     certificates: {
       title: 'Certificates',
       subtitle: 'Certificates and achievements I have earned',
       viewCertificate: 'View Certificate',
     },
-    
+
     // Contact Section
     contact: {
       title: 'Contact',
@@ -336,7 +360,7 @@ export const translations = {
         messageMin: 'Message must be at least 10 characters',
       },
     },
-    
+
     // Blog
     blog: {
       title: 'Blog',
@@ -346,7 +370,7 @@ export const translations = {
       backToBlog: 'Back to Blog',
       noPosts: 'No posts yet.',
     },
-    
+
     // CV Page
     cv: {
       title: 'Resume',
@@ -358,14 +382,14 @@ export const translations = {
       skills: 'Skills',
       projects: 'Projects',
     },
-    
+
     // Footer
     footer: {
       copyright: '© 2024 Ünzile Nur KAYA. All rights reserved.',
       madeWith: 'Made with',
       privacy: 'Privacy Policy',
     },
-    
+
     // Common
     common: {
       loading: 'Loading...',
@@ -375,7 +399,7 @@ export const translations = {
       menu: 'Menu',
       language: 'Language',
     },
-    
+
     // 404 Page
     notFound: {
       title: '404',
@@ -383,13 +407,13 @@ export const translations = {
       description: 'The page you are looking for does not exist or has been moved.',
       backHome: 'Back to Home',
     },
-    
+
     // Privacy Page
     privacy: {
       title: 'Privacy Policy',
       lastUpdated: 'Last updated',
     },
-    
+
     // Cookie Banner
     cookie: {
       message: 'This site uses cookies to improve your experience.',

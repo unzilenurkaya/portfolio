@@ -48,7 +48,7 @@ export default function Skills() {
                 <h3 className="text-xl font-semibold text-white">
                   {t('skills.core')}
                 </h3>
-                <p className="text-sm text-gray-500">Main expertise areas</p>
+                <p className="text-sm text-gray-500">{t('skills.coreDescription')}</p>
               </div>
             </div>
 
@@ -82,12 +82,12 @@ export default function Skills() {
               </div>
               <div>
                 <div className="text-5xl font-serif text-white mb-2">3+</div>
-                <p className="text-gray-400">Staj Deneyimi</p>
+                <p className="text-gray-400">{t('skills.stats.internship')}</p>
               </div>
               <div className="h-px bg-gradient-to-r from-transparent via-accent-cyan/50 to-transparent" />
               <div>
                 <div className="text-3xl font-serif text-white mb-1">15+</div>
-                <p className="text-gray-500 text-sm">Tamamlanan Proje</p>
+                <p className="text-gray-500 text-sm">{t('skills.stats.projects')}</p>
               </div>
             </div>
           </motion.div>
@@ -141,7 +141,7 @@ export default function Skills() {
                 <h3 className="text-lg font-semibold text-white">
                   {t('skills.familiar')}
                 </h3>
-                <p className="text-sm text-gray-500">Learning & exploring</p>
+                <p className="text-sm text-gray-500">{t('skills.familiarDescription')}</p>
               </div>
             </div>
 

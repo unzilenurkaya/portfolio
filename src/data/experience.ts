@@ -70,8 +70,10 @@ export const experiences: Experience[] = [
     },
     type: 'internship',
   },
+];
 
-  // Education
+export const internships = experiences;
+export const educations = [
   {
     id: 'edu-bandirma',
     company: {
@@ -84,10 +86,10 @@ export const experiences: Experience[] = [
     },
     period: '2022 - 2026',
     description: {
-      tr: 'Veri analizi, yazılım geliştirme ve iş süreçleri yönetimi üzerine eğitim. Aktif olarak proje geliştirme ve staj deneyimleri.',
-      en: 'Education on data analysis, software development, and business process management. Actively developing projects and gaining internship experience.',
+      tr: 'Veri analizi, yazılım geliştirme ve iş süreçleri yönetimi üzerine eğitim.',
+      en: 'Education on data analysis, software development, and business process management.',
     },
-    type: 'education',
+    type: 'education' as const,
   },
   {
     id: 'edu-anadolu',
@@ -101,16 +103,9 @@ export const experiences: Experience[] = [
     },
     period: '2022 - Devam',
     description: {
-      tr: 'İkinci üniversite olarak yazılım geliştirme odaklı eğitim. Programlama dilleri ve veritabanı yönetimi.',
-      en: 'Software development focused education as a second university. Programming languages and database management.',
+      tr: 'İkinci üniversite olarak yazılım geliştirme odaklı eğitim.',
+      en: 'Software development focused education as a second university.',
     },
-    type: 'education',
+    type: 'education' as const,
   },
 ];
-
-export const getExperiencesByType = (type: Experience['type']) => {
-  return experiences.filter((exp) => exp.type === type);
-};
-
-export const educations = getExperiencesByType('education');
-export const internships = getExperiencesByType('internship');

@@ -54,32 +54,6 @@ export const projects: Project[] = [
     github: 'https://github.com/unzilenurkaya/hotel-cancellation-prediction',
     category: 'data',
   },
-  {
-    id: 'sokak-hayvanlari-otomasyon',
-    title: {
-      tr: 'Sokak Hayvanları Otomasyon Sistemi',
-      en: 'Stray Animals Automation System',
-    },
-    description: {
-      tr: 'Madeni para ile çalışan mekanik otomat sistemlerinden esinlenerek sokak hayvanları için mama sağlayan ünitenin tasarım ve prototip geliştirme projesi.',
-      en: 'A design and prototype development project for a unit that provides food for stray animals, inspired by coin-operated mechanical vending machines.',
-    },
-    problem: {
-      tr: 'Sokak hayvanları düzensiz besleniyor, otomatik ve sürdürülebilir bir çözüm gerekiyor.',
-      en: 'Stray animals are fed irregularly, an automatic and sustainable solution is needed.',
-    },
-    solution: {
-      tr: 'TÜBİTAK 4006 kapsamında mekanik otomat prensibinden yola çıkarak mama dağıtım ünitesi tasarladım.',
-      en: 'I designed a food distribution unit based on mechanical vending machine principles within the scope of TÜBİTAK 4006.',
-    },
-    result: {
-      tr: 'Prototip başarıyla geliştirildi, TÜBİTAK 4006 projesine katılım sağlandı.',
-      en: 'Prototype was successfully developed, participation in TÜBİTAK 4006 project was achieved.',
-    },
-    technologies: ['TÜBİTAK 4006', 'Prototip Geliştirme'],
-    image: '/images/projects/sokak-hayvanlari.png',
-    category: 'iot',
-  },
 ];
 
 export const getProjectsByCategory = (category: Project['category'] | 'all') => {

@@ -100,9 +100,8 @@ export default function Timeline() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex items-center gap-8 ${
-                    isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                  className={`relative flex items-center gap-8 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
                 >
                   {/* Timeline Node */}
                   <div className="absolute left-8 md:left-1/2 -translate-x-1/2 z-10">
@@ -119,9 +118,8 @@ export default function Timeline() {
 
                   {/* Content Card */}
                   <div
-                    className={`w-full md:w-[calc(50%-4rem)] ml-24 md:ml-0 ${
-                      isLeft ? 'md:pr-8' : 'md:pl-8'
-                    }`}
+                    className={`w-full md:w-[calc(50%-4rem)] ml-24 md:ml-0 ${isLeft ? 'md:pr-8' : 'md:pl-8'
+                      }`}
                   >
                     <motion.div
                       whileHover={{ y: -5 }}
