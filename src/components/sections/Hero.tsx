@@ -9,8 +9,8 @@ export default function Hero() {
   const { t } = useLanguage();
 
   const stats = [
-    { labelKey: 'hero.stats.internship', value: '3+' },
-    { labelKey: 'hero.stats.projects', value: '5+' },
+    { labelKey: 'hero.stats.internship', value: '3' },
+    { labelKey: 'hero.stats.projects', value: '3' },
     { labelKey: 'hero.stats.university', value: '2' },
   ];
 
@@ -189,6 +189,25 @@ export default function Hero() {
                   {t('hero.focus')}
                 </div>
                 <div className="text-sm font-semibold text-white">{t('hero.dataAnalysis')}</div>
+              </div>
+            </motion.div>
+
+            {/* Floating Badge - BI & Analytics */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+              className="absolute top-1/2 -right-8 glass-card p-3 rounded-2xl flex items-center gap-2 shadow-2xl border border-white/10"
+            >
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-lime to-green-500 flex items-center justify-center text-white font-bold text-xs">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[9px] text-gray-500 uppercase tracking-tighter">
+                  {t('hero.biLabel')}
+                </div>
+                <div className="text-xs font-semibold text-white">{t('hero.biValue')}</div>
               </div>
             </motion.div>
           </div>

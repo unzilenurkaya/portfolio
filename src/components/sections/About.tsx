@@ -15,10 +15,11 @@ export default function About() {
   ];
 
   const interests = [
-    { icon: '🤖', name: 'AI & Machine Learning' },
-    { icon: '💬', name: 'LLM & Prompt Engineering' },
-    { icon: '💻', name: 'Software Engineering' },
-    { icon: '🌐', name: 'Web Development' },
+    { icon: '🤖', name: 'Yapay Zekâ & Veri Bilimi' },
+    { icon: '💬', name: 'Büyük Dil Modelleri (LLM) & Prompt Mühendisliği' },
+    { icon: '📊', name: 'İş Analitiği & Veri Görselleştirme' },
+    { icon: '⚙️', name: 'Süreç Otomasyonu' },
+    { icon: '🚀', name: 'Dijital Dönüşüm' },
   ];
 
   return (
