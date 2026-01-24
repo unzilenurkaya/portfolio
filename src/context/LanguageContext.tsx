@@ -31,7 +31,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   const t = (key: string): string => {
     const keys = key.split('.');
     let value: unknown = translations[language];
-    
+
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = (value as Record<string, unknown>)[k];
@@ -40,7 +40,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
         return key;
       }
     }
-    
+
     return typeof value === 'string' ? value : key;
   };
 
@@ -62,8 +62,15 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
+
+  // Provide a safe fallback for SSR/Build time if context is missing
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    return {
+      language: 'tr' as Language,
+      setLanguage: () => { },
+      t: (key: string) => key.split('.').pop() || key,
+    };
   }
+
   return context;
 }

@@ -70,8 +70,14 @@ export interface Experience {
 // Certificate Types
 export interface Certificate {
   id: string;
-  title: string;
-  issuer: string;
+  title: {
+    tr: string;
+    en: string;
+  };
+  issuer: {
+    tr: string;
+    en: string;
+  };
   date: string;
   image?: string;
   url?: string;

@@ -2,12 +2,16 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/mdx';
-import { formatDate } from '@/lib/utils';
 import components from '@/components/blog/MDXComponents';
 import Badge from '@/components/ui/Badge';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArticleSchema } from '@/components/seo/JsonLd';
+import ReadingProgressBar from '@/components/blog/ReadingProgressBar';
+import TableOfContents from '@/components/blog/TableOfContents';
+import BlogMeta from '@/components/blog/BlogMeta';
+import BlogNewsletter from '@/components/blog/BlogNewsletter';
+import RelatedPosts from '@/components/blog/RelatedPosts';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
 
@@ -15,13 +19,11 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Generate static paths
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
-// Generate metadata
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
@@ -79,6 +81,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-20">
+      <ReadingProgressBar />
       <ArticleSchema
         title={post.title}
         description={post.description}
@@ -88,138 +91,88 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         authorName="Ünzile Nur KAYA"
         authorUrl={siteUrl}
       />
-      <article className="max-w-3xl mx-auto px-6">
-        {/* Back Link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
-        >
-          <svg
-            className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Main Content */}
+        <article className="lg:col-span-8 lg:col-start-3">
+          {/* Back Link */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors mb-12 group text-sm font-medium uppercase tracking-widest"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Bloga Dön
-        </Link>
+            <svg
+              className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Blog
+          </Link>
 
-        {/* Header */}
-        <header className="mb-12">
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="outline" size="sm">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight">
-            {post.title}
-          </h1>
-
-          {/* Meta */}
-          <div className="flex items-center gap-6 text-gray-400 text-sm">
-            <time dateTime={post.date} className="flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              {formatDate(post.date, 'tr')}
-            </time>
-            <span className="flex items-center gap-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              {post.readingTime} dk okuma
-            </span>
-          </div>
-        </header>
-
-        {/* Featured Image */}
-        {post.image && (
-          <div className="mb-12 rounded-2xl overflow-hidden border border-white/10 relative aspect-video">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 768px"
-            />
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="prose prose-invert max-w-none">
-          <MDXRemote source={post.content} components={components} />
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl">
-                👩‍💻
-              </div>
-              <div>
-                <p className="text-white font-medium">Ünzile Nur KAYA</p>
-                <p className="text-gray-500 text-sm">YBS Öğrencisi & Developer</p>
-              </div>
+          {/* Header */}
+          <header className="mb-12">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {post.tags.map((tag) => (
+                <Badge key={tag} variant="outline" size="sm" className="bg-primary/5 border-primary/20 text-primary">
+                  {tag}
+                </Badge>
+              ))}
             </div>
-            
-            {/* Share Links */}
-            <div className="flex items-center gap-3">
-              <span className="text-gray-500 text-sm">Paylaş:</span>
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://unzilenurkaya.com/blog/${post.slug}`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
-                aria-label="Twitter'da paylaş"
-              >
-                𝕏
-              </a>
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://unzilenurkaya.com/blog/${post.slug}`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-xs"
-                aria-label="LinkedIn'de paylaş"
-              >
-                in
-              </a>
+
+            {/* Title */}
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-8 leading-tight">
+              {post.title}
+            </h1>
+
+            {/* Meta & Share Row */}
+            <BlogMeta
+              date={post.date}
+              readingTime={post.readingTime}
+              title={post.title}
+              slug={post.slug}
+            />
+          </header>
+
+          {/* Featured Image */}
+          {post.image && (
+            <div className="mb-16 rounded-3xl overflow-hidden border border-white/10 relative aspect-[21/9] shadow-2xl">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1280px) 100vw, 1200px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </div>
+          )}
+
+          {/* Content Body */}
+          <div className="prose prose-invert prose-orange max-w-none prose-headings:font-serif prose-h2:text-3xl prose-h3:text-2xl prose-p:text-gray-300 prose-p:text-lg prose-p:leading-relaxed prose-pre:bg-[#111] prose-pre:border prose-pre:border-white/10 prose-img:rounded-3xl">
+            <MDXRemote source={post.content} components={components} />
           </div>
-        </footer>
-      </article>
+
+          {/* Article Footer */}
+          <footer className="mt-20">
+            <BlogNewsletter />
+            <RelatedPosts currentSlug={post.slug} tags={post.tags} />
+          </footer>
+        </article>
+
+        {/* Sidebar - Table of Contents */}
+        <aside className="hidden lg:block lg:col-span-2">
+          <TableOfContents />
+        </aside>
+      </div>
     </main>
   );
 }

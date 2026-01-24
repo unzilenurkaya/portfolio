@@ -1,8 +1,17 @@
-'use client';
-
 import { useLanguage } from '@/context/LanguageContext';
 import { socialLinks } from '@/data/social';
 import Link from 'next/link';
+import { FaLinkedinIn, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+
+// Icon mapping
+const iconMap: Record<string, React.ElementType> = {
+  linkedin: FaLinkedinIn,
+  github: FaGithub,
+  twitter: FaXTwitter,
+  email: FaEnvelope,
+  instagram: FaInstagram,
+};
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -18,28 +27,30 @@ export default function Footer() {
               ÜNZİLE NUR<span className="text-primary">.</span>
             </Link>
             <p className="text-gray-500 max-w-sm mb-6">
-              AI destekli yazılım sistemleri geliştirmeyi hedefleyen Yönetim Bilişim Sistemleri öğrencisi.
+              {t('footer.bio')}
             </p>
             <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-primary transition-all"
-                  aria-label={social.name}
-                >
-                  {/* Icon placeholder */}
-                  <span className="text-xs">{social.name[0]}</span>
-                </a>
-              ))}
+              {socialLinks.map((social) => {
+                const Icon = iconMap[social.icon];
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-primary transition-all"
+                    aria-label={social.name}
+                  >
+                    {Icon && <Icon className="text-sm" />}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-medium mb-4">Hızlı Erişim</h4>
+            <h4 className="text-white font-medium mb-4">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 text-sm text-gray-500">
               <li><Link href="/#about" className="hover:text-primary transition-colors">{t('nav.about')}</Link></li>
               <li><Link href="/#projects" className="hover:text-primary transition-colors">{t('nav.projects')}</Link></li>
@@ -51,7 +62,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-white font-medium mb-4">Yasal</h4>
+            <h4 className="text-white font-medium mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-2 text-sm text-gray-500">
               <li><Link href="/privacy" className="hover:text-primary transition-colors">{t('footer.privacy')}</Link></li>
               <li><span className="cursor-not-allowed opacity-50">Terms of Service</span></li>
@@ -60,10 +71,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 uppercase tracking-wider">
-          <p>© {currentYear} Ünzile Nur KAYA. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            {t('footer.madeWith')} <span className="text-red-500">♥</span> using Next.js
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center items-center gap-6 text-[10px] sm:text-xs text-gray-600 uppercase tracking-[0.2em]">
+          <p className="font-medium text-center">
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

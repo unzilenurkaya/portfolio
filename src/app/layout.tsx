@@ -2,13 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
-import FluidCursor from "@/components/ui/FluidCursor";
-import ScrollToTop from "@/components/ui/ScrollToTop";
-import CookieBanner from "@/components/ui/CookieBanner";
 import { PersonSchema, WebSiteSchema } from "@/components/seo/JsonLd";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { Toaster } from "sonner";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -139,27 +134,9 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         <LanguageProvider>
-          {/* Skip to main content - Accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-black focus:rounded-lg focus:font-medium"
-          >
-            Ana içeriğe atla
-          </a>
-          <FluidCursor />
-          <Navbar />
-          <main id="main-content">
+          <ClientLayout>
             {children}
-          </main>
-          <Footer />
-          <ScrollToTop />
-          <CookieBanner />
-          <Toaster 
-            position="top-right" 
-            theme="dark"
-            richColors
-            closeButton
-          />
+          </ClientLayout>
         </LanguageProvider>
       </body>
     </html>

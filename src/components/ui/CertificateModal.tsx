@@ -3,6 +3,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Certificate } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 
 interface CertificateModalProps {
@@ -11,6 +12,7 @@ interface CertificateModalProps {
 }
 
 export default function CertificateModal({ certificate, onClose }: CertificateModalProps) {
+  const { t, language } = useLanguage();
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
@@ -27,7 +29,7 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
       previousFocusRef.current = document.activeElement as HTMLElement;
       document.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
-      
+
       // Focus the modal
       setTimeout(() => {
         modalRef.current?.focus();
@@ -71,16 +73,16 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
           <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#0a0a0a]">
             <div>
               <h2 id="certificate-modal-title" className="text-lg font-semibold text-white">
-                {certificate.title}
+                {certificate.title[language]}
               </h2>
               <p className="text-sm text-gray-400">
-                {certificate.issuer} - {certificate.date}
+                {certificate.issuer[language]} - {certificate.date}
               </p>
             </div>
             <button
               onClick={onClose}
               className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white"
-              aria-label="Kapat"
+              aria-label={t('common.close')}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -89,27 +91,41 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
           </div>
 
           {/* Content */}
-          <div className="relative overflow-auto" style={{ maxHeight: 'calc(90vh - 80px)' }}>
+          <div className="relative overflow-auto bg-[#050505]" style={{ maxHeight: 'calc(90vh - 80px)' }}>
             {isPdf && certificate.image ? (
-              <iframe
-                src={certificate.image}
-                className="w-full h-[70vh]"
-                title={certificate.title}
-              />
+              <div className="flex flex-col w-full">
+                <iframe
+                  src={`${certificate.image}#toolbar=0&navpanes=0&scrollbar=0`}
+                  className="w-full h-[70vh] border-none"
+                  title={certificate.title[language]}
+                />
+                <div className="p-4 bg-[#0a0a0a] border-t border-white/10 flex justify-center">
+                  <a
+                    href={certificate.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-xl border border-white/10 transition-all text-sm"
+                  >
+                    <span>📄</span>
+                    {t('certificates.viewFullPage')}
+                  </a>
+                </div>
+              </div>
             ) : certificate.image ? (
-              <div className="relative w-full flex items-center justify-center p-4 bg-[#050505]">
+              <div className="relative w-full flex items-center justify-center p-4">
                 <Image
                   src={certificate.image}
-                  alt={certificate.title}
-                  width={800}
-                  height={600}
-                  className="max-w-full h-auto object-contain rounded-lg"
+                  alt={certificate.title[language]}
+                  width={1200}
+                  height={900}
+                  className="max-w-full h-auto object-contain rounded-lg shadow-2xl"
                   priority
                 />
               </div>
             ) : (
-              <div className="flex items-center justify-center h-64 text-gray-400">
-                Sertifika gorseli bulunamadi
+              <div className="flex flex-col items-center justify-center h-64 text-gray-400 gap-4">
+                <span className="text-4xl">🔍</span>
+                {t('certificates.notFound')}
               </div>
             )}
           </div>

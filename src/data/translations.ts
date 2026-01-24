@@ -143,12 +143,15 @@ export const translations = {
       title: 'Sertifikalar',
       subtitle: 'Aldığım sertifikalar ve başarılar',
       viewCertificate: 'Sertifikayı Gör',
+      viewFullPage: 'Tam Sayfa Görüntüle / İndir',
+      notFound: 'Sertifika görseli bulunamadı',
     },
 
     // Contact Section
     contact: {
       title: 'İletişim',
       subtitle: 'Benimle iletişime geçin',
+      social: 'Sosyal Medya',
       name: 'Adınız',
       namePlaceholder: 'Adınızı girin',
       email: 'E-posta',
@@ -171,6 +174,7 @@ export const translations = {
         messageRequired: 'Mesaj gerekli',
         messageMin: 'Mesaj en az 10 karakter olmalı',
       },
+      emailLabel: 'E-posta',
     },
 
     // Blog
@@ -181,6 +185,12 @@ export const translations = {
       readingTime: 'dk okuma',
       backToBlog: 'Bloga Dön',
       noPosts: 'Henüz yazı yok.',
+      share: 'Paylaş',
+      relatedPosts: 'İlgili Yazılar',
+      newsletterTitle: 'Bültene Abone Ol',
+      newsletterDesc: 'Yeni yazılarımdan haberdar olmak için e-posta adresinizi bırakabilirsiniz.',
+      subscribe: 'Abone Ol',
+      featured: 'Öne Çıkan',
     },
 
     // CV Page
@@ -193,6 +203,12 @@ export const translations = {
       experience: 'Deneyim',
       skills: 'Yetenekler',
       projects: 'Projeler',
+      backToHome: 'Ana Sayfaya Dön',
+      languages: 'Diller',
+      turkish: 'Türkçe',
+      native: 'Ana Dil',
+      english: 'İngilizce',
+      intermediate: 'Orta Seviye',
     },
 
     // Footer
@@ -200,6 +216,9 @@ export const translations = {
       copyright: '© 2026 Ünzile Nur KAYA. Tüm hakları saklıdır.',
       madeWith: 'ile yapıldı',
       privacy: 'Gizlilik Politikası',
+      bio: 'AI destekli yazılım sistemleri geliştirmeyi hedefleyen Yönetim Bilişim Sistemleri öğrencisi.',
+      quickLinks: 'Hızlı Erişim',
+      legal: 'Yasal',
     },
 
     // Common
@@ -379,12 +398,15 @@ export const translations = {
       title: 'Certificates',
       subtitle: 'Certificates and achievements I have earned',
       viewCertificate: 'View Certificate',
+      viewFullPage: 'View Full Page / Download',
+      notFound: 'Certificate image not found',
     },
 
     // Contact Section
     contact: {
       title: 'Contact',
       subtitle: 'Get in touch with me',
+      social: 'Social Media',
       name: 'Your Name',
       namePlaceholder: 'Enter your name',
       email: 'Email',
@@ -407,6 +429,7 @@ export const translations = {
         messageRequired: 'Message is required',
         messageMin: 'Message must be at least 10 characters',
       },
+      emailLabel: 'Email',
     },
 
     // Blog
@@ -417,6 +440,12 @@ export const translations = {
       readingTime: 'min read',
       backToBlog: 'Back to Blog',
       noPosts: 'No posts yet.',
+      share: 'Share',
+      relatedPosts: 'Related Posts',
+      newsletterTitle: 'Subscribe to Newsletter',
+      newsletterDesc: 'Leave your email address to stay informed about my new posts.',
+      subscribe: 'Subscribe',
+      featured: 'Featured',
     },
 
     // CV Page
@@ -429,6 +458,12 @@ export const translations = {
       experience: 'Experience',
       skills: 'Skills',
       projects: 'Projects',
+      backToHome: 'Back to Home',
+      languages: 'Languages',
+      turkish: 'Turkish',
+      native: 'Native',
+      english: 'English',
+      intermediate: 'Intermediate',
     },
 
     // Footer
@@ -436,6 +471,9 @@ export const translations = {
       copyright: '© 2026 Ünzile Nur KAYA. All rights reserved.',
       madeWith: 'Made with',
       privacy: 'Privacy Policy',
+      bio: 'Management Information Systems student aiming to develop AI-powered software systems.',
+      quickLinks: 'Quick Links',
+      legal: 'Legal',
     },
 
     // Common

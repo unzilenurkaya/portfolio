@@ -25,7 +25,7 @@ export function getAllPostSlugs(): string[] {
   if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
-  
+
   const files = fs.readdirSync(BLOG_DIR);
   return files
     .filter((file) => file.endsWith('.mdx'))
@@ -35,7 +35,7 @@ export function getAllPostSlugs(): string[] {
 // Get all blog posts metadata (for listing)
 export function getAllPosts(): BlogPostMeta[] {
   const slugs = getAllPostSlugs();
-  
+
   const posts = slugs
     .map((slug) => getPostBySlug(slug))
     .filter((post): post is BlogPost => post !== null && post.published)
@@ -47,7 +47,7 @@ export function getAllPosts(): BlogPostMeta[] {
 // Get a single blog post by slug
 export function getPostBySlug(slug: string): BlogPost | null {
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
-  
+
   if (!fs.existsSync(filePath)) {
     return null;
   }
@@ -72,7 +72,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
 // Get posts by tag
 export function getPostsByTag(tag: string): BlogPostMeta[] {
   const allPosts = getAllPosts();
-  return allPosts.filter((post) => 
+  return allPosts.filter((post) =>
     post.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
   );
 }
@@ -81,10 +81,29 @@ export function getPostsByTag(tag: string): BlogPostMeta[] {
 export function getAllTags(): string[] {
   const allPosts = getAllPosts();
   const tagsSet = new Set<string>();
-  
+
   allPosts.forEach((post) => {
     post.tags.forEach((tag) => tagsSet.add(tag));
   });
-  
+
   return Array.from(tagsSet).sort();
+}
+
+// Get related posts by tags
+export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2): BlogPostMeta[] {
+  const allPosts = getAllPosts();
+
+  return allPosts
+    .filter((post) => post.slug !== currentSlug) // Exclude current post
+    .map((post) => {
+      // Calculate how many tags match
+      const matchingTags = post.tags.filter((tag) =>
+        tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
+      ).length;
+      return { ...post, matchingTags };
+    })
+    .filter((post) => post.matchingTags > 0) // Only posts with at least one matching tag
+    .sort((a, b) => b.matchingTags - a.matchingTags) // Sort by most matching tags
+    .slice(0, limit)
+    .map(({ matchingTags, ...post }) => post);
 }
