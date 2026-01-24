@@ -4,24 +4,24 @@ export const projects: Project[] = [
   {
     id: 'puantaj-otomasyon',
     title: {
-      tr: 'Puantaj Otomasyon Sistemi',
-      en: 'Attendance Automation System',
+      tr: 'İK Süreçleri için Puantaj ve Vardiya Otomasyon Sistemi',
+      en: 'HR Attendance and Shift Automation System',
     },
     description: {
-      tr: 'Manuel olarak yürütülen veri eşleştirme ve vardiya kontrol sürecini Python otomasyonu ile optimize eden bir prototip.',
-      en: 'A prototype that optimizes manual data matching and shift control processes with Python automation.',
+      tr: 'İnsan Kaynakları biriminde manuel süreçleri otomatikleştiren Python tabanlı karar destek sistemi.',
+      en: 'Python-based decision support system automating manual HR processes.',
     },
     problem: {
-      tr: 'Günlük 100+ personel turnike giriş/çıkış verisi manuel olarak kontrol ediliyor, bu süreç zaman alıcı ve hataya açıktı.',
-      en: 'Daily 100+ employee turnstile entry/exit data was manually checked, which was time-consuming and error-prone.',
+      tr: 'İnsan Kaynakları biriminde günlük 100+ personelin turnike verileri ve vardiya bilgileri manuel olarak Excel üzerinden kontrol ediliyordu. Bu süreç; zaman kaybına, insan hatasına ve tutarsız raporlamaya neden oluyor, karar alma süreçlerini yavaşlatıyordu.',
+      en: 'In the HR department, daily turnstile data and shift information of 100+ employees were manually checked via Excel. This process caused time loss, human error, and inconsistent reporting, slowing down decision-making processes.',
     },
     solution: {
-      tr: 'Python, Pandas ve Openpyxl kullanarak otomatik veri temizleme, eşleştirme ve Excel raporlama sistemi geliştirdim.',
-      en: 'I developed an automatic data cleaning, matching, and Excel reporting system using Python, Pandas, and Openpyxl.',
+      tr: 'Python tabanlı bir otomasyon sistemi tasarlayarak; verileri otomatik okuyan, temizleyen ve kural bazlı kontrollerle sapmaları tespit eden bir yapı kurdum. Pandas ve OpenPyXL ile otomatik raporlama mimarisi geliştirdim.',
+      en: 'I designed a Python-based automation system; building a structure that automatically reads, cleans data and detects deviations with rule-based controls. I developed an automatic reporting architecture with Pandas and OpenPyXL.',
     },
     result: {
-      tr: 'Manuel süreç otomatikleştirildi, veri temizleme ve analiz çalışmaları ile yazılım süreçleri iyileştirildi.',
-      en: 'Manual process was automated, software processes improved through data cleaning and analysis work.',
+      tr: 'Manuel süreç süresi %70 azaldı. Hatalı/eksik kayıtlar erken aşamada tespit edildi. İK için güvenilir karar destek çıktıları sağlandı. Sistem, AI destekli anomali tespitine uygun şekilde tasarlandı.',
+      en: 'Manual process time reduced by 70%. Erroneous/missing records were detected at an early stage. Reliable decision support outputs were provided for HR. The system was designed to be suitable for AI-supported anomaly detection.',
     },
     technologies: ['Python', 'Pandas', 'Openpyxl'],
     image: '/images/projects/puantaj.png',
@@ -30,24 +30,24 @@ export const projects: Project[] = [
   {
     id: 'otel-iptal-tahmini',
     title: {
-      tr: 'Otel Rezervasyon İptali Tahmini',
-      en: 'Hotel Reservation Cancellation Prediction',
+      tr: 'Makine Öğrenmesi ile Otel Rezervasyon İptal Tahminleme Sistemi',
+      en: 'Hotel Reservation Cancellation Prediction with Machine Learning',
     },
     description: {
-      tr: '36.000\'den fazla satırlık Kaggle veri seti üzerinde makine öğrenmesi algoritmalarıyla rezervasyon iptal tahminlemesi ve veri analizi çalışması.',
-      en: 'Reservation cancellation prediction and data analysis work using machine learning algorithms on a Kaggle dataset with over 36,000 rows.',
+      tr: '36.000+ satırlık veri seti üzerinde ML modelleri ile rezervasyon iptal tahminlemesi ve interaktif karar destek arayüzü.',
+      en: 'Reservation cancellation prediction with ML models on 36,000+ row dataset and interactive decision support interface.',
     },
     problem: {
-      tr: 'Oteller, son dakika iptallerinden dolayı gelir kaybı yaşıyor ve bu iptalleri önceden tahmin etmek zor.',
-      en: 'Hotels experience revenue loss due to last-minute cancellations, and predicting these cancellations is difficult.',
+      tr: 'Otel işletmeleri, iptalleri ancak gerçekleştiğinde fark edebiliyor. Bu durum ciddi gelir kaybına ve kapasite planlama hatalarına neden oluyor.',
+      en: 'Hotels can only notice cancellations when they happen. This causes serious revenue loss and capacity planning errors.',
     },
     solution: {
-      tr: 'Scikit-learn ve XGBoost algoritmaları ile eğitilmiş bir model, Streamlit ile interaktif tahmin arayüzü geliştirdim.',
-      en: 'I developed a model trained with Scikit-learn and XGBoost algorithms, and an interactive prediction interface with Streamlit.',
+      tr: '36.000+ satırlık veri seti üzerinde; EDA, özellik mühendisliği ve ML modelleri (XGBoost, Scikit-learn) uyguladım. Streamlit ile interaktif bir karar destek arayüzü kurguladım.',
+      en: 'I applied EDA, feature engineering and ML models (XGBoost, Scikit-learn) on a 36,000+ row dataset. I designed an interactive decision support interface with Streamlit.',
     },
     result: {
-      tr: 'Makine öğrenmesi ile iptal tahminleri yapıldı, veri analizi becerileri geliştirildi.',
-      en: 'Cancellation predictions were made with machine learning, data analysis skills were improved.',
+      tr: '%94 doğruluk oranıyla iptal olasılıkları önceden tahmin edilerek, işletmelerin riskli rezervasyonları erken fark etmesi ve gelir planlamasını iyileştirmesi sağlandı. Veri biliminin iş kararlarına entegrasyonu kanıtlandı.',
+      en: 'With 94% accuracy, cancellation probabilities were predicted in advance, enabling businesses to identify risky reservations early and improve revenue planning. Integration of data science into business decisions was proven.',
     },
     technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit'],
     image: '/images/projects/hotel-ai.png',

@@ -11,6 +11,24 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+// Helper function to highlight numbers in text (make them orange and bold)
+function highlightNumbers(text: string): React.ReactNode {
+  // Regex to match numbers with optional % or + signs
+  const parts = text.split(/(\d+[\.,]?\d*[+%]?)/g);
+  
+  return parts.map((part, index) => {
+    // Check if this part is a number (with optional % or +)
+    if (/^\d+[\.,]?\d*[+%]?$/.test(part)) {
+      return (
+        <span key={index} className="text-secondary font-bold">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+}
+
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { t, language } = useLanguage();
 
@@ -98,7 +116,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </h3>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    {project.problem[language]}
+                    {highlightNumbers(project.problem[language])}
                   </p>
                 </motion.div>
               )}
@@ -118,7 +136,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </h3>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    {project.solution[language]}
+                    {highlightNumbers(project.solution[language])}
                   </p>
                 </motion.div>
               )}
@@ -138,7 +156,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </h3>
                   </div>
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    {project.result[language]}
+                    {highlightNumbers(project.result[language])}
                   </p>
                 </motion.div>
               )}

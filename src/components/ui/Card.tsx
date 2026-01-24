@@ -40,7 +40,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             'rounded-2xl transition-all duration-300',
             variantStyles[variant],
             paddingStyles[padding],
-            hover && 'hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5',
+            hover && 'hover:border-secondary/40 hover:shadow-[0_0_25px_rgba(255,107,53,0.15)]',
             className
           )
         )}

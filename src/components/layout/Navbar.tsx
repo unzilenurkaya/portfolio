@@ -56,6 +56,9 @@ export default function Navbar() {
             <Link href="/#about" className="hover:text-white transition-colors">
               {t('nav.about')}
             </Link>
+            <Link href="/#skills" className="hover:text-white transition-colors">
+              {t('nav.skills')}
+            </Link>
             <Link href="/#projects" className="hover:text-white transition-colors">
               {t('nav.projects')}
             </Link>
