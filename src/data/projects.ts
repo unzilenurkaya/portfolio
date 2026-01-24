@@ -1,6 +1,7 @@
 import { Project } from '@/types';
 
 export const projects: Project[] = [
+  // 1. Puantaj Otomasyon Sistemi
   {
     id: 'puantaj-otomasyon',
     title: {
@@ -27,6 +28,8 @@ export const projects: Project[] = [
     image: '/images/projects/puantaj.png',
     category: 'automation',
   },
+
+  // 2. Otel Rezervasyon İptal Tahmini
   {
     id: 'otel-iptal-tahmini',
     title: {
@@ -51,8 +54,36 @@ export const projects: Project[] = [
     },
     technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit'],
     image: '/images/projects/hotel-ai.png',
-    github: 'https://github.com/unzilenurkaya/hotel-cancellation-prediction',
+    github: 'https://github.com/unzilenurkaya/hotel-reservation-app',
     category: 'data',
+  },
+
+  // 3. TÜBİTAK Sokak Hayvanları Otomasyon Sistemi
+  {
+    id: 'sokak-hayvanlari-otomasyon',
+    title: {
+      tr: 'Sokak Hayvanları Otomasyon Sistemi',
+      en: 'Stray Animals Automation System',
+    },
+    description: {
+      tr: 'TÜBİTAK 4006 Bilim Fuarı kapsamında geliştirilen otonom mama dağıtım prototipi.',
+      en: 'Autonomous food distribution prototype developed for TÜBİTAK 4006 Science Fair.',
+    },
+    problem: {
+      tr: 'Sokak hayvanlarının beslenmesi insan müdahalesine bağlı kalmakta, bu durum sürdürülebilir bir çözüm sunmamaktadır. İnsan müdahalesi gerektirmeyen, sürdürülebilir bir beslenme mekanizması ihtiyacı bulunmaktadır.',
+      en: 'Feeding stray animals depends on human intervention, which does not provide a sustainable solution. There is a need for a sustainable feeding mechanism that does not require human intervention.',
+    },
+    solution: {
+      tr: 'Madeni para ve sensör tetiklemeli mekanik ve elektronik sistem entegrasyonu tasarladım. Otonom çalışan bir mama dağıtım mekanizması geliştirdim.',
+      en: 'I designed coin and sensor-triggered mechanical and electronic system integration. I developed an autonomous food distribution mechanism.',
+    },
+    result: {
+      tr: 'TÜBİTAK 4006 Bilim Fuarı\'nda başarıyla sergilendi ve prototip tam not aldı. Sosyal sorumluluk ile mühendislik vizyonu birleştirildi.',
+      en: 'Successfully exhibited at TÜBİTAK 4006 Science Fair and the prototype received full marks. Social responsibility and engineering vision were combined.',
+    },
+    technologies: ['Arduino', 'Elektronik', 'Mekanik Tasarım'],
+    image: '/images/projects/tubitak.png',
+    category: 'automation',
   },
 ];
 
