@@ -7,6 +7,7 @@ import { projects, getProjectsByCategory } from '@/data/projects';
 import { Project } from '@/types';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 // Dynamic import for ProjectModal
@@ -14,12 +15,11 @@ const ProjectModal = dynamic(() => import('./ProjectModal'), {
   ssr: false,
 });
 
-type FilterCategory = 'all' | 'data' | 'web' | 'automation';
+type FilterCategory = 'all' | 'data' | 'automation';
 
 const filterButtons: { key: FilterCategory; icon: string }[] = [
   { key: 'all', icon: '🔮' },
   { key: 'data', icon: '📊' },
-  { key: 'web', icon: '🌐' },
   { key: 'automation', icon: '⚙️' },
 ];
 
@@ -98,13 +98,22 @@ export default function Projects() {
                   onClick={() => setSelectedProject(project)}
                   hover
                 >
-                  {/* Project Image Placeholder */}
+                  {/* Project Image */}
                   <div className="relative h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl mb-6 overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50 group-hover:scale-110 transition-transform duration-500">
-                      {project.category === 'data' && '📊'}
-                      {project.category === 'web' && '🌐'}
-                      {project.category === 'automation' && '⚙️'}
-                    </div>
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title[language]}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50 group-hover:scale-110 transition-transform duration-500">
+                        {project.category === 'data' && '📊'}
+                        {project.category === 'automation' && '⚙️'}
+                      </div>
+                    )}
                     
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

@@ -57,7 +57,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl">
                 {project.category === 'data' && '📊'}
-                {project.category === 'web' && '🌐'}
                 {project.category === 'automation' && '⚙️'}
               </div>
               <div>

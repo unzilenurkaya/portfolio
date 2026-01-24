@@ -41,7 +41,7 @@ export interface Project {
   image?: string;
   github?: string;
   demo?: string;
-  category: 'data' | 'web' | 'automation';
+  category: 'data' | 'automation';
 }
 
 // Experience Types

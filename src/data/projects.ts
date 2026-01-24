@@ -25,7 +25,7 @@ export const projects: Project[] = [
       en: 'Manual process time reduced by 70%. Erroneous/missing records were detected at an early stage. Reliable decision support outputs were provided for HR. The system was designed to be suitable for AI-supported anomaly detection.',
     },
     technologies: ['Python', 'Pandas', 'Openpyxl'],
-    image: '/images/projects/puantaj.png',
+    image: '/images/puantaj.jpg',
     category: 'automation',
   },
 
@@ -53,7 +53,7 @@ export const projects: Project[] = [
       en: 'With 94% accuracy, cancellation probabilities were predicted in advance, enabling businesses to identify risky reservations early and improve revenue planning. Integration of data science into business decisions was proven.',
     },
     technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit'],
-    image: '/images/projects/hotel-ai.png',
+    image: '/images/oteltahmin.png',
     github: 'https://github.com/unzilenurkaya/hotel-reservation-app',
     category: 'data',
   },
@@ -82,7 +82,7 @@ export const projects: Project[] = [
       en: 'Successfully exhibited at TÜBİTAK 4006 Science Fair and the prototype received full marks. Social responsibility and engineering vision were combined.',
     },
     technologies: ['Arduino', 'Elektronik', 'Mekanik Tasarım'],
-    image: '/images/projects/tubitak.png',
+    image: '/images/tübitak1.jpg',
     category: 'automation',
   },
 ];

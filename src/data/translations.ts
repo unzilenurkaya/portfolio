@@ -110,7 +110,6 @@ export const translations = {
       filters: {
         all: 'Tümü',
         data: 'Veri Analizi',
-        web: 'Web',
         automation: 'Otomasyon',
       },
     },
@@ -338,7 +337,6 @@ export const translations = {
       filters: {
         all: 'All',
         data: 'Data Analysis',
-        web: 'Web',
         automation: 'Automation',
       },
     },
