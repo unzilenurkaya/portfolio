@@ -1,101 +1,75 @@
 import { Skill } from '@/types';
 
 export const skills: Skill[] = [
-  // GRUP 1: Backend & Core (Ana Omurga)
+  // KUTU 1: Temel Yetkinlikler (Core Stack)
   {
     name: 'Python',
-    category: 'backend',
-    icon: '🐍',
+    category: 'core',
+    icon: 'python',
   },
   {
     name: 'SQL',
-    category: 'backend',
-    icon: '🗄️',
-  },
-  {
-    name: 'Veri Yapıları & Algoritmik Düşünme',
-    category: 'backend',
-    icon: '🧬',
+    category: 'core',
+    icon: 'postgresql',
   },
   {
     name: 'Git',
-    category: 'backend',
-    icon: '📝',
+    category: 'core',
+    icon: 'git',
+  },
+  {
+    name: 'REST API',
+    category: 'core',
+    icon: 'api',
   },
 
-  // GRUP 2: Veri & Yapay Zeka Araçları (Uzmanlık)
-  // 📊 Veri İşleme
+  // KUTU 2: Veri Bilimi & Yapay Zekâ (AI & Data)
   {
     name: 'Pandas',
     category: 'data-ai',
-    subCategory: 'processing',
-    icon: '🐼',
+    icon: 'pandas',
   },
-  {
-    name: 'SQL',
-    category: 'data-ai',
-    subCategory: 'processing',
-    icon: '🗄️',
-  },
-  {
-    name: 'Excel',
-    category: 'data-ai',
-    subCategory: 'processing',
-    icon: '📊',
-  },
-  // 🤖 Makine Öğrenmesi (Temel-Orta)
   {
     name: 'Scikit-learn',
     category: 'data-ai',
-    subCategory: 'ml',
-    icon: '🤖',
-  },
-  {
-    name: 'XGBoost',
-    category: 'data-ai',
-    subCategory: 'ml',
-    icon: '🚀',
-  },
-  // 🧠 LLM & AI Araçları
-  {
-    name: 'Prompt Engineering',
-    category: 'data-ai',
-    subCategory: 'llm',
-    icon: '💬',
-  },
-  {
-    name: 'LLM Tabanlı Otomasyonlar',
-    category: 'data-ai',
-    subCategory: 'llm',
-    icon: '🧠',
+    icon: 'scikitlearn',
   },
   {
     name: 'Streamlit',
     category: 'data-ai',
-    subCategory: 'llm',
-    icon: '🌊',
+    icon: 'streamlit',
+  },
+  {
+    name: 'XGBoost',
+    category: 'data-ai',
+    icon: 'numpy',
+  },
+  {
+    name: 'LLM & AI Tools',
+    category: 'data-ai',
+    icon: 'openai',
   },
 
-  // GRUP 3: Deneyim Kazanılan Teknolojiler
+  // KUTU 3: Web & Görselleştirme
   {
     name: 'React',
-    category: 'experienced',
-    icon: '⚛️',
+    category: 'web',
+    icon: 'react',
   },
   {
     name: 'JavaScript',
-    category: 'experienced',
-    icon: '🟨',
+    category: 'web',
+    icon: 'javascript',
   },
   {
     name: 'HTML / CSS',
-    category: 'experienced',
-    icon: '🎨',
+    category: 'web',
+    icon: 'html5',
   },
   {
     name: 'Power BI',
-    category: 'experienced',
-    icon: '📈',
+    category: 'web',
+    icon: 'powerbi',
   },
 ];
 
@@ -103,15 +77,6 @@ export const getSkillsByCategory = (category: Skill['category']) => {
   return skills.filter((skill) => skill.category === category);
 };
 
-export const getSkillsBySubCategory = (subCategory: Skill['subCategory']) => {
-  return skills.filter((skill) => skill.subCategory === subCategory);
-};
-
-export const backendSkills = getSkillsByCategory('backend');
+export const coreSkills = getSkillsByCategory('core');
 export const dataAiSkills = getSkillsByCategory('data-ai');
-export const experiencedSkills = getSkillsByCategory('experienced');
-
-// Sub-categories for data-ai
-export const processingSkills = getSkillsBySubCategory('processing');
-export const mlSkills = getSkillsBySubCategory('ml');
-export const llmSkills = getSkillsBySubCategory('llm');
+export const webSkills = getSkillsByCategory('web');

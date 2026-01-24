@@ -80,19 +80,15 @@ export const translations = {
     skills: {
       title: 'Yetenekler',
       subtitle: 'Teknik yetkinliklerim ve uzmanlık alanlarım',
-      // Grup 1: Backend & Core
-      backend: 'Backend & Core',
-      backendDescription: 'Ana Omurga',
-      // Grup 2: Veri & Yapay Zeka
-      dataAi: 'Veri & Yapay Zeka Araçları',
-      dataAiDescription: 'Uzmanlık Alanınız',
-      processing: 'Veri İşleme',
-      ml: 'Makine Öğrenmesi',
-      mlLevel: 'Temel-Orta',
-      llm: 'LLM & AI Araçları',
-      // Grup 3: Deneyim Kazanılan
-      experienced: 'Deneyim Kazanılan Teknolojiler',
-      experiencedDescription: 'Tamamlayıcı & Projelerde Kullanıldı',
+      // Kutu 1: Temel Yetkinlikler
+      core: 'Temel Yetkinlikler',
+      coreDescription: 'Core Stack',
+      // Kutu 2: Veri Bilimi & Yapay Zekâ
+      dataAi: 'Veri Bilimi & Yapay Zekâ',
+      dataAiDescription: 'AI & Data',
+      // Kutu 3: Web & Görselleştirme
+      web: 'Web & Görselleştirme',
+      webDescription: 'Visualization',
       stats: {
         internship: 'Staj',
         projects: 'Proje',
@@ -312,19 +308,15 @@ export const translations = {
     skills: {
       title: 'Skills',
       subtitle: 'My technical competencies and areas of expertise',
-      // Group 1: Backend & Core
-      backend: 'Backend & Core',
-      backendDescription: 'Main Backbone',
-      // Group 2: Data & AI
-      dataAi: 'Data & AI Tools',
-      dataAiDescription: 'Area of Expertise',
-      processing: 'Data Processing',
-      ml: 'Machine Learning',
-      mlLevel: 'Basic-Intermediate',
-      llm: 'LLM & AI Tools',
-      // Group 3: Experienced Technologies
-      experienced: 'Experienced Technologies',
-      experiencedDescription: 'Complementary & Used in Projects',
+      // Box 1: Core Competencies
+      core: 'Core Competencies',
+      coreDescription: 'Core Stack',
+      // Box 2: Data Science & AI
+      dataAi: 'Data Science & AI',
+      dataAiDescription: 'AI & Data',
+      // Box 3: Web & Visualization
+      web: 'Web & Visualization',
+      webDescription: 'Visualization',
       stats: {
         internship: 'Internship',
         projects: 'Projects',
