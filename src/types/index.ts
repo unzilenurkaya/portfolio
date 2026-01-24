@@ -39,9 +39,10 @@ export interface Project {
   };
   technologies: string[];
   image?: string;
+  badge?: string;
   github?: string;
   demo?: string;
-  category: 'data' | 'automation';
+  category: 'industrial' | 'business-ai' | 'social';
 }
 
 // Experience Types

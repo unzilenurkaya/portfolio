@@ -1,7 +1,7 @@
 import { Project } from '@/types';
 
 export const projects: Project[] = [
-  // 1. Puantaj Otomasyon Sistemi
+  // 1. Puantaj Otomasyon Sistemi - Endüstriyel Otomasyon
   {
     id: 'puantaj-otomasyon',
     title: {
@@ -24,12 +24,13 @@ export const projects: Project[] = [
       tr: 'Manuel süreç süresi %70 azaldı. Hatalı/eksik kayıtlar erken aşamada tespit edildi. İK için güvenilir karar destek çıktıları sağlandı. Sistem, AI destekli anomali tespitine uygun şekilde tasarlandı.',
       en: 'Manual process time reduced by 70%. Erroneous/missing records were detected at an early stage. Reliable decision support outputs were provided for HR. The system was designed to be suitable for AI-supported anomaly detection.',
     },
-    technologies: ['Python', 'Pandas', 'Openpyxl'],
+    technologies: ['Python', 'Pandas', 'Openpyxl', 'Excel Analysis', 'Business Process Automation'],
     image: '/images/puantaj.jpg',
-    category: 'automation',
+    badge: '100+ Personel',
+    category: 'industrial',
   },
 
-  // 2. Otel Rezervasyon İptal Tahmini
+  // 2. Otel Rezervasyon İptal Tahmini - İş Zekası & Yapay Zeka
   {
     id: 'otel-iptal-tahmini',
     title: {
@@ -52,13 +53,14 @@ export const projects: Project[] = [
       tr: '%94 doğruluk oranıyla iptal olasılıkları önceden tahmin edilerek, işletmelerin riskli rezervasyonları erken fark etmesi ve gelir planlamasını iyileştirmesi sağlandı. Veri biliminin iş kararlarına entegrasyonu kanıtlandı.',
       en: 'With 94% accuracy, cancellation probabilities were predicted in advance, enabling businesses to identify risky reservations early and improve revenue planning. Integration of data science into business decisions was proven.',
     },
-    technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit'],
+    technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit', 'Pandas'],
     image: '/images/oteltahmin.png',
     github: 'https://github.com/unzilenurkaya/hotel-reservation-app',
-    category: 'data',
+    badge: '36.000+ Veri',
+    category: 'business-ai',
   },
 
-  // 3. TÜBİTAK Sokak Hayvanları Otomasyon Sistemi
+  // 3. TÜBİTAK Sokak Hayvanları Otomasyon Sistemi - Sosyal Etki & Mühendislik
   {
     id: 'sokak-hayvanlari-otomasyon',
     title: {
@@ -81,9 +83,10 @@ export const projects: Project[] = [
       tr: 'TÜBİTAK 4006 Bilim Fuarı\'nda başarıyla sergilendi ve prototip tam not aldı. Sosyal sorumluluk ile mühendislik vizyonu birleştirildi.',
       en: 'Successfully exhibited at TÜBİTAK 4006 Science Fair and the prototype received full marks. Social responsibility and engineering vision were combined.',
     },
-    technologies: ['Arduino', 'Elektronik', 'Mekanik Tasarım'],
+    technologies: ['Mekanik Tasarım', 'Prototipleme', 'Proje Yönetimi', 'TÜBİTAK 4006'],
     image: '/images/tübitak1.jpg',
-    category: 'automation',
+    badge: 'TÜBİTAK 4006',
+    category: 'social',
   },
 ];
 

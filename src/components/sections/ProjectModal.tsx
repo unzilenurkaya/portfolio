@@ -29,6 +29,13 @@ function highlightNumbers(text: string): React.ReactNode {
   });
 }
 
+// Kategori ikonları
+const categoryIcons: Record<string, string> = {
+  'industrial': '⚙️',
+  'business-ai': '🧠',
+  'social': '💚',
+};
+
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { t, language } = useLanguage();
 
@@ -56,8 +63,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           <div className="flex items-center justify-between p-6 border-b border-white/10">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl">
-                {project.category === 'data' && '📊'}
-                {project.category === 'automation' && '⚙️'}
+                {categoryIcons[project.category] || '📊'}
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-white">

@@ -15,13 +15,21 @@ const ProjectModal = dynamic(() => import('./ProjectModal'), {
   ssr: false,
 });
 
-type FilterCategory = 'all' | 'data' | 'automation';
+type FilterCategory = 'all' | 'industrial' | 'business-ai' | 'social';
 
 const filterButtons: { key: FilterCategory; icon: string }[] = [
   { key: 'all', icon: '🔮' },
-  { key: 'data', icon: '📊' },
-  { key: 'automation', icon: '⚙️' },
+  { key: 'industrial', icon: '⚙️' },
+  { key: 'business-ai', icon: '🧠' },
+  { key: 'social', icon: '💚' },
 ];
+
+// Kategori ikonları
+const categoryIcons: Record<string, string> = {
+  'industrial': '⚙️',
+  'business-ai': '🧠',
+  'social': '💚',
+};
 
 export default function Projects() {
   const { t, language } = useLanguage();
@@ -94,30 +102,39 @@ export default function Projects() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <Card
-                  className="h-full cursor-pointer group"
+                  className="h-full cursor-pointer group hover:shadow-[0_0_30px_rgba(255,107,53,0.15)] hover:border-secondary/40 transition-all duration-300"
                   onClick={() => setSelectedProject(project)}
                   hover
                 >
-                  {/* Project Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl mb-6 overflow-hidden">
+                  {/* Project Image - aspect-video (16:9) */}
+                  <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl mb-6 overflow-hidden">
                     {project.image ? (
                       <Image
                         src={project.image}
                         alt={project.title[language]}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50 group-hover:scale-110 transition-transform duration-500">
-                        {project.category === 'data' && '📊'}
-                        {project.category === 'automation' && '⚙️'}
+                      <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50 group-hover:scale-105 transition-transform duration-500">
+                        {categoryIcons[project.category] || '📊'}
                       </div>
                     )}
                     
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                      <span className="text-white text-sm font-medium">
+                    {/* Dark Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    
+                    {/* Sayısal Başarı Rozeti - Sol Alt */}
+                    {project.badge && (
+                      <div className="absolute bottom-3 left-3 px-3 py-1.5 bg-secondary/90 backdrop-blur-sm rounded-lg text-white text-sm font-bold shadow-lg shadow-secondary/30">
+                        {project.badge}
+                      </div>
+                    )}
+                    
+                    {/* Hover Overlay - Sağ Alt */}
+                    <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-white text-sm font-medium bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
                         {t('projects.viewProject')} →
                       </span>
                     </div>
@@ -126,11 +143,11 @@ export default function Projects() {
                   {/* Content */}
                   <div className="space-y-4">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-xl font-semibold text-white group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-semibold text-white group-hover:text-secondary transition-colors">
                         {project.title[language]}
                       </h3>
-                      <Badge variant="default" size="sm">
-                        {t(`projects.filters.${project.category}`)}
+                      <Badge variant="default" size="sm" className="shrink-0">
+                        {categoryIcons[project.category]} {t(`projects.filters.${project.category}`)}
                       </Badge>
                     </div>
 

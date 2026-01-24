@@ -109,8 +109,9 @@ export const translations = {
       technologies: 'Kullanılan Teknolojiler',
       filters: {
         all: 'Tümü',
-        data: 'Veri Analizi',
-        automation: 'Otomasyon',
+        industrial: 'Endüstriyel Otomasyon',
+        'business-ai': 'İş Zekası & Yapay Zeka',
+        social: 'Sosyal Etki & Mühendislik',
       },
     },
 
@@ -336,8 +337,9 @@ export const translations = {
       technologies: 'Technologies Used',
       filters: {
         all: 'All',
-        data: 'Data Analysis',
-        automation: 'Automation',
+        industrial: 'Industrial Automation',
+        'business-ai': 'Business Intelligence & AI',
+        social: 'Social Impact & Engineering',
       },
     },
 
