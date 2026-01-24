@@ -80,15 +80,15 @@ export const translations = {
     skills: {
       title: 'Yetenekler',
       subtitle: 'Teknik yetkinliklerim ve uzmanlık alanlarım',
-      // Kutu 1: Temel Yetkinlikler
-      core: 'Temel Yetkinlikler',
-      coreDescription: 'Core Stack',
+      // Kutu 1: Yazılım Geliştirme
+      core: 'Yazılım Geliştirme',
+      coreDescription: 'Software Development',
       // Kutu 2: Veri Bilimi & Yapay Zekâ
       dataAi: 'Veri Bilimi & Yapay Zekâ',
-      dataAiDescription: 'AI & Data',
-      // Kutu 3: Web & Görselleştirme
-      web: 'Web & Görselleştirme',
-      webDescription: 'Visualization',
+      dataAiDescription: 'Data Science & AI',
+      // Kutu 3: Web & Arayüz
+      web: 'Web & Arayüz',
+      webDescription: 'Web & UI/UX',
       stats: {
         internship: 'Staj',
         projects: 'Proje',
@@ -308,15 +308,15 @@ export const translations = {
     skills: {
       title: 'Skills',
       subtitle: 'My technical competencies and areas of expertise',
-      // Box 1: Core Competencies
-      core: 'Core Competencies',
-      coreDescription: 'Core Stack',
+      // Box 1: Software Development
+      core: 'Software Development',
+      coreDescription: 'Software Development',
       // Box 2: Data Science & AI
       dataAi: 'Data Science & AI',
-      dataAiDescription: 'AI & Data',
-      // Box 3: Web & Visualization
-      web: 'Web & Visualization',
-      webDescription: 'Visualization',
+      dataAiDescription: 'Data Science & AI',
+      // Box 3: Web & UI
+      web: 'Web & UI',
+      webDescription: 'Web & UI/UX',
       stats: {
         internship: 'Internship',
         projects: 'Projects',
