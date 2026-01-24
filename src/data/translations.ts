@@ -79,7 +79,7 @@ export const translations = {
     // Skills Section
     skills: {
       title: 'Yetenekler',
-      subtitle: 'Teknik yetkinliklerim ve uzmanlık alanlarım',
+      subtitle: 'Yazılım ve veri bilimi yolculuğumda kullandığım teknolojiler',
       // Kutu 1: Yazılım Geliştirme
       core: 'Yazılım Geliştirme',
       coreDescription: 'Software Development',
@@ -307,7 +307,7 @@ export const translations = {
     // Skills Section
     skills: {
       title: 'Skills',
-      subtitle: 'My technical competencies and areas of expertise',
+      subtitle: 'Technologies I use in my software and data science journey',
       // Box 1: Software Development
       core: 'Software Development',
       coreDescription: 'Software Development',

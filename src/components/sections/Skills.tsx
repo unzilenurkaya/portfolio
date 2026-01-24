@@ -5,7 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { coreSkills, dataAiSkills, webSkills } from '@/data/skills';
 import { Skill } from '@/types';
 
-// Simple Icons imports
+// Simple Icons imports - RESMI MARKA LOGOLARI
 import {
   SiPython,
   SiPostgresql,
@@ -20,9 +20,9 @@ import {
   SiHtml5,
 } from 'react-icons/si';
 import { FaServer, FaChartBar } from 'react-icons/fa';
-import { VscTerminal } from 'react-icons/vsc';
+import { LuTerminal } from 'react-icons/lu';
 
-// Icon mapping
+// Icon mapping - SADECE RESMİ LOGOLAR
 const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
   python: SiPython,
   postgresql: SiPostgresql,
@@ -39,7 +39,7 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = 
   powerbi: FaChartBar,
 };
 
-// Skill Card Component with Simple Icons
+// Skill Card Component - TURUNCU GLOW + YUKARI KAYMA
 function SkillCard({ skill, delay = 0 }: { skill: Skill; delay?: number }) {
   const IconComponent = skill.icon ? iconMap[skill.icon] : null;
 
@@ -49,17 +49,20 @@ function SkillCard({ skill, delay = 0 }: { skill: Skill; delay?: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3, delay }}
-      whileHover={{ scale: 1.05, y: -4 }}
-      className="group bg-white/5 rounded-2xl p-4 text-center hover:bg-white/10 transition-all duration-300 cursor-default border border-transparent hover:border-secondary/30 hover:shadow-lg hover:shadow-secondary/10"
+      whileHover={{ scale: 1.05, y: -8 }}
+      className="group bg-white/5 rounded-2xl p-4 text-center cursor-default border border-transparent 
+                 hover:bg-white/10 hover:border-secondary/40 
+                 hover:shadow-[0_0_25px_rgba(255,107,53,0.2)] 
+                 transition-all duration-300"
     >
-      {/* Icon - White default, orange on hover */}
+      {/* Icon - Beyaz -> Turuncu hover */}
       <div className="flex justify-center mb-3">
         {IconComponent && (
-          <IconComponent className="w-8 h-8 text-white/80 group-hover:text-secondary transition-colors duration-300" />
+          <IconComponent className="w-8 h-8 text-white/70 group-hover:text-secondary transition-colors duration-300" />
         )}
       </div>
       {/* Skill Name */}
-      <span className="text-sm text-white/80 group-hover:text-white transition-colors duration-300">
+      <span className="text-sm text-white/70 group-hover:text-white transition-colors duration-300">
         {skill.name}
       </span>
     </motion.div>
@@ -71,13 +74,11 @@ function SkillBox({
   title,
   description,
   skills,
-  accentColor,
   delay = 0,
 }: {
   title: string;
   description: string;
   skills: Skill[];
-  accentColor: string;
   delay?: number;
 }) {
   return (
@@ -86,7 +87,7 @@ function SkillBox({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className={`glass-card rounded-3xl p-6 border border-white/10 hover:border-${accentColor}/30 transition-all duration-300`}
+      className="glass-card rounded-3xl p-6 border border-white/10 hover:border-secondary/30 transition-all duration-300"
     >
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
@@ -129,41 +130,52 @@ export default function Skills() {
 
         {/* Main Grid: Stats + 3 Skill Boxes */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Stats Card - Sol taraf */}
+          {/* Stats Card - BELIRGIN TERMINAL + TURUNCU BOLD RAKAMLAR */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="glass-card rounded-3xl p-8 border border-white/10 hover:border-secondary/30 transition-all duration-300 flex flex-col justify-center"
+            className="glass-card rounded-3xl p-8 border border-white/10 hover:border-secondary/30 transition-all duration-300 flex flex-col justify-center relative overflow-hidden"
           >
-            <div className="text-center space-y-6">
-              {/* Terminal Icon - Turuncu */}
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20">
-                <VscTerminal className="w-8 h-8 text-secondary" />
+            {/* Subtle background particles effect */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-4 left-4 w-2 h-2 bg-secondary rounded-full" />
+              <div className="absolute top-8 right-8 w-1.5 h-1.5 bg-secondary rounded-full" />
+              <div className="absolute bottom-12 left-8 w-1 h-1 bg-secondary rounded-full" />
+              <div className="absolute bottom-6 right-6 w-2 h-2 bg-secondary rounded-full" />
+            </div>
+
+            <div className="text-center space-y-6 relative z-10">
+              {/* Terminal Icon - BELİRGİN VE PARLAK */}
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary/30 to-secondary/10 border border-secondary/30">
+                <LuTerminal className="w-10 h-10 text-secondary" />
               </div>
 
-              {/* Stats - Turuncu ve Bold */}
+              {/* Stats - TURUNCU VE KALIN */}
               <div>
-                <div className="text-5xl font-bold text-secondary mb-2">3</div>
-                <p className="text-gray-400">{t('skills.stats.internship')}</p>
+                <div className="text-6xl font-bold text-secondary mb-2 drop-shadow-[0_0_10px_rgba(255,107,53,0.3)]">
+                  3
+                </div>
+                <p className="text-gray-400 font-medium">{t('skills.stats.internship')}</p>
               </div>
 
-              <div className="h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
+              <div className="h-px bg-gradient-to-r from-transparent via-secondary/60 to-transparent" />
 
               <div>
-                <div className="text-4xl font-bold text-secondary mb-1">3</div>
+                <div className="text-5xl font-bold text-secondary mb-1 drop-shadow-[0_0_10px_rgba(255,107,53,0.3)]">
+                  3
+                </div>
                 <p className="text-gray-500 text-sm">{t('skills.stats.projects')}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Kutu 1: Temel Yetkinlikler */}
+          {/* Kutu 1: Yazılım Geliştirme */}
           <SkillBox
             title={t('skills.core')}
             description={t('skills.coreDescription')}
             skills={coreSkills}
-            accentColor="primary"
             delay={0.1}
           />
 
@@ -172,16 +184,14 @@ export default function Skills() {
             title={t('skills.dataAi')}
             description={t('skills.dataAiDescription')}
             skills={dataAiSkills}
-            accentColor="secondary"
             delay={0.2}
           />
 
-          {/* Kutu 3: Web & Görselleştirme */}
+          {/* Kutu 3: Web & Arayüz */}
           <SkillBox
             title={t('skills.web')}
             description={t('skills.webDescription')}
             skills={webSkills}
-            accentColor="accent-cyan"
             delay={0.3}
           />
         </div>
