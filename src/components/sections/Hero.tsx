@@ -152,11 +152,12 @@ export default function Hero() {
               />
             </div>
 
-            {/* Floating Badge - Python */}
+            {/* Badge 1: Süreç Otomasyonu - Sol Alt (Merkeze yakın) */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-4 -left-4 glass-card p-4 rounded-2xl flex items-center gap-3 shadow-2xl border border-white/10"
+              className="absolute -bottom-4 -left-4 glass-card p-4 rounded-2xl flex items-center gap-3 shadow-2xl border border-white/10 group cursor-default"
+              title={t('hero.badge1Hover')}
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -165,19 +166,20 @@ export default function Hero() {
               </div>
               <div>
                 <div className="text-[10px] text-gray-500 uppercase tracking-tighter">
-                  {t('hero.expertise')}
+                  {t('hero.badge1Label')}
                 </div>
                 <div className="text-sm font-semibold text-white">
-                  {t('hero.pythonAutomation')}
+                  {t('hero.badge1Value')}
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating Badge - Data */}
+            {/* Badge 2: Veri Analitiği - Sağ Üst (Merkeze yakın) */}
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              className="absolute -top-4 -right-4 glass-card p-4 rounded-2xl flex items-center gap-3 shadow-2xl border border-white/10"
+              className="absolute -top-4 -right-4 glass-card p-4 rounded-2xl flex items-center gap-3 shadow-2xl border border-white/10 group cursor-default"
+              title={t('hero.badge2Hover')}
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-cyan to-blue-500 flex items-center justify-center text-white font-bold text-sm">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -186,28 +188,49 @@ export default function Hero() {
               </div>
               <div>
                 <div className="text-[10px] text-gray-500 uppercase tracking-tighter">
-                  {t('hero.focus')}
+                  {t('hero.badge2Label')}
                 </div>
-                <div className="text-sm font-semibold text-white">{t('hero.dataAnalysis')}</div>
+                <div className="text-sm font-semibold text-white">{t('hero.badge2Value')}</div>
               </div>
             </motion.div>
 
-            {/* Floating Badge - BI & Analytics */}
+            {/* Badge 3: Yapay Zeka Destekli Sistemler - Sağ Orta (Orta halka) */}
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              className="absolute top-1/2 -right-8 glass-card p-3 rounded-2xl flex items-center gap-2 shadow-2xl border border-white/10"
+              className="absolute top-1/2 -right-8 glass-card p-3 rounded-2xl flex items-center gap-2 shadow-2xl border border-white/10 group cursor-default"
+              title={t('hero.badge3Hover')}
             >
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-lime to-green-500 flex items-center justify-center text-white font-bold text-xs">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
               <div>
                 <div className="text-[9px] text-gray-500 uppercase tracking-tighter">
-                  {t('hero.biLabel')}
+                  {t('hero.badge3Label')}
                 </div>
-                <div className="text-xs font-semibold text-white">{t('hero.biValue')}</div>
+                <div className="text-xs font-semibold text-white">{t('hero.badge3Value')}</div>
+              </div>
+            </motion.div>
+
+            {/* Badge 4: Analitik ve Sistem Düşüncesi - Sol Üst (En dış / Küçük / Gri-Mor) */}
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+              className="absolute top-8 -left-6 glass-card p-2.5 rounded-xl flex items-center gap-2 shadow-xl border border-white/10 group cursor-default"
+              title={t('hero.badge4Hover')}
+            >
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-gray-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-[8px] text-gray-500 uppercase tracking-tighter">
+                  {t('hero.badge4Label')}
+                </div>
+                <div className="text-[10px] font-semibold text-white/90">{t('hero.badge4Value')}</div>
               </div>
             </motion.div>
           </div>
