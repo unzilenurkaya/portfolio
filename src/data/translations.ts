@@ -80,14 +80,22 @@ export const translations = {
     skills: {
       title: 'Yetenekler',
       subtitle: 'Teknik yetkinliklerim ve uzmanlık alanlarım',
-      core: 'Ana Yetenekler',
-      coreDescription: 'Temel uzmanlık alanları',
-      supporting: 'Destekleyici',
-      familiar: 'Aşina',
-      familiarDescription: 'Öğrenme & keşfetme',
+      // Grup 1: Backend & Core
+      backend: 'Backend & Core',
+      backendDescription: 'Ana Omurga',
+      // Grup 2: Veri & Yapay Zeka
+      dataAi: 'Veri & Yapay Zeka Araçları',
+      dataAiDescription: 'Uzmanlık Alanınız',
+      processing: 'Veri İşleme',
+      ml: 'Makine Öğrenmesi',
+      mlLevel: 'Temel-Orta',
+      llm: 'LLM & AI Araçları',
+      // Grup 3: Deneyim Kazanılan
+      experienced: 'Deneyim Kazanılan Teknolojiler',
+      experiencedDescription: 'Tamamlayıcı & Projelerde Kullanıldı',
       stats: {
-        internship: 'Staj Deneyimi',
-        projects: 'Tamamlanan Proje',
+        internship: 'Staj',
+        projects: 'Proje',
       },
     },
 
@@ -304,14 +312,22 @@ export const translations = {
     skills: {
       title: 'Skills',
       subtitle: 'My technical competencies and areas of expertise',
-      core: 'Core Skills',
-      coreDescription: 'Main expertise areas',
-      supporting: 'Supporting',
-      familiar: 'Familiar',
-      familiarDescription: 'Learning & exploring',
+      // Group 1: Backend & Core
+      backend: 'Backend & Core',
+      backendDescription: 'Main Backbone',
+      // Group 2: Data & AI
+      dataAi: 'Data & AI Tools',
+      dataAiDescription: 'Area of Expertise',
+      processing: 'Data Processing',
+      ml: 'Machine Learning',
+      mlLevel: 'Basic-Intermediate',
+      llm: 'LLM & AI Tools',
+      // Group 3: Experienced Technologies
+      experienced: 'Experienced Technologies',
+      experiencedDescription: 'Complementary & Used in Projects',
       stats: {
-        internship: 'Internship Experience',
-        projects: 'Completed Projects',
+        internship: 'Internship',
+        projects: 'Projects',
       },
     },
 

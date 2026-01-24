@@ -1,94 +1,101 @@
 import { Skill } from '@/types';
 
 export const skills: Skill[] = [
-  // Core Skills - Ana Yetenekler
+  // GRUP 1: Backend & Core (Ana Omurga)
   {
     name: 'Python',
-    level: 85,
-    category: 'core',
+    category: 'backend',
     icon: '🐍',
   },
   {
     name: 'SQL',
-    level: 80,
-    category: 'core',
+    category: 'backend',
     icon: '🗄️',
   },
   {
-    name: 'JavaScript',
-    level: 75,
-    category: 'core',
-    icon: '🟨',
-  },
-  {
-    name: 'React',
-    level: 70,
-    category: 'core',
-    icon: '⚛️',
-  },
-  {
-    name: 'HTML / CSS',
-    level: 80,
-    category: 'core',
-    icon: '🎨',
+    name: 'Veri Yapıları & Algoritmik Düşünme',
+    category: 'backend',
+    icon: '🧬',
   },
   {
     name: 'Git',
-    level: 75,
-    category: 'core',
+    category: 'backend',
     icon: '📝',
   },
 
-  // AI / Data Skills - AI & Veri Destekleyici
+  // GRUP 2: Veri & Yapay Zeka Araçları (Uzmanlık)
+  // 📊 Veri İşleme
   {
     name: 'Pandas',
-    level: 80,
-    category: 'supporting',
+    category: 'data-ai',
+    subCategory: 'processing',
     icon: '🐼',
   },
   {
-    name: 'Power BI',
-    level: 70,
-    category: 'supporting',
-    icon: '📈',
+    name: 'SQL',
+    category: 'data-ai',
+    subCategory: 'processing',
+    icon: '🗄️',
   },
   {
+    name: 'Excel',
+    category: 'data-ai',
+    subCategory: 'processing',
+    icon: '📊',
+  },
+  // 🤖 Makine Öğrenmesi (Temel-Orta)
+  {
     name: 'Scikit-learn',
-    level: 65,
-    category: 'supporting',
+    category: 'data-ai',
+    subCategory: 'ml',
     icon: '🤖',
   },
   {
     name: 'XGBoost',
-    level: 65,
-    category: 'supporting',
+    category: 'data-ai',
+    subCategory: 'ml',
     icon: '🚀',
   },
+  // 🧠 LLM & AI Araçları
   {
     name: 'Prompt Engineering',
-    level: 75,
-    category: 'supporting',
+    category: 'data-ai',
+    subCategory: 'llm',
     icon: '💬',
   },
   {
-    name: 'LLM Tools (ChatGPT)',
-    level: 80,
-    category: 'supporting',
+    name: 'LLM Tabanlı Otomasyonlar',
+    category: 'data-ai',
+    subCategory: 'llm',
     icon: '🧠',
   },
-
-  // Tools - Araçlar & Diğer
   {
     name: 'Streamlit',
-    level: 70,
-    category: 'familiar',
+    category: 'data-ai',
+    subCategory: 'llm',
     icon: '🌊',
   },
+
+  // GRUP 3: Deneyim Kazanılan Teknolojiler
   {
-    name: 'Excel',
-    level: 85,
-    category: 'familiar',
-    icon: '📊',
+    name: 'React',
+    category: 'experienced',
+    icon: '⚛️',
+  },
+  {
+    name: 'JavaScript',
+    category: 'experienced',
+    icon: '🟨',
+  },
+  {
+    name: 'HTML / CSS',
+    category: 'experienced',
+    icon: '🎨',
+  },
+  {
+    name: 'Power BI',
+    category: 'experienced',
+    icon: '📈',
   },
 ];
 
@@ -96,6 +103,15 @@ export const getSkillsByCategory = (category: Skill['category']) => {
   return skills.filter((skill) => skill.category === category);
 };
 
-export const coreSkills = getSkillsByCategory('core');
-export const supportingSkills = getSkillsByCategory('supporting');
-export const familiarSkills = getSkillsByCategory('familiar');
+export const getSkillsBySubCategory = (subCategory: Skill['subCategory']) => {
+  return skills.filter((skill) => skill.subCategory === subCategory);
+};
+
+export const backendSkills = getSkillsByCategory('backend');
+export const dataAiSkills = getSkillsByCategory('data-ai');
+export const experiencedSkills = getSkillsByCategory('experienced');
+
+// Sub-categories for data-ai
+export const processingSkills = getSkillsBySubCategory('processing');
+export const mlSkills = getSkillsBySubCategory('ml');
+export const llmSkills = getSkillsBySubCategory('llm');

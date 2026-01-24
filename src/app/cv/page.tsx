@@ -22,8 +22,8 @@ export default function CVPage() {
 
   const educations = experiences.filter((e) => e.type === 'education');
   const internships = experiences.filter((e) => e.type === 'internship');
-  const coreSkills = skills.filter((s) => s.category === 'core');
-  const supportingSkills = skills.filter((s) => s.category === 'supporting');
+  const backendSkills = skills.filter((s) => s.category === 'backend');
+  const dataAiSkills = skills.filter((s) => s.category === 'data-ai');
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-24 pb-20 print:bg-white print:pt-0 print:pb-0">
@@ -149,9 +149,9 @@ export default function CVPage() {
 
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-sm font-medium text-primary mb-2 print:text-gray-600">{t('skills.core')}</h3>
+                    <h3 className="text-sm font-medium text-primary mb-2 print:text-gray-600">{t('skills.backend')}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {coreSkills.map((skill) => (
+                      {backendSkills.map((skill) => (
                         <span key={skill.name} className="px-3 py-1 text-xs rounded-full bg-primary/20 text-primary print:bg-gray-200 print:text-gray-700">
                           {skill.name}
                         </span>
@@ -160,9 +160,9 @@ export default function CVPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-medium text-gray-400 mb-2 print:text-gray-600">{t('skills.supporting')}</h3>
+                    <h3 className="text-sm font-medium text-gray-400 mb-2 print:text-gray-600">{t('skills.dataAi')}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {supportingSkills.map((skill) => (
+                      {dataAiSkills.map((skill) => (
                         <span key={skill.name} className="px-3 py-1 text-xs rounded-full bg-white/10 text-gray-300 print:bg-gray-100 print:text-gray-600">
                           {skill.name}
                         </span>

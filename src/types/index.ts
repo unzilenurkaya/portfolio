@@ -10,8 +10,8 @@ export interface LanguageContextType {
 // Skill Types
 export interface Skill {
   name: string;
-  level: number;
-  category: 'core' | 'supporting' | 'familiar';
+  category: 'backend' | 'data-ai' | 'experienced';
+  subCategory?: 'processing' | 'ml' | 'llm'; // For data-ai group sub-blocks
   icon?: string;
 }
 
