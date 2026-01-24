@@ -209,7 +209,7 @@ export default function CVPage() {
                     <div key={edu.id} className="border-l-2 border-primary/50 pl-4 print:border-gray-300">
                       <div className="flex flex-wrap justify-between items-start gap-2">
                         <h3 className="text-white font-medium print:text-black">{edu.company[language]}</h3>
-                        <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded print:bg-gray-100">{edu.period}</span>
+                        <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded print:bg-gray-100">{typeof edu.period === 'string' ? edu.period : edu.period[language]}</span>
                       </div>
                       <p className="text-primary text-sm print:text-gray-600">{edu.role[language]}</p>
                     </div>
@@ -230,7 +230,7 @@ export default function CVPage() {
                     <div key={exp.id} className="border-l-2 border-accent-cyan/50 pl-4 print:border-gray-300">
                       <div className="flex flex-wrap justify-between items-start gap-2">
                         <h3 className="text-white font-medium print:text-black">{exp.company[language]}</h3>
-                        <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded print:bg-gray-100">{exp.period}</span>
+                        <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded print:bg-gray-100">{typeof exp.period === 'string' ? exp.period : exp.period[language]}</span>
                       </div>
                       <p className="text-accent-cyan text-sm mb-2 print:text-gray-600">{exp.role[language]}</p>
                       <p className="text-gray-400 text-sm print:text-gray-600">{exp.description[language]}</p>
@@ -253,9 +253,14 @@ export default function CVPage() {
                       <h3 className="text-white font-medium mb-1 print:text-black">{project.title[language]}</h3>
                       <p className="text-gray-400 text-sm mb-2 print:text-gray-600">{project.description[language]}</p>
                       <div className="flex flex-wrap gap-1">
-                        {project.technologies.slice(0, 4).map((tech) => (
-                          <span key={tech} className="text-xs text-primary print:text-gray-600">#{tech}</span>
-                        ))}
+                        {(() => {
+                          const techs = Array.isArray(project.technologies) 
+                            ? project.technologies 
+                            : project.technologies[language];
+                          return techs.slice(0, 4).map((tech: string) => (
+                            <span key={tech} className="text-xs text-primary print:text-gray-600">#{tech}</span>
+                          ));
+                        })()}
                       </div>
                     </div>
                   ))}

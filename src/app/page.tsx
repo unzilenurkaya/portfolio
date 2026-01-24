@@ -8,15 +8,10 @@ import Timeline from '@/components/sections/Timeline';
 import Education from '@/components/sections/Education';
 import Certificates from '@/components/sections/Certificates';
 import Contact from '@/components/sections/Contact';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import ScrollToTop from '@/components/ui/ScrollToTop';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a]">
-      <Navbar />
-
+    <div className="min-h-screen bg-[#0a0a0a]">
       {/* Sections */}
       <Hero />
       <About />
@@ -26,11 +21,6 @@ export default function Home() {
       <Education />
       <Certificates />
       <Contact />
-
-      <Footer />
-
-      {/* Scroll to Top */}
-      <ScrollToTop />
-    </main>
+    </div>
   );
 }

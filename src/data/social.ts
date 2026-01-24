@@ -17,8 +17,13 @@ export const socialLinks: SocialLink[] = [
     icon: 'email',
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/unzilenurkaya',
+    name: 'X',
+    url: 'https://x.com/unzilenurkaya',
     icon: 'twitter',
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/unzilenurkayaa/',
+    icon: 'instagram',
   },
 ];

@@ -58,6 +58,13 @@ export const translations = {
       headline: 'Yapay Zeka ile Akıllı Sistemler',
       headlineHighlight: 'Geliştirmek',
       interests: 'İlgi Alanları',
+      interestsList: {
+        ai: 'Yapay Zekâ & Veri Bilimi',
+        llm: 'Büyük Dil Modelleri (LLM) & Prompt Mühendisliği',
+        bi: 'İş Analitiği & Veri Görselleştirme',
+        automation: 'Süreç Otomasyonu',
+        digital: 'Dijital Dönüşüm',
+      },
       highlights: {
         student: 'YBS Öğrencisi',
         studentValue: '4. Sınıf',
@@ -82,13 +89,13 @@ export const translations = {
       subtitle: 'Yazılım ve veri bilimi yolculuğumda kullandığım teknolojiler',
       // Kutu 1: Yazılım Geliştirme
       core: 'Yazılım Geliştirme',
-      coreDescription: 'Software Development',
+      coreDescription: 'Temel Programlama & Backend',
       // Kutu 2: Veri Bilimi & Yapay Zekâ
       dataAi: 'Veri Bilimi & Yapay Zekâ',
-      dataAiDescription: 'Data Science & AI',
+      dataAiDescription: 'Veri Analizi & Makine Öğrenmesi',
       // Kutu 3: Web & Arayüz
       web: 'Web & Arayüz',
-      webDescription: 'Web & UI/UX',
+      webDescription: 'Web Geliştirme & Kullanıcı Deneyimi',
       stats: {
         internship: 'Staj',
         projects: 'Proje',
@@ -113,6 +120,7 @@ export const translations = {
         'business-ai': 'İş Zekası & Yapay Zeka',
         social: 'Sosyal Etki & Mühendislik',
       },
+      noProjects: 'Bu kategoride proje bulunamadı.',
     },
 
     // Experience Section
@@ -189,7 +197,7 @@ export const translations = {
 
     // Footer
     footer: {
-      copyright: '© 2024 Ünzile Nur KAYA. Tüm hakları saklıdır.',
+      copyright: '© 2026 Ünzile Nur KAYA. Tüm hakları saklıdır.',
       madeWith: 'ile yapıldı',
       privacy: 'Gizlilik Politikası',
     },
@@ -286,6 +294,13 @@ export const translations = {
       headline: 'Developing Smart Systems',
       headlineHighlight: 'with AI',
       interests: 'Interests',
+      interestsList: {
+        ai: 'AI & Data Science',
+        llm: 'Large Language Models (LLM) & Prompt Engineering',
+        bi: 'Business Analytics & Data Visualization',
+        automation: 'Process Automation',
+        digital: 'Digital Transformation',
+      },
       highlights: {
         student: 'MIS Student',
         studentValue: 'Senior',
@@ -341,6 +356,7 @@ export const translations = {
         'business-ai': 'Business Intelligence & AI',
         social: 'Social Impact & Engineering',
       },
+      noProjects: 'No projects found in this category.',
     },
 
     // Experience Section
@@ -417,7 +433,7 @@ export const translations = {
 
     // Footer
     footer: {
-      copyright: '© 2024 Ünzile Nur KAYA. All rights reserved.',
+      copyright: '© 2026 Ünzile Nur KAYA. All rights reserved.',
       madeWith: 'Made with',
       privacy: 'Privacy Policy',
     },

@@ -15,11 +15,11 @@ export default function About() {
   ];
 
   const interests = [
-    { icon: '🤖', name: 'Yapay Zekâ & Veri Bilimi' },
-    { icon: '💬', name: 'Büyük Dil Modelleri (LLM) & Prompt Mühendisliği' },
-    { icon: '📊', name: 'İş Analitiği & Veri Görselleştirme' },
-    { icon: '⚙️', name: 'Süreç Otomasyonu' },
-    { icon: '🚀', name: 'Dijital Dönüşüm' },
+    { icon: '🤖', key: 'about.interestsList.ai' },
+    { icon: '💬', key: 'about.interestsList.llm' },
+    { icon: '📊', key: 'about.interestsList.bi' },
+    { icon: '⚙️', key: 'about.interestsList.automation' },
+    { icon: '🚀', key: 'about.interestsList.digital' },
   ];
 
   return (
@@ -176,7 +176,7 @@ export default function About() {
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-primary/30 transition-colors"
                   >
                     <span>{interest.icon}</span>
-                    <span className="text-sm text-white/80">{interest.name}</span>
+                    <span className="text-sm text-white/80">{t(interest.key)}</span>
                   </motion.div>
                 ))}
               </div>

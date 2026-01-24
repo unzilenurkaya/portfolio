@@ -1,12 +1,22 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { certificates } from '@/data/certificates';
+import { Certificate } from '@/types';
 import Card from '@/components/ui/Card';
+import CertificateModal from '@/components/ui/CertificateModal';
 
 export default function Certificates() {
   const { t } = useLanguage();
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+
+  const handleCertificateClick = (cert: Certificate) => {
+    if (cert.hasViewButton !== false) {
+      setSelectedCertificate(cert);
+    }
+  };
 
   return (
     <section id="certificates" className="py-24 relative">
@@ -38,28 +48,30 @@ export default function Certificates() {
               transition={{ delay: index * 0.1 }}
             >
               <Card
-                className="h-full group cursor-pointer"
-                onClick={() => cert.url && window.open(cert.url, '_blank')}
-                hover
+                className={`h-full group ${cert.hasViewButton !== false ? 'cursor-pointer' : 'cursor-default'}`}
+                onClick={() => handleCertificateClick(cert)}
+                hover={cert.hasViewButton !== false}
               >
                 {/* Certificate Image Placeholder */}
                 <div className="aspect-[4/3] bg-gradient-to-br from-white/5 to-white/10 rounded-t-2xl relative overflow-hidden p-6 flex items-center justify-center">
                   <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
-                  <div className="text-4xl">🏆</div>
+                  <div className="text-4xl">{cert.featured ? '🏆' : '📜'}</div>
                   
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                    <span className="text-white font-medium px-4 py-2 border border-white rounded-full">
-                      {t('certificates.viewCertificate')}
-                    </span>
-                  </div>
+                  {/* Overlay - only show if hasViewButton is not false */}
+                  {cert.hasViewButton !== false && (
+                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-white font-medium px-4 py-2 border border-white rounded-full">
+                        {t('certificates.viewCertificate')}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6">
                   <div className="text-xs text-primary font-medium mb-2 uppercase tracking-wider">
                     {cert.issuer}
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                  <h3 className={`text-lg font-semibold text-white mb-2 leading-tight ${cert.hasViewButton !== false ? 'group-hover:text-primary' : ''} transition-colors`}>
                     {cert.title}
                   </h3>
                   <div className="text-sm text-gray-500">{cert.date}</div>
@@ -69,6 +81,16 @@ export default function Certificates() {
           ))}
         </div>
       </div>
+
+      {/* Certificate Modal */}
+      <AnimatePresence>
+        {selectedCertificate && (
+          <CertificateModal
+            certificate={selectedCertificate}
+            onClose={() => setSelectedCertificate(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

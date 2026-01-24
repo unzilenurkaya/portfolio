@@ -174,14 +174,19 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {t('projects.technologies')}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-4 py-2 rounded-full bg-white/5 text-white/80 border border-white/10 text-sm hover:bg-white/10 transition-colors"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {(() => {
+                  const techs = Array.isArray(project.technologies) 
+                    ? project.technologies 
+                    : project.technologies[language];
+                  return techs.map((tech: string) => (
+                    <span
+                      key={tech}
+                      className="px-4 py-2 rounded-full bg-white/5 text-white/80 border border-white/10 text-sm hover:bg-white/10 transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ));
+                })()}
               </div>
             </div>
           </div>

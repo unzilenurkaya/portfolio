@@ -9,6 +9,7 @@ import { contactSchema, ContactFormValues } from '@/lib/validations';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { socialLinks } from '@/data/social';
+import { toast } from 'sonner';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -26,16 +27,33 @@ export default function Contact() {
   const onSubmit = async (data: ContactFormValues) => {
     setStatus('sending');
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    // Success simulation
-    console.log(data);
-    setStatus('success');
-    reset();
-    
-    // Reset status after 3 seconds
-    setTimeout(() => setStatus('idle'), 3000);
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setStatus('success');
+      toast.success(t('contact.success'));
+      reset();
+      
+      // Reset status after 3 seconds
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus('error');
+      toast.error(t('contact.error'));
+      
+      // Reset status after 3 seconds
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -63,7 +81,9 @@ export default function Contact() {
               {/* Email Info */}
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl text-primary">
-                  ✉️
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 uppercase tracking-wider">Email</p>
@@ -96,6 +116,7 @@ export default function Contact() {
                     {social.icon === 'github' && 'gh'}
                     {social.icon === 'twitter' && 'x'}
                     {social.icon === 'email' && '@'}
+                    {social.icon === 'instagram' && 'ig'}
                   </motion.a>
                 ))}
               </div>
@@ -111,6 +132,15 @@ export default function Contact() {
             className="glass-card p-8 rounded-3xl border border-white/10"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Honeypot field - hidden from users */}
+              <input
+                type="text"
+                {...register('honeypot' as never)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   label={t('contact.name')}
@@ -145,7 +175,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all resize-none"
                 />
                 {errors.message && (
-                  <p className="text-red-400 text-xs">{errors.message.message}</p>
+                  <p className="text-red-400 text-xs" role="alert" aria-live="polite">{errors.message.message}</p>
                 )}
               </div>
 
@@ -157,14 +187,8 @@ export default function Contact() {
                 isLoading={status === 'sending'}
                 disabled={status === 'success'}
               >
-                {status === 'success' ? t('contact.success') : t('contact.send')}
+                {status === 'success' ? t('contact.success') : status === 'sending' ? t('contact.sending') : t('contact.send')}
               </Button>
-
-              {status === 'error' && (
-                <p className="text-red-400 text-center text-sm">
-                  {t('contact.error')}
-                </p>
-              )}
             </form>
           </motion.div>
         </div>

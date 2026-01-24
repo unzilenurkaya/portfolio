@@ -26,7 +26,10 @@ export const projects: Project[] = [
     },
     technologies: ['Python', 'Pandas', 'Openpyxl', 'Excel Analysis', 'Business Process Automation'],
     image: '/images/puantaj.jpg',
-    badge: '100+ Personel',
+    badge: {
+      tr: '100+ Personel',
+      en: '100+ Employees',
+    },
     category: 'industrial',
   },
 
@@ -56,7 +59,10 @@ export const projects: Project[] = [
     technologies: ['Python', 'Scikit-learn', 'XGBoost', 'Streamlit', 'Pandas'],
     image: '/images/oteltahmin.png',
     github: 'https://github.com/unzilenurkaya/hotel-reservation-app',
-    badge: '36.000+ Veri',
+    badge: {
+      tr: '36.000+ Veri',
+      en: '36,000+ Data',
+    },
     category: 'business-ai',
   },
 
@@ -83,9 +89,15 @@ export const projects: Project[] = [
       tr: 'TÜBİTAK 4006 Bilim Fuarı\'nda başarıyla sergilendi ve prototip tam not aldı. Sosyal sorumluluk ile mühendislik vizyonu birleştirildi.',
       en: 'Successfully exhibited at TÜBİTAK 4006 Science Fair and the prototype received full marks. Social responsibility and engineering vision were combined.',
     },
-    technologies: ['Mekanik Tasarım', 'Prototipleme', 'Proje Yönetimi', 'TÜBİTAK 4006'],
+    technologies: {
+      tr: ['Mekanik Tasarım', 'Prototipleme', 'Proje Yönetimi', 'TÜBİTAK 4006'],
+      en: ['Mechanical Design', 'Prototyping', 'Project Management', 'TÜBİTAK 4006'],
+    },
     image: '/images/tübitak1.jpg',
-    badge: 'TÜBİTAK 4006',
+    badge: {
+      tr: 'TÜBİTAK 4006',
+      en: 'TÜBİTAK 4006',
+    },
     category: 'social',
   },
 ];

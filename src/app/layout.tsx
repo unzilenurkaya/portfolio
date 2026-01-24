@@ -6,6 +6,9 @@ import FluidCursor from "@/components/ui/FluidCursor";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import CookieBanner from "@/components/ui/CookieBanner";
 import { PersonSchema, WebSiteSchema } from "@/components/seo/JsonLd";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -122,7 +125,8 @@ export default function RootLayout({
           sameAs={[
             "https://linkedin.com/in/unzilenurkaya",
             "https://github.com/unzilenurkaya",
-            "https://twitter.com/unzilenurkaya",
+            "https://x.com/unzilenurkaya",
+            "https://instagram.com/unzilenurkaya",
           ]}
         />
         <WebSiteSchema
@@ -143,11 +147,19 @@ export default function RootLayout({
             Ana içeriğe atla
           </a>
           <FluidCursor />
+          <Navbar />
           <main id="main-content">
             {children}
           </main>
+          <Footer />
           <ScrollToTop />
           <CookieBanner />
+          <Toaster 
+            position="top-right" 
+            theme="dark"
+            richColors
+            closeButton
+          />
         </LanguageProvider>
       </body>
     </html>

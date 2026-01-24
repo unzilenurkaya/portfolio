@@ -130,7 +130,7 @@ export default function Timeline() {
                         <span
                           className={`text-xs font-medium px-3 py-1 rounded-full bg-gradient-to-r ${getTypeColor(exp.type)} bg-opacity-20 text-white`}
                         >
-                          {exp.period}
+                          {exp.period[language]}
                         </span>
                         <span className="text-xs text-gray-500 uppercase tracking-wider">
                           {t(`experience.${exp.type}`)}

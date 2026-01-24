@@ -40,7 +40,7 @@ export default function Navbar() {
           borderBottom: `1px solid`,
           borderColor: headerBorder,
         }}
-        className="fixed top-0 w-full z-40 transition-all duration-300"
+        className="sticky top-0 w-full z-50 transition-all duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}

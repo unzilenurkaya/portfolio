@@ -113,7 +113,7 @@ export default function Projects() {
                         src={project.image}
                         alt={project.title[language]}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
@@ -128,7 +128,7 @@ export default function Projects() {
                     {/* Sayısal Başarı Rozeti - Sol Alt */}
                     {project.badge && (
                       <div className="absolute bottom-3 left-3 px-3 py-1.5 bg-secondary/90 backdrop-blur-sm rounded-lg text-white text-sm font-bold shadow-lg shadow-secondary/30">
-                        {project.badge}
+                        {typeof project.badge === 'string' ? project.badge : project.badge[language]}
                       </div>
                     )}
                     
@@ -157,19 +157,28 @@ export default function Projects() {
 
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 pt-2">
-                      {project.technologies.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-white/60 border border-white/10"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 4 && (
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
+                      {(() => {
+                        const techs = Array.isArray(project.technologies) 
+                          ? project.technologies 
+                          : project.technologies[language];
+                        return (
+                          <>
+                            {techs.slice(0, 4).map((tech: string) => (
+                              <span
+                                key={tech}
+                                className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-white/60 border border-white/10"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                            {techs.length > 4 && (
+                              <span className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+                                +{techs.length - 4}
+                              </span>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 </Card>
@@ -186,7 +195,7 @@ export default function Projects() {
             className="text-center py-12"
           >
             <div className="text-6xl mb-4">🔍</div>
-            <p className="text-gray-400">Bu kategoride proje bulunamadı.</p>
+            <p className="text-gray-400">{t('projects.noProjects')}</p>
           </motion.div>
         )}
       </div>

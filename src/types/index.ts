@@ -37,9 +37,9 @@ export interface Project {
     tr: string;
     en: string;
   };
-  technologies: string[];
+  technologies: string[] | { tr: string[]; en: string[] };
   image?: string;
-  badge?: string;
+  badge?: string | { tr: string; en: string };
   github?: string;
   demo?: string;
   category: 'industrial' | 'business-ai' | 'social';
@@ -56,7 +56,10 @@ export interface Experience {
     tr: string;
     en: string;
   };
-  period: string;
+  period: {
+    tr: string;
+    en: string;
+  };
   description: {
     tr: string;
     en: string;
@@ -73,6 +76,8 @@ export interface Certificate {
   image?: string;
   url?: string;
   featured?: boolean;
+  fileType?: 'pdf' | 'image';
+  hasViewButton?: boolean;
 }
 
 // Social Links
