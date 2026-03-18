@@ -14,6 +14,12 @@ interface ChatMessage {
   text: string;
 }
 
+interface WakeCue {
+  id: string;
+  title: string;
+  body: string;
+}
+
 type AssistantSection =
   | 'hero'
   | 'about'
@@ -45,8 +51,10 @@ export default function VirtualAssistant() {
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [scrollOffset, setScrollOffset] = useState(0);
   const [drift, setDrift] = useState({ x: 0, y: 0 });
+  const [wakeCue, setWakeCue] = useState<WakeCue | null>(null);
+  const [isListening, setIsListening] = useState(false);
   const messageCounter = useRef(1);
-  const contextCounter = useRef(1);
+  const wakeCounter = useRef(1);
 
   const quickActions = useMemo(
     () => [
@@ -69,6 +77,13 @@ export default function VirtualAssistant() {
   );
 
   const liveContext = useMemo(() => t(`assistant.context.${activeSection}`), [activeSection, t]);
+  const personaLabel = useMemo(
+    () =>
+      pathname.startsWith('/blog')
+        ? t('assistant.persona.analyst')
+        : t('assistant.persona.guide'),
+    [pathname, t]
+  );
 
   useEffect(() => {
     if (isOpen || floatingHints.length === 0) {
@@ -162,12 +177,20 @@ export default function VirtualAssistant() {
       return;
     }
 
-    const messageId = `context-${contextCounter.current++}`;
-    setMessages((current) => {
-      const next = current.filter((message) => !message.id.startsWith('context-'));
-      return [...next, { id: messageId, role: 'assistant', text: liveContext }];
-    });
-  }, [isOpen, liveContext]);
+    const nextCue = {
+      id: `wake-${wakeCounter.current++}`,
+      title: t(`assistant.sections.${activeSection}`),
+      body: liveContext,
+    };
+
+    setWakeCue(nextCue);
+
+    const timeoutId = window.setTimeout(() => {
+      setWakeCue((current) => (current?.id === nextCue.id ? null : current));
+    }, 2600);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeSection, isOpen, liveContext, t]);
 
   const toggleAssistant = () => {
     setIsOpen((current) => !current);
@@ -220,7 +243,7 @@ export default function VirtualAssistant() {
     const baseId = `assistant-${messageCounter.current++}`;
 
     setMessages((current) => [
-      ...current.filter((message) => !message.id.startsWith('context-')),
+      ...current,
       { id: `${baseId}-user`, role: 'user', text: userText },
       { id: `${baseId}-assistant`, role: 'assistant', text: getReply(intent) },
     ]);
@@ -243,11 +266,12 @@ export default function VirtualAssistant() {
     const intent = detectIntent(trimmedInput);
     const baseId = `assistant-${messageCounter.current++}`;
     setMessages((current) => [
-      ...current.filter((message) => !message.id.startsWith('context-')),
+      ...current,
       { id: `${baseId}-user`, role: 'user', text: trimmedInput },
     ]);
     setInput('');
     setIsOpen(true);
+    setIsListening(false);
 
     if (intent !== 'fallback') {
       setMessages((current) => [...current, { id: `${baseId}-assistant`, role: 'assistant', text: getReply(intent) }]);
@@ -326,7 +350,7 @@ export default function VirtualAssistant() {
                     <p className="truncate text-lg font-semibold text-[#f6ede7]">{t('assistant.name')}</p>
                     <p className="mt-1 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#f07445]">
                       <span className="h-2 w-2 rounded-full bg-[#f07445] shadow-[0_0_12px_rgba(240,116,69,0.85)]" />
-                      {t('assistant.status')}
+                      {personaLabel}
                     </p>
                   </div>
                   <button
@@ -377,6 +401,15 @@ export default function VirtualAssistant() {
                       </div>
                     </div>
                   )}
+                  {isListening && !isThinking && input.trim().length > 0 && (
+                    <div className="flex items-end gap-3">
+                      <AssistantBadge />
+                      <div className="flex max-w-[78%] items-center gap-2 rounded-[1.35rem] rounded-bl-md border border-[#f07445]/12 bg-[#17110d] px-4 py-3 text-sm leading-6 text-[#ead7c8]">
+                        <span>{t('assistant.listening')}</span>
+                        <ListeningDots />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-4 flex flex-wrap gap-2">
@@ -395,7 +428,10 @@ export default function VirtualAssistant() {
                 <div className="flex items-center gap-3 rounded-[1.3rem] border border-white/10 bg-[#0d0a08] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
                   <input
                     value={input}
-                    onChange={(event) => setInput(event.target.value)}
+                    onChange={(event) => {
+                      setInput(event.target.value);
+                      setIsListening(event.target.value.trim().length > 0);
+                    }}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter') {
                         handleSubmit();
@@ -422,9 +458,9 @@ export default function VirtualAssistant() {
 
         <div className="relative">
           <AnimatePresence>
-            {!isOpen && (
+            {!isOpen && wakeCue && (
               <motion.div
-                key={`${activeSection}-${hintIndex}`}
+                key={wakeCue.id}
                 initial={{ opacity: 0, y: 10, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -432,9 +468,9 @@ export default function VirtualAssistant() {
                 className="absolute bottom-[102px] right-0 hidden w-[min(280px,78vw)] rounded-[1.4rem] border border-[#f07445]/25 bg-[linear-gradient(180deg,rgba(19,13,9,0.96),rgba(10,8,6,0.96))] px-4 py-3 text-sm text-[#ead7c8] shadow-[0_18px_40px_rgba(0,0,0,0.42)] md:block"
               >
                 <div className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#f07445]">
-                  {t(`assistant.sections.${activeSection}`)}
+                  {wakeCue.title}
                 </div>
-                <div className="leading-6">{isOpen ? t('assistant.liveHint') : liveContext}</div>
+                <div className="leading-6">{wakeCue.body}</div>
                 <div className="mt-3 border-t border-white/5 pt-3 text-xs text-[#b9977e]">
                   {floatingHints[hintIndex]}
                 </div>
@@ -472,6 +508,21 @@ export default function VirtualAssistant() {
         </div>
       </div>
     </>
+  );
+}
+
+function ListeningDots() {
+  return (
+    <div className="flex items-center gap-1">
+      {[0, 1, 2].map((index) => (
+        <motion.span
+          key={index}
+          animate={{ opacity: [0.25, 1, 0.25], y: [0, -2, 0] }}
+          transition={{ duration: 0.9, repeat: Number.POSITIVE_INFINITY, delay: index * 0.14 }}
+          className="h-1.5 w-1.5 rounded-full bg-[#f07445]"
+        />
+      ))}
+    </div>
   );
 }
 

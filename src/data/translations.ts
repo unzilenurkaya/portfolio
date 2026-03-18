@@ -283,6 +283,7 @@ export const translations = {
       intro: 'Merhaba. Projeler, blog, CV ve iletisim gibi alanlarda sana hizlica rehberlik edebilirim.',
       placeholder: 'Bir sey sor...',
       thinking: 'Dusunuyorum...',
+      listening: 'Dinliyorum...',
       openLabel: 'Asistani ac',
       closeLabel: 'Asistani kapat',
       sendLabel: 'Mesaji gonder',
@@ -323,6 +324,10 @@ export const translations = {
         blog: 'Blog tarafindasin. AI engineering serisi en guclu alanlardan biri olarak burada duruyor.',
         cv: 'CV sayfasindasin. Egitim, deneyim ve teknik odak tek akista goruluyor.',
         privacy: 'Gizlilik sayfasindasin. Istersen seni tekrar ana iceriklere goturebilirim.',
+      },
+      persona: {
+        guide: 'Rehber modu',
+        analyst: 'Analitik mod',
       },
       replies: {
         projects: 'Projeler bolumune gidiyorum. Burada otomasyon, makine ogrenmesi ve sosyal etki odakli islerini gorebilirsin.',
@@ -619,6 +624,7 @@ export const translations = {
       intro: 'Hello. I can quickly guide you through projects, blog posts, the resume page, and contact options.',
       placeholder: 'Ask something...',
       thinking: 'Thinking...',
+      listening: 'Listening...',
       openLabel: 'Open assistant',
       closeLabel: 'Close assistant',
       sendLabel: 'Send message',
@@ -659,6 +665,10 @@ export const translations = {
         blog: 'You are on the blog side. The AI engineering series is one of the strongest parts here.',
         cv: 'You are on the resume page. Education, experience, and technical focus are presented in one flow.',
         privacy: 'You are on the privacy page. If you want, I can take you back to the core content.',
+      },
+      persona: {
+        guide: 'Guide mode',
+        analyst: 'Analytical mode',
       },
       replies: {
         projects: 'Taking you to the projects section. You can explore work focused on automation, machine learning, and social impact there.',
