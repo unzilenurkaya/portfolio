@@ -1,6 +1,7 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { socialLinks } from '@/data/social';
 import Link from 'next/link';
+import NavLink from '@/components/ui/NavLink';
 import { FaLinkedinIn, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
@@ -15,7 +16,6 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function Footer() {
   const { t } = useLanguage();
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#050505] border-t border-white/5 pt-16 pb-8">
@@ -23,9 +23,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="font-serif text-2xl font-bold text-white mb-4 block">
+            <NavLink href="/" className="font-serif text-2xl font-bold text-white mb-4 block">
               ÜNZİLE NUR<span className="text-primary">.</span>
-            </Link>
+            </NavLink>
             <p className="text-gray-500 max-w-sm mb-6">
               {t('footer.bio')}
             </p>
@@ -52,11 +52,11 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-medium mb-4">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 text-sm text-gray-500">
-              <li><Link href="/#about" className="hover:text-primary transition-colors">{t('nav.about')}</Link></li>
-              <li><Link href="/#projects" className="hover:text-primary transition-colors">{t('nav.projects')}</Link></li>
+              <li><NavLink href="/#about" className="hover:text-primary transition-colors">{t('nav.about')}</NavLink></li>
+              <li><NavLink href="/#projects" className="hover:text-primary transition-colors">{t('nav.projects')}</NavLink></li>
               <li><Link href="/blog" className="hover:text-primary transition-colors">{t('nav.blog')}</Link></li>
               <li><Link href="/cv" className="hover:text-primary transition-colors">{t('nav.cv')}</Link></li>
-              <li><Link href="/#contact" className="hover:text-primary transition-colors">{t('nav.contact')}</Link></li>
+              <li><NavLink href="/#contact" className="hover:text-primary transition-colors">{t('nav.contact')}</NavLink></li>
             </ul>
           </div>
 

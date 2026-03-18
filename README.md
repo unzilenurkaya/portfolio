@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Portfolio
 
-## Getting Started
+Kisisel portfolyo ve blog sitesi. Proje Next.js App Router yapisi ile gelistirilmis, blog icerikleri ise `content/blog` altindaki MDX dosyalarindan uretilir.
 
-First, run the development server:
+## Ozellikler
+
+- Ana sayfada portfolyo bolumleri
+- MDX tabanli blog yapisi
+- `sitemap` ve `robots` uretimi
+- Open Graph API route
+- Resend uzerinden calisan iletisim formu
+
+## Teknoloji Yigini
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- ESLint 9
+- MDX tabanli icerik yapisi
+
+## Proje Yapisi
+
+```text
+src/
+  app/
+    page.tsx
+    blog/
+    cv/
+    privacy/
+    api/
+  components/
+  data/
+  lib/
+content/
+  blog/
+public/
+```
+
+## Gelistirme
+
+Gelistirme sunucusunu baslatmak icin:
+
+```bash
+npm install
+npm run dev
+```
+
+Tarayicida [http://localhost:3000](http://localhost:3000) adresini acabilirsiniz.
+
+## Scriptler
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ortam Degiskenleri
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Projeyi calistirmadan once `.env.example` dosyasini referans alarak kendi `.env.local` dosyanizi olusturun.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Kullanilan degiskenler:
 
-## Learn More
+- `NEXT_PUBLIC_SITE_URL`: sitemap, robots ve SEO metadata icin temel site adresi
+- `RESEND_API_KEY`: iletisim formundaki e-posta gonderimi icin gerekli anahtar
+- `GOOGLE_SITE_VERIFICATION`: opsiyonel Search Console dogrulamasi
+- `NEXT_PUBLIC_GA_ID`: opsiyonel Google Analytics kimligi
 
-To learn more about Next.js, take a look at the following resources:
+Not: `RESEND_API_KEY` tanimli degilse iletisim API'si gelistirme kolayligi icin yine basarili doner, ancak gercek e-posta gonderimi yapilmaz.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Icerik Yonetimi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Blog yazilari `content/blog/*.mdx` altinda tutulur
+- Portfolyo icerikleri `src/data/*` dosyalarindan beslenir
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Bu proje Vercel uzerinde deploy edilmeye uygundur. Uretim ortami icin en azindan su degiskenlerin tanimli oldugundan emin olun:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `NEXT_PUBLIC_SITE_URL`
+- `RESEND_API_KEY`

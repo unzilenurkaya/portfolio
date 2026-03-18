@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import LanguageToggle from '@/components/ui/LanguageToggle';
+import NavLink from '@/components/ui/NavLink';
 import MobileMenu from './MobileMenu';
-import Link from 'next/link';
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -44,44 +44,44 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="font-serif text-xl font-bold tracking-tighter text-white uppercase relative z-50">
+          <NavLink href="/" className="font-serif text-xl font-bold tracking-tighter text-white uppercase relative z-50">
             ÜNZİLE NUR<span className="text-primary">.</span>
-          </Link>
+          </NavLink>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-            <Link href="/" className="hover:text-white transition-colors">
+            <NavLink href="/" className="hover:text-white transition-colors">
               {t('nav.home')}
-            </Link>
-            <Link href="/#about" className="hover:text-white transition-colors">
+            </NavLink>
+            <NavLink href="/#about" className="hover:text-white transition-colors">
               {t('nav.about')}
-            </Link>
-            <Link href="/#skills" className="hover:text-white transition-colors">
+            </NavLink>
+            <NavLink href="/#skills" className="hover:text-white transition-colors">
               {t('nav.skills')}
-            </Link>
-            <Link href="/#projects" className="hover:text-white transition-colors">
+            </NavLink>
+            <NavLink href="/#projects" className="hover:text-white transition-colors">
               {t('nav.projects')}
-            </Link>
-             <Link href="/#certificates" className="hover:text-white transition-colors">
+            </NavLink>
+             <NavLink href="/#certificates" className="hover:text-white transition-colors">
               {t('nav.certificates')}
-            </Link>
-            <Link href="/blog" className="hover:text-white transition-colors">
+            </NavLink>
+            <NavLink href="/blog" className="hover:text-white transition-colors">
               {t('nav.blog')}
-            </Link>
-            <Link href="/cv" className="hover:text-white transition-colors">
+            </NavLink>
+            <NavLink href="/cv" className="hover:text-white transition-colors">
               {t('nav.cv')}
-            </Link>
+            </NavLink>
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageToggle />
-            <Link
+            <NavLink
               href="/#contact"
               className="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-primary/50 transition-all"
             >
               {t('nav.contact')}
-            </Link>
+            </NavLink>
           </div>
 
           {/* Mobile Menu Button */}

@@ -54,7 +54,7 @@ export default function Certificates() {
               >
                 {/* Certificate Icon Preview */}
                 <div className="aspect-[4/3] bg-gradient-to-br from-white/5 to-white/10 rounded-t-2xl relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12)_0,transparent_55%)] opacity-70" />
 
                   <div className="text-5xl drop-shadow-xl z-10">
                     🏆

@@ -15,30 +15,36 @@ export default function TableOfContents() {
     const [activeId, setActiveId] = useState<string>('');
 
     useEffect(() => {
-        const headings = Array.from(document.querySelectorAll('h2, h3'))
-            .filter((h) => h.id)
-            .map((h) => ({
-                id: h.id,
-                text: (h as HTMLElement).innerText,
-                level: Number(h.tagName.substring(1)),
-            }));
+        let observer: IntersectionObserver | null = null;
+        const frameId = requestAnimationFrame(() => {
+            const headings = Array.from(document.querySelectorAll('h2, h3'))
+                .filter((h) => h.id)
+                .map((h) => ({
+                    id: h.id,
+                    text: (h as HTMLElement).innerText,
+                    level: Number(h.tagName.substring(1)),
+                }));
 
-        setToc(headings);
+            setToc(headings);
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveId(entry.target.id);
-                    }
-                });
-            },
-            { rootMargin: '-10% 0% -80% 0%' }
-        );
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            setActiveId(entry.target.id);
+                        }
+                    });
+                },
+                { rootMargin: '-10% 0% -80% 0%' }
+            );
 
-        document.querySelectorAll('h2, h3').forEach((h) => observer.observe(h));
+            document.querySelectorAll('h2, h3').forEach((h) => observer?.observe(h));
+        });
 
-        return () => observer.disconnect();
+        return () => {
+            cancelAnimationFrame(frameId);
+            observer?.disconnect();
+        };
     }, []);
 
     if (toc.length === 0) return null;

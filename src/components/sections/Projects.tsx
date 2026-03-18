@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { projects, getProjectsByCategory } from '@/data/projects';
+import { getProjectsByCategory } from '@/data/projects';
 import { Project } from '@/types';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';

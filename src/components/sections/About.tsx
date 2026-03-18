@@ -199,13 +199,6 @@ export default function About() {
                     <p className="text-gray-500 text-xs">{t('about.universities.bandirmaProgram')}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-cyan mt-2" />
-                  <div>
-                    <p className="text-white text-sm">{t('about.universities.anadolu')}</p>
-                    <p className="text-gray-500 text-xs">{t('about.universities.anadoluProgram')}</p>
-                  </div>
-                </div>
               </div>
             </div>
           </motion.div>

@@ -41,7 +41,7 @@ export function getAllPosts(): BlogPostMeta[] {
     .filter((post): post is BlogPost => post !== null && post.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return posts.map(({ content, ...meta }) => meta);
+  return posts.map(({ ...meta }) => meta);
 }
 
 // Get a single blog post by slug
@@ -97,13 +97,17 @@ export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2):
     .filter((post) => post.slug !== currentSlug) // Exclude current post
     .map((post) => {
       // Calculate how many tags match
-      const matchingTags = post.tags.filter((tag) =>
+      const matchCount = post.tags.filter((tag) =>
         tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
       ).length;
-      return { ...post, matchingTags };
+      return { ...post, matchCount };
     })
-    .filter((post) => post.matchingTags > 0) // Only posts with at least one matching tag
-    .sort((a, b) => b.matchingTags - a.matchingTags) // Sort by most matching tags
+    .filter((post) => post.matchCount > 0) // Only posts with at least one matching tag
+    .sort((a, b) => b.matchCount - a.matchCount) // Sort by most matching tags
     .slice(0, limit)
-    .map(({ matchingTags, ...post }) => post);
+    .map((post) => {
+      const { matchCount, ...rest } = post;
+      void matchCount;
+      return rest;
+    });
 }

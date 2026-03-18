@@ -13,17 +13,25 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if consent was already given
-    const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (savedConsent) {
-      setConsentStatus(savedConsent as ConsentStatus);
-    } else {
-      // Show banner after a short delay
-      const timer = setTimeout(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const frameId = requestAnimationFrame(() => {
+      const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+      if (savedConsent === 'accepted' || savedConsent === 'rejected') {
+        setConsentStatus(savedConsent);
+        return;
+      }
+
+      timer = setTimeout(() => {
         setIsVisible(true);
       }, 1500);
-      return () => clearTimeout(timer);
-    }
+    });
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
   }, []);
 
   const handleAccept = () => {

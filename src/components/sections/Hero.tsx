@@ -4,14 +4,17 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
+import { experiences, educations } from '@/data/experience';
+import { projects } from '@/data/projects';
 
 export default function Hero() {
   const { t } = useLanguage();
+  const internshipCount = experiences.filter((item) => item.type === 'internship').length;
 
   const stats = [
-    { labelKey: 'hero.stats.internship', value: '3' },
-    { labelKey: 'hero.stats.projects', value: '3' },
-    { labelKey: 'hero.stats.university', value: '2' },
+    { labelKey: 'hero.stats.internship', value: String(internshipCount) },
+    { labelKey: 'hero.stats.projects', value: String(projects.length) },
+    { labelKey: 'hero.stats.university', value: String(educations.length) },
   ];
 
   return (

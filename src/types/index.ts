@@ -64,6 +64,10 @@ export interface Experience {
     tr: string;
     en: string;
   };
+  note?: {
+    tr: string;
+    en: string;
+  };
   type: 'internship' | 'education' | 'work';
 }
 

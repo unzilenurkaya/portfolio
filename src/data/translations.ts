@@ -78,8 +78,6 @@ export const translations = {
       universities: {
         bandirma: 'Bandırma Onyedi Eylül Üniversitesi',
         bandirmaProgram: 'YBS • 2022-2026',
-        anadolu: 'Anadolu Üniversitesi',
-        anadoluProgram: 'Bilgisayar Prog. • 2022-Devam',
       },
     },
 
@@ -128,6 +126,7 @@ export const translations = {
       title: 'Deneyim',
       subtitle: 'Staj ve iş deneyimlerim',
       internship: 'Staj',
+      work: 'Deneyim',
       education: 'Eğitim',
       present: 'Devam',
     },
@@ -136,6 +135,7 @@ export const translations = {
     education: {
       title: 'Eğitim',
       subtitle: 'Akademik geçmişim',
+      noteLabel: 'Not',
     },
 
     // Certificates Section
@@ -209,6 +209,7 @@ export const translations = {
       native: 'Ana Dil',
       english: 'İngilizce',
       intermediate: 'Orta Seviye',
+      noteLabel: 'Not',
     },
 
     // Footer
@@ -333,8 +334,6 @@ export const translations = {
       universities: {
         bandirma: 'Bandırma Onyedi Eylül University',
         bandirmaProgram: 'MIS • 2022-2026',
-        anadolu: 'Anadolu University',
-        anadoluProgram: 'Computer Prog. • 2022-Ongoing',
       },
     },
 
@@ -383,6 +382,7 @@ export const translations = {
       title: 'Experience',
       subtitle: 'My internships and work experience',
       internship: 'Internship',
+      work: 'Experience',
       education: 'Education',
       present: 'Present',
     },
@@ -391,6 +391,7 @@ export const translations = {
     education: {
       title: 'Education',
       subtitle: 'My academic background',
+      noteLabel: 'Note',
     },
 
     // Certificates Section
@@ -464,6 +465,7 @@ export const translations = {
       native: 'Native',
       english: 'English',
       intermediate: 'Intermediate',
+      noteLabel: 'Note',
     },
 
     // Footer

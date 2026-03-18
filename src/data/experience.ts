@@ -73,14 +73,14 @@ export const experiences: Experience[] = [
       en: 'MIS Community - Sponsorship Team Member',
     },
     period: {
-      tr: '2023 - Devam',
-      en: '2023 - Present',
+      tr: '2023 - 2024',
+      en: '2023 - 2024',
     },
     description: {
       tr: 'Topluluk etkinlikleri için sponsorluk süreçlerini yönettim ve kurumsal iletişim becerilerimi geliştirdim. Teknoloji şirketleri ile iş birliği süreçlerinde aktif rol aldım. Organizasyon ve koordinasyon yeteneklerimi teknoloji ile iş dünyası arasında köprü kuracak projelerde kullandım.',
       en: 'Managed sponsorship processes for community events and developed corporate communication skills. Took an active role in collaboration processes with technology companies. Used organization and coordination skills in projects bridging technology and business.',
     },
-    type: 'internship',
+    type: 'work',
   },
 ];
 
@@ -101,28 +101,12 @@ export const educations = [
       en: '2022 - 2026',
     },
     description: {
-      tr: 'Veri analizi, yazılım geliştirme ve iş süreçleri yönetimi üzerine eğitim.',
-      en: 'Education on data analysis, software development, and business process management.',
+      tr: 'Veri analizi, yazılım geliştirme ve iş süreçleri yönetimi odaklı lisans eğitimi.',
+      en: 'Undergraduate education focused on data analysis, software development, and business process management.',
     },
-    type: 'education' as const,
-  },
-  {
-    id: 'edu-anadolu',
-    company: {
-      tr: 'Anadolu Üniversitesi',
-      en: 'Anadolu University',
-    },
-    role: {
-      tr: 'Bilgisayar Programcılığı',
-      en: 'Computer Programming',
-    },
-    period: {
-      tr: '2022 - Devam',
-      en: '2022 - Present',
-    },
-    description: {
-      tr: 'İkinci üniversite olarak yazılım geliştirme odaklı eğitim.',
-      en: 'Software development focused education as a second university.',
+    note: {
+      tr: 'Akademik eğitimime Düzce Üniversitesi Yönetim Bilişim Sistemleri bölümünde başlayıp, yatay geçiş ile Bandırma Onyedi Eylül Üniversitesi\'nde devam ettim.',
+      en: 'I began my academic education in the Management Information Systems department at Duzce University and continued at Bandirma Onyedi Eylul University through a horizontal transfer.',
     },
     type: 'education' as const,
   },

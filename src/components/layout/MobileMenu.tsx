@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import LanguageToggle from '@/components/ui/LanguageToggle';
+import NavLink from '@/components/ui/NavLink';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -58,22 +59,22 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
             <nav className="flex-1 space-y-6">
               {menuItems.map((item) => (
-                <a
+                <NavLink
                   key={item.key}
                   href={item.href}
                   onClick={onClose}
                   className="block text-2xl font-serif text-white/80 hover:text-primary transition-colors"
                 >
                   {t(item.key)}
-                </a>
+                </NavLink>
               ))}
-              <a
+              <NavLink
                 href="/#contact"
                 onClick={onClose}
                 className="block text-2xl font-serif text-primary"
               >
                 {t('nav.contact')}
-              </a>
+              </NavLink>
             </nav>
 
             <div className="mt-auto pt-8 border-t border-white/10">

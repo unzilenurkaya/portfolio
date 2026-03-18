@@ -29,10 +29,6 @@ export function PersonSchema({
         '@type': 'EducationalOrganization',
         name: 'Bandırma 17 Eylül Üniversitesi',
       },
-      {
-        '@type': 'EducationalOrganization',
-        name: 'Anadolu Üniversitesi',
-      },
     ],
     knowsAbout: [
       'Python',

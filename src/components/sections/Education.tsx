@@ -141,6 +141,16 @@ export default function Education() {
                                             <p className="text-gray-400 text-sm leading-relaxed">
                                                 {exp.description[language]}
                                             </p>
+                                            {exp.note && (
+                                                <div className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary mb-1">
+                                                        {t('education.noteLabel')}
+                                                    </p>
+                                                    <p className="text-gray-300 text-sm leading-relaxed">
+                                                        {exp.note[language]}
+                                                    </p>
+                                                </div>
+                                            )}
                                         </motion.div>
                                     </div>
 

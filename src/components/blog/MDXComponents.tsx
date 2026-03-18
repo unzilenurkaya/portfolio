@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaInfoCircle, FaExclamationTriangle, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
@@ -158,24 +159,31 @@ const components: MDXComponents = {
   ),
 
   // Professional Figure & Image
-  img: ({ src, alt, ...props }) => (
-    <figure className="my-12">
-      <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-        <img
-          src={src}
-          alt={alt || ''}
-          className="w-full h-auto object-cover"
-          loading="lazy"
-          {...props}
-        />
-      </div>
-      {alt && (
-        <figcaption className="text-center text-gray-500 text-sm mt-4 italic font-light tracking-wide">
-          — {alt}
-        </figcaption>
-      )}
-    </figure>
-  ),
+  img: ({ src, alt, width, height, ...props }) => {
+    const imageSrc = typeof src === 'string' ? src : '';
+    const imageWidth = typeof width === 'number' ? width : Number(width) || 1200;
+    const imageHeight = typeof height === 'number' ? height : Number(height) || 675;
+
+    return (
+      <figure className="my-12">
+        <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+          <Image
+            src={imageSrc}
+            alt={alt || ''}
+            width={imageWidth}
+            height={imageHeight}
+            className="w-full h-auto object-cover"
+            {...props}
+          />
+        </div>
+        {alt && (
+          <figcaption className="text-center text-gray-500 text-sm mt-4 italic font-light tracking-wide">
+            — {alt}
+          </figcaption>
+        )}
+      </figure>
+    );
+  },
 
   // Table
   table: ({ children, ...props }) => (

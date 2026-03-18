@@ -3,9 +3,8 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { skills } from '@/data/skills';
-import { experiences } from '@/data/experience';
+import { experiences, educations } from '@/data/experience';
 import { projects } from '@/data/projects';
-import { socialLinks } from '@/data/social';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,8 +19,7 @@ export default function CVPage() {
     window.open('/cv.pdf', '_blank');
   };
 
-  const educations = experiences.filter((e) => e.type === 'education');
-  const internships = experiences.filter((e) => e.type === 'internship');
+  const experienceEntries = experiences.filter((e) => e.type !== 'education');
   const coreSkillsList = skills.filter((s) => s.category === 'core');
   const dataAiSkillsList = skills.filter((s) => s.category === 'data-ai');
 
@@ -212,6 +210,15 @@ export default function CVPage() {
                         <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded print:bg-gray-100">{typeof edu.period === 'string' ? edu.period : edu.period[language]}</span>
                       </div>
                       <p className="text-primary text-sm print:text-gray-600">{edu.role[language]}</p>
+                      <p className="text-gray-400 text-sm mt-2 print:text-gray-600">{edu.description[language]}</p>
+                      {edu.note && (
+                        <div className="mt-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 print:border-gray-200 print:bg-gray-50">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary print:text-gray-700">
+                            {t('cv.noteLabel')}
+                          </p>
+                          <p className="text-gray-300 text-sm mt-1 print:text-gray-600">{edu.note[language]}</p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -226,7 +233,7 @@ export default function CVPage() {
                   {t('cv.experience')}
                 </h2>
                 <div className="space-y-6">
-                  {internships.map((exp) => (
+                  {experienceEntries.map((exp) => (
                     <div key={exp.id} className="border-l-2 border-accent-cyan/50 pl-4 print:border-gray-300">
                       <div className="flex flex-wrap justify-between items-start gap-2">
                         <h3 className="text-white font-medium print:text-black">{exp.company[language]}</h3>

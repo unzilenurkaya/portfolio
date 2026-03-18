@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       "Veri analizi, Python otomasyonu ve web geliştirme alanlarında uzmanlaşan YBS öğrencisi.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: "Ünzile Nur KAYA - Portfolio",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: "Ünzile Nur KAYA | YBS Öğrencisi & Developer",
     description:
       "Veri analizi, Python otomasyonu ve web geliştirme alanlarında uzmanlaşan YBS öğrencisi.",
-    images: ["/og-image.png"],
+    images: ["/api/og"],
     creator: "@unzilenurkaya",
   },
   robots: {
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/icon.svg',
   },
   manifest: '/manifest.json',
 };
@@ -116,7 +116,7 @@ export default function RootLayout({
           jobTitle="YBS Öğrencisi & Developer"
           description="Veri analizi, Python otomasyonu ve web geliştirme alanlarında uzmanlaşan YBS öğrencisi."
           url={siteUrl}
-          image={`${siteUrl}/profile.jpg`}
+          image={`${siteUrl}/images/profile-pic.png`}
           sameAs={[
             "https://linkedin.com/in/unzilenurkaya",
             "https://github.com/unzilenurkaya",

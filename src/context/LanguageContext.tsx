@@ -15,11 +15,15 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const savedLang = localStorage.getItem('portfolio-language') as Language;
-    if (savedLang && (savedLang === 'tr' || savedLang === 'en')) {
-      setLanguageState(savedLang);
-    }
+    const frameId = requestAnimationFrame(() => {
+      setMounted(true);
+      const savedLang = localStorage.getItem('portfolio-language') as Language;
+      if (savedLang && (savedLang === 'tr' || savedLang === 'en')) {
+        setLanguageState(savedLang);
+      }
+    });
+
+    return () => cancelAnimationFrame(frameId);
   }, []);
 
   const setLanguage = (lang: Language) => {
