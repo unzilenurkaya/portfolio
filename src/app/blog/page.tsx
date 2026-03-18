@@ -52,32 +52,58 @@ export default function BlogPage() {
     <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Hero Section */}
-        <section className="mb-20 text-center lg:text-left grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="mb-20 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(255,126,95,0.16),transparent_33%),linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-8 md:p-10"
           >
-            <Badge variant="primary" className="mb-4 uppercase tracking-widest px-4 py-1">
+            <Badge variant="primary" className="mb-4 uppercase tracking-[0.24em] px-4 py-1">
               Blog
             </Badge>
             <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight">
               {t('blog.title')}
             </h1>
-            <p className="text-gray-400 text-lg md:text-xl max-w-xl leading-relaxed">
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed">
               {t('blog.subtitle')}
             </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
+              <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500 mb-2">{t('blog.archiveLabel')}</p>
+                <p className="text-3xl font-serif text-white">{posts.length || '0'}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500 mb-2">{t('blog.focusLabel')}</p>
+                <p className="text-3xl font-serif text-white">{tags.length || '0'}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500 mb-2">{t('blog.writtenBy')}</p>
+                <p className="text-lg text-white">Ünzile Nur KAYA</p>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden lg:block relative aspect-video rounded-3xl overflow-hidden border border-white/10"
+            className="relative min-h-[320px] rounded-[2rem] overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_top_right,rgba(0,245,255,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(255,126,95,0.22),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-8 md:p-10 flex flex-col justify-between"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 animate-pulse" />
-            <div className="absolute inset-0 flex items-center justify-center text-8xl">
-              ✍️
+            <div className="max-w-md">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-primary/80 mb-4">{t('blog.featured')}</p>
+              <h2 className="text-3xl md:text-4xl font-serif text-white leading-tight mb-4">
+                Öğrendiğim şeyleri sadece not almak yerine, anlaşılır hale getirip paylaşmayı seviyorum.
+              </h2>
+              <p className="text-gray-400 leading-relaxed">
+                Buradaki yazılar daha çok gerçek deneyimlerden, staj süreçlerinden, veri tarafında karşılaştığım sorunlardan ve üretirken öğrendiğim küçük ama etkili detaylardan oluşuyor.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 text-sm text-white/70">
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Python</span>
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Veri Analizi</span>
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Kariyer Notları</span>
             </div>
           </motion.div>
         </section>
@@ -91,7 +117,7 @@ export default function BlogPage() {
             className="mb-24"
           >
             <Link href={`/blog/${featuredPost.slug}`} className="group block">
-              <div className="glass-card rounded-[2.5rem] overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-0 lg:h-[450px]">
+              <div className="rounded-[2.5rem] overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-500 grid grid-cols-1 lg:grid-cols-2 gap-0 lg:h-[450px] bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] backdrop-blur-xl">
                 <div className="relative h-64 lg:h-full overflow-hidden">
                   {featuredPost.image ? (
                     <Image
@@ -149,7 +175,7 @@ export default function BlogPage() {
         <section>
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <h2 className="text-2xl font-serif text-white">
-              {selectedTag ? `${t('projects.filters.all')} / ${selectedTag}` : t('blog.relatedPosts')}
+              {selectedTag ? `${t('projects.filters.all')} / ${selectedTag}` : t('blog.latestPosts')}
             </h2>
 
             {/* Tags Filter */}

@@ -1,114 +1,103 @@
 ---
-title: "Excel'den Python'a Geçiş: Otomasyon İpuçları"
-description: "Excel işlemlerinizi Python ile otomatikleştirmek için pratik ipuçları ve örnek kodlar."
+title: "Excel'de Yürüyen Bir Süreci Python'a Taşımadan Önce Ne Düşünüyorum?"
+description: "Excel ile çalışan bir işi otomasyona çevirmeden önce baktığım işaretleri, riskleri ve karar noktalarını anlattığım pratik bir yazı."
 date: 2024-02-10
-tags: ["Python", "Excel", "Otomasyon", "Pandas"]
+tags: ["Python", "Excel", "Otomasyon", "Süreç Yönetimi"]
 published: true
-image: "/images/blog/excel-python.png"
 ---
 
-Excel harika bir araç, ancak tekrarlayan görevlerde zaman kaybına yol açabiliyor. Python ile bu işlemleri otomatikleştirerek saatler kazanabilirsiniz. Bu yazıda, Excel'den Python'a geçiş sürecini ve otomasyon ipuçlarını paylaşacağım.
+Excel birçok iş sürecinde hâlâ çok güçlü bir araç. Bunu küçümsemek yerine doğru yerde kullanmak gerektiğini düşünüyorum. Ama bazı noktadan sonra Excel dosyası işi taşımamaya başlıyor ve süreç, dosya yönetimiyle değil insan emeğiyle ayakta duruyor. Benim ilgimi çeken yer tam olarak burası.
 
-## Neden Excel'den Python'a Geçmeli?
+Bir süreci Python ile otomatikleştirmeden önce önce şuna bakıyorum: burada gerçekten tekrar eden bir iş var mı, yoksa sadece dağınık bir iş mi var?
 
-| Özellik | Excel | Python |
-|---------|-------|--------|
-| Tekrarlayan işlemler | Manuel | Otomatik |
-| Büyük veri setleri | Yavaş | Hızlı |
-| Hata riski | Yüksek | Düşük |
-| Ölçeklenebilirlik | Sınırlı | Sınırsız |
+Çünkü her dağınık süreç otomasyon adayı değil. Bazen önce süreci sadeleştirmek gerekiyor.
 
-## Temel Dönüşümler
+## Benim için otomasyon sinyalleri neler?
 
-### VLOOKUP → merge()
+Bir Excel tabanlı işte aşağıdaki belirtiler varsa, orada otomasyon düşünmeye başlıyorum:
 
-Excel'de VLOOKUP kullanıyorsanız, Python'da `merge()` fonksiyonunu kullanabilirsiniz:
+- Aynı adımlar her gün ya da her hafta tekrar ediyorsa
+- Farklı dosyalar arasında sürekli kopyala-yapıştır yapılıyorsa
+- Hata kontrolü kişisel dikkatle yürüyorsa
+- Bir raporun hazırlanması gereğinden fazla zaman alıyorsa
+- Süreç kişiye bağımlı hale geldiyse
 
-```python
-import pandas as pd
+Bu işaretler genelde “burada kod yazılabilir” demekten çok, “burada sistem kurulmalı” anlamına geliyor.
 
-# İki veri setini birleştirme
-sonuc = pd.merge(df1, df2, on='ortak_sutun', how='left')
-```
+## Doğrudan kod yazmıyorum
 
-### PivotTable → pivot_table()
+Benim için en önemli noktalardan biri bu. Eğer bir süreci anlamadan kodlamaya başlarsan, sadece manuel hatayı otomatik hale getiriyorsun.
 
-```python
-# Pivot tablo oluşturma
-pivot = df.pivot_table(
-    values='satis',
-    index='kategori',
-    columns='ay',
-    aggfunc='sum'
-)
-```
+Bu yüzden önce şu soruları soruyorum:
 
-### SUMIF → groupby()
+### 1. Girdi ne?
 
-```python
-# Koşullu toplam
-kategori_toplam = df.groupby('kategori')['tutar'].sum()
-```
+Hangi dosya geliyor? Formatı sabit mi? Her hafta aynı isimle mi geliyor? Boş kolon olabiliyor mu?
 
-## Pratik Otomasyon Örneği
+### 2. Kurallar net mi?
 
-İşte günlük raporlama için kullanabileceğiniz bir script:
+Bir satırın hatalı sayılması için hangi koşullar gerekiyor? Bunu herkes aynı şekilde mi yorumluyor?
 
-```python
-import pandas as pd
-from datetime import datetime
-import os
+### 3. Çıktı ne?
 
-def gunluk_rapor():
-    # Bugünün tarihi
-    bugun = datetime.now().strftime('%Y-%m-%d')
-    
-    # Verileri oku
-    df = pd.read_excel('satis_verileri.xlsx')
-    
-    # Bugünün verilerini filtrele
-    gunluk = df[df['tarih'] == bugun]
-    
-    # Özet istatistikler
-    ozet = {
-        'Toplam Satış': gunluk['tutar'].sum(),
-        'Ortalama': gunluk['tutar'].mean(),
-        'İşlem Sayısı': len(gunluk)
-    }
-    
-    # Raporu kaydet
-    rapor = pd.DataFrame([ozet])
-    rapor.to_excel(f'rapor_{bugun}.xlsx', index=False)
-    
-    print(f"Rapor oluşturuldu: rapor_{bugun}.xlsx")
+Rapor mu üretilecek, kontrol listesi mi çıkacak, uyarı mı verilecek?
 
-# Scripti çalıştır
-gunluk_rapor()
-```
+### 4. İnsan onayı gerekli mi?
 
-## Zamanlama ile Tam Otomasyon
+Bazı süreçler tamamen otomatik olabilir. Bazılarında ise sistem önce işaretler, son kararı insan verir. Bu ayrım çok önemli.
 
-Script'inizi belirli aralıklarla çalıştırmak için:
+## Excel'den Python'a geçişte en kritik konu: kural seti
 
-### Windows (Task Scheduler)
+Bence otomasyonun kalitesi yazılan koddan önce kural setine bağlı. Eğer iş kuralları net değilse, Python sadece karışıklığı daha hızlı üretir.
 
-1. Task Scheduler'ı açın
-2. "Create Basic Task" seçin
-3. Python script'inizin yolunu belirtin
+Örneğin:
 
-### Cron Job (Linux/Mac)
+- Hangi durumda bir kayıt eksik sayılacak?
+- Hangi durumda uyarı üretilecek?
+- Hangi durum normal kabul edilecek?
 
-```bash
-# Her gün saat 09:00'da çalıştır
-0 9 * * * /usr/bin/python3 /path/to/script.py
-```
+Bu soruların cevabı net değilse, otomasyon sürdürülebilir olmuyor.
+
+## Küçük başlamak daha doğru
+
+Ben olsam tüm süreci bir anda dönüştürmek yerine önce en çok zaman kaybettiren parçayı ayırırım. Mesela:
+
+- dosya birleştirme
+- tarih formatı temizleme
+- tekrar eden kayıtları bulma
+- günlük özet rapor üretme
+
+Bu küçük parçalar oturduğunda sistem zaten doğal olarak büyümeye başlıyor.
+
+## Python neden burada fark yaratıyor?
+
+Çünkü Python sadece veri işlemiyor, süreci standardize ediyor.
+
+Örneğin aynı dosyayı üç kişi farklı şekilde yorumlayabiliyorsa, burada verimsizlik vardır. Ama aynı kontrol bir script ile yapılıyorsa, süreç daha tutarlı hale gelir. Ben otomasyonun en değerli tarafını burada görüyorum: hızdan önce tutarlılık.
+
+## Otomasyon her şeyi çözmez
+
+Bunu özellikle vurgulamak isterim. Otomasyonun amacı her şeyi kodlamak değil. Bazen en iyi çözüm sadece kontrol katmanı kurmaktır. Bazen de dosya yapısını düzeltmek yeterlidir.
+
+Yani iyi otomasyon, en fazla kod yazan çözüm değil; en az sürtünmeyle çalışan çözümdür.
+
+## Benim yaklaşımım
+
+Bir Excel sürecini Python'a taşırken genelde şu sırayı izliyorum:
+
+1. Süreci gözlemle
+2. Hata kaynaklarını çıkar
+3. Kuralları yazılı hale getir
+4. Küçük bir prototip kur
+5. Çıktıyı kullanıcıyla kontrol et
+6. Sonra sistemleştir
+
+Bu sırayla ilerlediğimde hem daha az geri dönüş oluyor hem de otomasyon gerçekten kullanılabilir hale geliyor.
 
 ## Sonuç
 
-Excel'den Python'a geçiş başta korkutucu görünebilir, ama faydaları çok büyük:
+Excel'den Python'a geçiş bence teknik bir geçişten çok düşünme biçimi değişimi. Amaç sadece dosya işlemek değil; tekrar eden işi daha güvenilir ve daha sürdürülebilir hale getirmek.
 
-- **Zaman tasarrufu**: Saatler süren işlemler dakikalara iner
-- **Tutarlılık**: Aynı script her seferinde aynı sonucu verir
-- **Ölçeklenebilirlik**: Binlerce dosyayı işleyebilirsiniz
+Bu yüzden ben otomasyon kararını hep şu cümleyle test ediyorum: Bu işi yapan kişinin yükünü gerçekten azaltıyor muyum?
 
-Bir sonraki adım olarak, bu script'leri daha da geliştirip e-posta ile otomatik rapor gönderme özelliği ekleyebilirsiniz.
+Eğer cevap evetse, orada Python çoğu zaman doğru araç oluyor.

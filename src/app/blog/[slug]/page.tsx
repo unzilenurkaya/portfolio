@@ -132,6 +132,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.title}
             </h1>
 
+            <p className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-3xl mb-10">
+              {post.description}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 mb-10">
+              <div className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-white/80">
+                {`Ünzile Nur KAYA`}
+              </div>
+              <div className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-400">
+                {`MIS / Data / Software Notes`}
+              </div>
+            </div>
+
             {/* Meta & Share Row */}
             <BlogMeta
               date={post.date}
@@ -164,7 +177,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Article Footer */}
           <footer className="mt-20">
             <BlogNewsletter />
-            <RelatedPosts currentSlug={post.slug} tags={post.tags} />
+            <RelatedPosts currentSlug={post.slug} tags={post.tags} title="İlgili Yazılar" />
           </footer>
         </article>
 
