@@ -14,6 +14,18 @@ interface ChatMessage {
   text: string;
 }
 
+type AssistantSection =
+  | 'hero'
+  | 'about'
+  | 'skills'
+  | 'projects'
+  | 'experience'
+  | 'certificates'
+  | 'contact'
+  | 'blog'
+  | 'cv'
+  | 'privacy';
+
 const homeTargets: Record<Exclude<AssistantIntent, 'cv' | 'blog' | 'fallback'>, string> = {
   projects: 'projects',
   contact: 'contact',
@@ -28,7 +40,12 @@ export default function VirtualAssistant() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [hintIndex, setHintIndex] = useState(0);
+  const [isThinking, setIsThinking] = useState(false);
+  const [activeSection, setActiveSection] = useState<AssistantSection>(() => getInitialSection(pathname));
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const [scrollOffset, setScrollOffset] = useState(0);
   const messageCounter = useRef(1);
+  const contextCounter = useRef(1);
 
   const quickActions = useMemo(
     () => [
@@ -50,6 +67,8 @@ export default function VirtualAssistant() {
     [t]
   );
 
+  const liveContext = useMemo(() => t(`assistant.context.${activeSection}`), [activeSection, t]);
+
   useEffect(() => {
     if (isOpen || floatingHints.length === 0) {
       return;
@@ -61,6 +80,77 @@ export default function VirtualAssistant() {
 
     return () => window.clearInterval(intervalId);
   }, [floatingHints, isOpen]);
+
+  useEffect(() => {
+    setActiveSection(getInitialSection(pathname));
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const x = ((event.clientX / window.innerWidth) - 0.5) * 14;
+      const y = ((event.clientY / window.innerHeight) - 0.5) * 10;
+      setMouseOffset({ x, y });
+    };
+
+    const handleScroll = () => {
+      setScrollOffset(Math.min(window.scrollY * 0.03, 18));
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      return;
+    }
+
+    const sectionIds: AssistantSection[] = ['about', 'skills', 'projects', 'experience', 'certificates', 'contact'];
+    const sectionElements = sectionIds
+      .map((id) => ({ id, element: document.getElementById(id) }))
+      .filter((entry): entry is { id: AssistantSection; element: HTMLElement } => entry.element instanceof HTMLElement);
+
+    if (sectionElements.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible) {
+          setActiveSection(visible.target.id as AssistantSection);
+        }
+      },
+      {
+        rootMargin: '-15% 0px -45% 0px',
+        threshold: [0.2, 0.35, 0.5, 0.75],
+      }
+    );
+
+    sectionElements.forEach(({ element }) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
+    const messageId = `context-${contextCounter.current++}`;
+    setMessages((current) => {
+      const next = current.filter((message) => !message.id.startsWith('context-'));
+      return [...next, { id: messageId, role: 'assistant', text: liveContext }];
+    });
+  }, [isOpen, liveContext]);
 
   const toggleAssistant = () => {
     setIsOpen((current) => !current);
@@ -113,7 +203,7 @@ export default function VirtualAssistant() {
     const baseId = `assistant-${messageCounter.current++}`;
 
     setMessages((current) => [
-      ...current,
+      ...current.filter((message) => !message.id.startsWith('context-')),
       { id: `${baseId}-user`, role: 'user', text: userText },
       { id: `${baseId}-assistant`, role: 'assistant', text: getReply(intent) },
     ]);
@@ -126,38 +216,82 @@ export default function VirtualAssistant() {
     setIsOpen(true);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const trimmedInput = input.trim();
 
-    if (!trimmedInput) {
+    if (!trimmedInput || isThinking) {
       return;
     }
 
     const intent = detectIntent(trimmedInput);
-    appendExchange(trimmedInput, intent);
+    const baseId = `assistant-${messageCounter.current++}`;
+    setMessages((current) => [
+      ...current.filter((message) => !message.id.startsWith('context-')),
+      { id: `${baseId}-user`, role: 'user', text: trimmedInput },
+    ]);
     setInput('');
     setIsOpen(true);
+
+    if (intent !== 'fallback') {
+      setMessages((current) => [...current, { id: `${baseId}-assistant`, role: 'assistant', text: getReply(intent) }]);
+      navigate(intent);
+      return;
+    }
+
+    setIsThinking(true);
+
+    try {
+      const response = await fetch('/api/assistant', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: trimmedInput,
+          language,
+          pathname,
+          activeSection,
+        }),
+      });
+
+      const data = (await response.json()) as { reply?: string; action?: AssistantIntent };
+      const aiIntent = data.action || 'fallback';
+
+      setMessages((current) => [
+        ...current,
+        {
+          id: `${baseId}-assistant`,
+          role: 'assistant',
+          text: data.reply || getReply('fallback'),
+        },
+      ]);
+
+      if (aiIntent !== 'fallback') {
+        navigate(aiIntent);
+      }
+    } catch {
+      setMessages((current) => [
+        ...current,
+        {
+          id: `${baseId}-assistant`,
+          role: 'assistant',
+          text: getReply('fallback'),
+        },
+      ]);
+    } finally {
+      setIsThinking(false);
+    }
   };
 
   return (
     <>
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.div
-            key={floatingHints[hintIndex]}
-            initial={{ opacity: 0, y: 12, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-28 right-6 z-[70] hidden max-w-[240px] rounded-[1.4rem] border border-[#f07445]/25 bg-[linear-gradient(180deg,rgba(19,13,9,0.96),rgba(10,8,6,0.96))] px-4 py-3 text-sm text-[#ead7c8] shadow-[0_18px_40px_rgba(0,0,0,0.42)] md:block"
-          >
-            <div className="absolute -bottom-2 right-7 h-4 w-4 rotate-45 border-b border-r border-[#f07445]/20 bg-[#0d0906]" />
-            {floatingHints[hintIndex]}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="fixed bottom-6 right-6 z-[80] flex items-end gap-3">
+      <div
+        className="fixed bottom-6 right-6 z-[80] flex items-end gap-3"
+        style={{
+          transform: `translate3d(${mouseOffset.x}px, ${mouseOffset.y - scrollOffset}px, 0)`,
+          transition: 'transform 220ms ease-out',
+        }}
+      >
         <AnimatePresence>
           {isOpen && (
             <motion.section
@@ -218,6 +352,14 @@ export default function VirtualAssistant() {
                       </div>
                     </div>
                   ))}
+                  {isThinking && (
+                    <div className="flex items-end gap-3">
+                      <AssistantBadge />
+                      <div className="max-w-[78%] rounded-[1.35rem] rounded-bl-md border border-[#f07445]/12 bg-[#17110d] px-4 py-3 text-sm leading-6 text-[#ead7c8]">
+                        {t('assistant.thinking')}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-4 flex flex-wrap gap-2">
@@ -262,6 +404,28 @@ export default function VirtualAssistant() {
         </AnimatePresence>
 
         <div className="relative">
+          <AnimatePresence>
+            {!isOpen && (
+              <motion.div
+                key={`${activeSection}-${hintIndex}`}
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                transition={{ duration: 0.28 }}
+                className="absolute bottom-[102px] right-0 hidden w-[min(280px,78vw)] rounded-[1.4rem] border border-[#f07445]/25 bg-[linear-gradient(180deg,rgba(19,13,9,0.96),rgba(10,8,6,0.96))] px-4 py-3 text-sm text-[#ead7c8] shadow-[0_18px_40px_rgba(0,0,0,0.42)] md:block"
+              >
+                <div className="mb-2 text-[10px] uppercase tracking-[0.24em] text-[#f07445]">
+                  {t(`assistant.sections.${activeSection}`)}
+                </div>
+                <div className="leading-6">{isOpen ? t('assistant.liveHint') : liveContext}</div>
+                <div className="mt-3 border-t border-white/5 pt-3 text-xs text-[#b9977e]">
+                  {floatingHints[hintIndex]}
+                </div>
+                <div className="absolute -bottom-2 right-8 h-4 w-4 rotate-45 border-b border-r border-[#f07445]/20 bg-[#0d0906]" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <motion.div
             animate={{ scale: [1, 1.14, 1], opacity: [0.2, 0.42, 0.2] }}
             transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
@@ -276,12 +440,20 @@ export default function VirtualAssistant() {
             aria-label={isOpen ? t('assistant.closeLabel') : t('assistant.openLabel')}
           >
             <div className="absolute inset-[6px] rounded-full border border-[#f07445]/20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)]" />
-            <AssistantOrb />
+            <AssistantOrb activeSection={activeSection} />
           </motion.button>
         </div>
       </div>
     </>
   );
+}
+
+function getInitialSection(pathname: string): AssistantSection {
+  if (pathname === '/blog') return 'blog';
+  if (pathname.startsWith('/blog/')) return 'blog';
+  if (pathname === '/cv') return 'cv';
+  if (pathname === '/privacy') return 'privacy';
+  return 'hero';
 }
 
 function AssistantBadge() {
@@ -305,7 +477,15 @@ function AssistantBadge() {
   );
 }
 
-function AssistantOrb({ compact = false }: { compact?: boolean }) {
+function AssistantOrb({ compact = false, activeSection = 'hero' }: { compact?: boolean; activeSection?: AssistantSection }) {
+  const sectionGlow = activeSection === 'blog'
+    ? '#6de3ff'
+    : activeSection === 'projects'
+      ? '#f7a76d'
+      : activeSection === 'contact'
+        ? '#77f5b5'
+        : '#f07445';
+
   return (
     <motion.div
       animate={{ y: [0, -3, 0], rotate: [0, 1.5, 0, -1.5, 0] }}
@@ -319,26 +499,26 @@ function AssistantOrb({ compact = false }: { compact?: boolean }) {
             <stop offset="72%" stopColor="#110b08" />
             <stop offset="100%" stopColor="#080604" />
           </radialGradient>
-          <radialGradient id="eyeGlow" cx="50%" cy="50%">
+          <radialGradient id={`eyeGlow-${activeSection}`} cx="50%" cy="50%">
             <stop offset="0%" stopColor="#7ef4a2" />
             <stop offset="75%" stopColor="#33c566" />
             <stop offset="100%" stopColor="#0d2b16" />
           </radialGradient>
         </defs>
-        <circle cx="42" cy="42" r="39" fill="url(#shellGlow)" stroke="#f07445" strokeWidth="2.2" />
-        <circle cx="42" cy="27" r="15" fill="#17100b" stroke="#f07445" strokeWidth="1.6" />
-        <line x1="42" y1="12" x2="42" y2="8" stroke="#f07445" strokeWidth="1.5" />
-        <circle cx="42" cy="6.5" r="2.5" fill="#f07445" />
-        <rect x="24" y="21" width="5.4" height="10" rx="2.7" fill="#1a120d" stroke="#f07445" strokeWidth="1" />
-        <rect x="54.6" y="21" width="5.4" height="10" rx="2.7" fill="#1a120d" stroke="#f07445" strokeWidth="1" />
+        <circle cx="42" cy="42" r="39" fill="url(#shellGlow)" stroke={sectionGlow} strokeWidth="2.2" />
+        <circle cx="42" cy="27" r="15" fill="#17100b" stroke={sectionGlow} strokeWidth="1.6" />
+        <line x1="42" y1="12" x2="42" y2="8" stroke={sectionGlow} strokeWidth="1.5" />
+        <circle cx="42" cy="6.5" r="2.5" fill={sectionGlow} />
+        <rect x="24" y="21" width="5.4" height="10" rx="2.7" fill="#1a120d" stroke={sectionGlow} strokeWidth="1" />
+        <rect x="54.6" y="21" width="5.4" height="10" rx="2.7" fill="#1a120d" stroke={sectionGlow} strokeWidth="1" />
         <ellipse cx="35" cy="27" rx="4.6" ry="5.5" fill="#07120a" />
         <ellipse cx="49" cy="27" rx="4.6" ry="5.5" fill="#07120a" />
-        <ellipse cx="35" cy="27" rx="3" ry="3.6" fill="url(#eyeGlow)" />
-        <ellipse cx="49" cy="27" rx="3" ry="3.6" fill="url(#eyeGlow)" />
+        <ellipse cx="35" cy="27" rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
+        <ellipse cx="49" cy="27" rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
         <circle cx="36.2" cy="25.3" r="1.1" fill="#fff" opacity="0.95" />
         <circle cx="50.2" cy="25.3" r="1.1" fill="#fff" opacity="0.95" />
-        <path d="M31 35Q42 42 53 35" fill="none" stroke="#f07445" strokeWidth="1.8" strokeLinecap="round" />
-        <rect x="31" y="46" width="22" height="14" rx="7" fill="#17110d" stroke="#f0744566" strokeWidth="1.2" />
+        <path d="M31 35Q42 42 53 35" fill="none" stroke={sectionGlow} strokeWidth="1.8" strokeLinecap="round" />
+        <rect x="31" y="46" width="22" height="14" rx="7" fill="#17110d" stroke={`${sectionGlow}66`} strokeWidth="1.2" />
       </svg>
     </motion.div>
   );
