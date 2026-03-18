@@ -10,10 +10,12 @@ import Image from 'next/image';
 
 interface BlogCardProps {
   post: BlogPostMeta;
+  seriesLabel?: string;
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
+export default function BlogCard({ post, seriesLabel }: BlogCardProps) {
   const { t, language } = useLanguage();
+  const isSeries = Boolean(seriesLabel);
 
   return (
     <motion.article
@@ -25,7 +27,11 @@ export default function BlogCard({ post }: BlogCardProps) {
       className="h-full"
     >
       <Link href={`/blog/${post.slug}`} className="block group h-full">
-        <div className="h-full rounded-[2rem] overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] backdrop-blur-xl transition-all duration-500 flex flex-col group-hover:border-primary/30 group-hover:-translate-y-1 group-hover:shadow-[0_24px_50px_-22px_rgba(255,107,53,0.32)]">
+        <div className={`h-full rounded-[2rem] overflow-hidden border bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] backdrop-blur-xl transition-all duration-500 flex flex-col group-hover:-translate-y-1 ${
+          isSeries
+            ? 'border-cyan-400/30 group-hover:border-cyan-300/60 group-hover:shadow-[0_24px_50px_-22px_rgba(0,245,255,0.28)]'
+            : 'border-white/10 group-hover:border-primary/30 group-hover:shadow-[0_24px_50px_-22px_rgba(255,107,53,0.32)]'
+        }`}>
           {/* Image Container */}
           <div className="relative h-56 overflow-hidden">
             {post.image ? (
@@ -50,10 +56,15 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             {/* Tag on Image */}
             {post.tags.length > 0 && (
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                 <Badge variant="outline" size="sm" className="bg-black/20 backdrop-blur-md border-white/20 text-white font-medium uppercase tracking-wider">
                   {post.tags[0]}
                 </Badge>
+                {isSeries && (
+                  <Badge variant="secondary" size="sm" className="uppercase tracking-wider">
+                    {seriesLabel}
+                  </Badge>
+                )}
               </div>
             )}
           </div>

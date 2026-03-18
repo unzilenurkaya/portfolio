@@ -46,14 +46,21 @@ export default function BlogPage() {
     .slice(0, 4)
     .map(([tag]) => tag);
 
+  const aiSeriesTags = ['AI Engineering', 'LLM', 'Agent Systems', 'OpenClaw', 'Personal Assistant', 'System Design'];
+  const aiSeriesPosts = posts.filter((post) =>
+    post.tags.some((tag) => aiSeriesTags.includes(tag))
+  );
+  const aiSeriesSlugs = new Set(aiSeriesPosts.slice(0, 3).map((post) => post.slug));
+
   const featuredPost = posts[0];
   const otherPosts = posts.slice(1);
+  const regularPosts = otherPosts.filter((post) => !aiSeriesSlugs.has(post.slug));
 
   const filteredPosts = selectedTag
     ? posts.filter((post) =>
       post.tags.map((t) => t.toLowerCase()).includes(selectedTag.toLowerCase())
     )
-    : otherPosts;
+    : regularPosts;
 
   const displayPosts = selectedTag ? filteredPosts : otherPosts;
 
@@ -178,6 +185,31 @@ export default function BlogPage() {
               </div>
             </Link>
           </motion.section>
+        )}
+
+        {!isLoading && aiSeriesPosts.length > 0 && !selectedTag && (
+          <section className="mb-20">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+              <div className="max-w-2xl">
+                <p className="text-[11px] uppercase tracking-[0.24em] text-cyan-300/80 mb-3">{t('blog.featured')}</p>
+                <h2 className="text-3xl md:text-4xl font-serif text-white mb-3">{t('blog.seriesTitle')}</h2>
+                <p className="text-gray-400 leading-relaxed">{t('blog.seriesDesc')}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {aiSeriesPosts.slice(0, 3).map((post, index) => (
+                <motion.div
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                >
+                  <BlogCard post={post} seriesLabel="AI Series" />
+                </motion.div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Filters & Grid Container */}
