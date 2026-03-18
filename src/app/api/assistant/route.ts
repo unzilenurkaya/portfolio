@@ -56,6 +56,80 @@ function parseAssistantResponse(raw: string) {
   }
 }
 
+async function requestGemini(prompt: string, apiKey: string) {
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: prompt }],
+          },
+        ],
+        generationConfig: {
+          temperature: 0.5,
+          responseMimeType: 'application/json',
+        },
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+
+  const data = await response.json();
+  return parseAssistantResponse(extractTextFromCandidate(data));
+}
+
+async function requestOpenRouter(prompt: string, apiKey: string) {
+  const model = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-120b:free';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
+
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': siteUrl,
+      'X-Title': "Unzile's Portfolio Assistant",
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.5,
+      max_tokens: 220,
+      messages: [
+        {
+          role: 'system',
+          content: siteContext,
+        },
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+
+  const data = (await response.json()) as {
+    choices?: Array<{ message?: { content?: string } }>;
+  };
+
+  return parseAssistantResponse(data.choices?.[0]?.message?.content || '');
+}
+
 export async function POST(request: Request) {
   try {
     const { message, language, pathname, activeSection } = (await request.json()) as {
@@ -69,19 +143,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ reply: 'Empty message.', action: 'fallback' }, { status: 400 });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const geminiApiKey = process.env.GEMINI_API_KEY;
+    const openRouterApiKey = process.env.OPENROUTER_API_KEY;
 
-    if (!apiKey) {
+    if (!geminiApiKey && !openRouterApiKey) {
       return NextResponse.json({
         reply:
           language === 'en'
-            ? 'The AI connection is ready. Once a Gemini API key is added, I can answer more intelligently.'
-            : 'AI baglantisi hazir. Gemini API key eklendiginde daha akilli cevaplar verebilirim.',
+            ? 'The AI connection is ready. Once a Gemini or OpenRouter API key is added, I can answer more intelligently.'
+            : 'AI baglantisi hazir. Gemini veya OpenRouter API key eklendiginde daha akilli cevaplar verebilirim.',
         action: 'fallback',
       });
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
     const prompt = `
 ${siteContext}
 
@@ -91,49 +165,50 @@ Current active section: ${activeSection || 'unknown'}
 User message: ${message}
 `;
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': apiKey,
-        },
-        body: JSON.stringify({
-          contents: [
+    if (geminiApiKey) {
+      try {
+        const geminiResult = await requestGemini(prompt, geminiApiKey);
+        return NextResponse.json(geminiResult);
+      } catch (error) {
+        if (!openRouterApiKey) {
+          return NextResponse.json(
             {
-              role: 'user',
-              parts: [{ text: prompt }],
+              reply:
+                language === 'en'
+                  ? 'The AI assistant could not respond right now, but I can still help you navigate the site.'
+                  : 'AI asistani su anda cevap veremedi, ama seni site icinde yonlendirmeye devam edebilirim.',
+              action: 'fallback',
+              error: error instanceof Error ? error.message : 'Gemini request failed',
             },
-          ],
-          generationConfig: {
-            temperature: 0.5,
-            responseMimeType: 'application/json',
-          },
-        }),
+            { status: 200 }
+          );
+        }
       }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      return NextResponse.json(
-        {
-          reply:
-            language === 'en'
-              ? 'The AI assistant could not respond right now, but I can still help you navigate the site.'
-              : 'AI asistani su anda cevap veremedi, ama seni site icinde yonlendirmeye devam edebilirim.',
-          action: 'fallback',
-          error: errorText,
-        },
-        { status: 200 }
-      );
     }
 
-    const data = await response.json();
-    const text = extractTextFromCandidate(data);
-    const parsed = parseAssistantResponse(text);
+    if (openRouterApiKey) {
+      try {
+        const openRouterResult = await requestOpenRouter(prompt, openRouterApiKey);
+        return NextResponse.json(openRouterResult);
+      } catch (error) {
+        return NextResponse.json(
+          {
+            reply:
+              language === 'en'
+                ? 'Both AI providers are currently unavailable, but I can still help you navigate the site.'
+                : 'Su anda iki AI saglayicisi da cevap veremiyor, ama seni site icinde yonlendirmeye devam edebilirim.',
+            action: 'fallback',
+            error: error instanceof Error ? error.message : 'OpenRouter request failed',
+          },
+          { status: 200 }
+        );
+      }
+    }
 
-    return NextResponse.json(parsed);
+    return NextResponse.json({
+      reply: language === 'en' ? 'Assistant unavailable.' : 'Asistan su anda kullanilamiyor.',
+      action: 'fallback',
+    });
   } catch {
     return NextResponse.json({
       reply: 'Assistant unavailable.',
