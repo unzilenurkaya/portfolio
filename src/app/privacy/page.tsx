@@ -42,7 +42,7 @@ const privacyContent: PrivacyContentMap = {
       {
         title: '1. Genel Bilgi',
         paragraphs: [
-          'Bu gizlilik politikasi, unzilenurkaya.com web sitesini ("Site") ziyaret ettiginizde kisisel verilerinizin nasil toplandigini, kullanildigini ve korundugunu aciklar.',
+          'Bu gizlilik politikasi, unzilenurkaya.vercel.app web sitesini ("Site") ziyaret ettiginizde kisisel verilerinizin nasil toplandigini, kullanildigini ve korundugunu aciklar.',
           '6698 sayili Kisisel Verilerin Korunmasi Kanunu ("KVKK") ve Avrupa Birligi Genel Veri Koruma Tuzugu ("GDPR") kapsaminda haklarinizi korumayi taahhut ediyoruz.',
         ],
       },
@@ -124,7 +124,7 @@ const privacyContent: PrivacyContentMap = {
       {
         title: '1. Overview',
         paragraphs: [
-          'This privacy policy explains how your personal data is collected, used, and protected when you visit unzilenurkaya.com (the "Site").',
+          'This privacy policy explains how your personal data is collected, used, and protected when you visit unzilenurkaya.vercel.app (the "Site").',
           'We are committed to protecting your rights under the Turkish Personal Data Protection Law ("KVKK") and the General Data Protection Regulation ("GDPR").',
         ],
       },

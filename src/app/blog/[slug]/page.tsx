@@ -16,7 +16,7 @@ import RelatedPosts from '@/components/blog/RelatedPosts';
 import { translations } from '@/data/translations';
 import { Language } from '@/types';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.vercel.app';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

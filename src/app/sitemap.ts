@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllPostSlugs } from '@/lib/mdx';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.vercel.app';
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

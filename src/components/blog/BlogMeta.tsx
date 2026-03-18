@@ -14,7 +14,10 @@ interface BlogMetaProps {
 
 export default function BlogMeta({ date, readingTime, title, slug }: BlogMetaProps) {
     const { t, language } = useLanguage();
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://unzilenurkaya.com/blog/${slug}`;
+    const shareUrl =
+        typeof window !== 'undefined'
+            ? window.location.href
+            : `${process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.vercel.app'}/blog/${slug}`;
 
     return (
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 py-8 border-y border-white/10 my-10">

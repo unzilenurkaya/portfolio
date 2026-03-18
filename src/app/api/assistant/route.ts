@@ -108,7 +108,7 @@ async function requestGemini(prompt: string, apiKey: string) {
 
 async function requestOpenRouter(prompt: string, apiKey: string) {
   const model = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-120b:free';
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.vercel.app';
 
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',

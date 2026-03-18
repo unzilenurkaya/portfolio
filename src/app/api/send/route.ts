@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
             <p style="white-space: pre-wrap;">${safeMessage}</p>
           </div>
           <p style="color: #888; font-size: 12px; margin-top: 20px;">
-            Bu mesaj unzilenurkaya.com portfolio sitesinden gonderildi.
+            Bu mesaj unzilenurkaya.vercel.app portfolio sitesinden gonderildi.
           </p>
         </div>
       `,

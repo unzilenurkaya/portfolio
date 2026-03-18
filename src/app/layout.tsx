@@ -17,7 +17,8 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://unzilenurkaya.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://unzilenurkaya.vercel.app";
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -90,9 +91,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "google-site-verification-code",
-  },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification,
+      }
+    : undefined,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
