@@ -44,6 +44,7 @@ export default function VirtualAssistant() {
   const [activeSection, setActiveSection] = useState<AssistantSection>(() => getInitialSection(pathname));
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [drift, setDrift] = useState({ x: 0, y: 0 });
   const messageCounter = useRef(1);
   const contextCounter = useRef(1);
 
@@ -87,8 +88,8 @@ export default function VirtualAssistant() {
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      const x = ((event.clientX / window.innerWidth) - 0.5) * 14;
-      const y = ((event.clientY / window.innerHeight) - 0.5) * 10;
+      const x = ((event.clientX / window.innerWidth) - 0.5) * 22;
+      const y = ((event.clientY / window.innerHeight) - 0.5) * 16;
       setMouseOffset({ x, y });
     };
 
@@ -104,6 +105,22 @@ export default function VirtualAssistant() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setDrift({ x: 0, y: 0 });
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setDrift({
+        x: Math.round((Math.random() - 0.5) * 18),
+        y: Math.round((Math.random() - 0.5) * 14),
+      });
+    }, 3200);
+
+    return () => window.clearInterval(intervalId);
+  }, [isOpen]);
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -288,8 +305,8 @@ export default function VirtualAssistant() {
       <div
         className="fixed bottom-6 right-6 z-[80] flex items-end gap-3"
         style={{
-          transform: `translate3d(${mouseOffset.x}px, ${mouseOffset.y - scrollOffset}px, 0)`,
-          transition: 'transform 220ms ease-out',
+          transform: `translate3d(${mouseOffset.x * 0.55 + drift.x}px, ${mouseOffset.y * 0.45 - scrollOffset + drift.y}px, 0)`,
+          transition: 'transform 520ms cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       >
         <AnimatePresence>
@@ -304,7 +321,7 @@ export default function VirtualAssistant() {
               <div className="relative overflow-hidden border-b border-[#f07445]/12 px-5 py-4">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,116,69,0.14),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(82,255,170,0.08),transparent_28%)]" />
                 <div className="relative flex items-center gap-4">
-                  <AssistantOrb compact />
+                  <AssistantOrb compact activeSection={activeSection} mouseOffset={mouseOffset} isThinking={isThinking} />
                   <div className="min-w-0">
                     <p className="truncate text-lg font-semibold text-[#f6ede7]">{t('assistant.name')}</p>
                     <p className="mt-1 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#f07445]">
@@ -427,20 +444,30 @@ export default function VirtualAssistant() {
           </AnimatePresence>
 
           <motion.div
-            animate={{ scale: [1, 1.14, 1], opacity: [0.2, 0.42, 0.2] }}
+            animate={{ scale: [1, 1.18, 1], opacity: [0.18, 0.4, 0.18] }}
             transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
             className="pointer-events-none absolute inset-0 rounded-full border border-[#f07445]/35"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.32, 1], opacity: [0.08, 0.22, 0.08] }}
+            transition={{ duration: 3.8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 0.4 }}
+            className="pointer-events-none absolute -inset-3 rounded-full border border-[#f07445]/20"
           />
           <motion.button
             type="button"
             onClick={toggleAssistant}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.07, rotate: 1.5 }}
             whileTap={{ scale: 0.96 }}
             className="relative grid h-[84px] w-[84px] place-items-center rounded-full border border-[#f07445]/45 bg-[radial-gradient(circle_at_32%_28%,rgba(53,34,19,0.95),rgba(12,8,5,0.98)_66%)] shadow-[0_0_0_1px_rgba(240,116,69,0.08),0_16px_38px_rgba(0,0,0,0.46),0_0_28px_rgba(240,116,69,0.26)]"
             aria-label={isOpen ? t('assistant.closeLabel') : t('assistant.openLabel')}
           >
             <div className="absolute inset-[6px] rounded-full border border-[#f07445]/20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)]" />
-            <AssistantOrb activeSection={activeSection} />
+            <motion.div
+              animate={{ y: [0, -2, 0], x: [0, 1.5, 0, -1.5, 0] }}
+              transition={{ duration: 4.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+            >
+              <AssistantOrb activeSection={activeSection} mouseOffset={mouseOffset} isThinking={isThinking} />
+            </motion.div>
           </motion.button>
         </div>
       </div>
@@ -477,7 +504,17 @@ function AssistantBadge() {
   );
 }
 
-function AssistantOrb({ compact = false, activeSection = 'hero' }: { compact?: boolean; activeSection?: AssistantSection }) {
+function AssistantOrb({
+  compact = false,
+  activeSection = 'hero',
+  mouseOffset = { x: 0, y: 0 },
+  isThinking = false,
+}: {
+  compact?: boolean;
+  activeSection?: AssistantSection;
+  mouseOffset?: { x: number; y: number };
+  isThinking?: boolean;
+}) {
   const sectionGlow = activeSection === 'blog'
     ? '#6de3ff'
     : activeSection === 'projects'
@@ -485,10 +522,17 @@ function AssistantOrb({ compact = false, activeSection = 'hero' }: { compact?: b
       : activeSection === 'contact'
         ? '#77f5b5'
         : '#f07445';
+  const eyeShiftX = Math.max(-1.6, Math.min(1.6, mouseOffset.x * 0.08));
+  const eyeShiftY = Math.max(-1.2, Math.min(1.2, mouseOffset.y * 0.08));
+  const mouthPath = isThinking ? 'M31 36Q42 31 53 36' : 'M31 35Q42 42 53 35';
 
   return (
     <motion.div
-      animate={{ y: [0, -3, 0], rotate: [0, 1.5, 0, -1.5, 0] }}
+      animate={{
+        y: [0, -3, 0],
+        rotate: [0, 1.5, 0, -1.5, 0],
+        scale: compact ? [1, 1.02, 1] : [1, 1.03, 1],
+      }}
       transition={{ duration: compact ? 3.4 : 3.8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
       className={compact ? 'h-12 w-12' : 'h-16 w-16'}
     >
@@ -513,11 +557,11 @@ function AssistantOrb({ compact = false, activeSection = 'hero' }: { compact?: b
         <rect x="54.6" y="21" width="5.4" height="10" rx="2.7" fill="#1a120d" stroke={sectionGlow} strokeWidth="1" />
         <ellipse cx="35" cy="27" rx="4.6" ry="5.5" fill="#07120a" />
         <ellipse cx="49" cy="27" rx="4.6" ry="5.5" fill="#07120a" />
-        <ellipse cx="35" cy="27" rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
-        <ellipse cx="49" cy="27" rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
-        <circle cx="36.2" cy="25.3" r="1.1" fill="#fff" opacity="0.95" />
-        <circle cx="50.2" cy="25.3" r="1.1" fill="#fff" opacity="0.95" />
-        <path d="M31 35Q42 42 53 35" fill="none" stroke={sectionGlow} strokeWidth="1.8" strokeLinecap="round" />
+        <ellipse cx={35 + eyeShiftX} cy={27 + eyeShiftY} rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
+        <ellipse cx={49 + eyeShiftX} cy={27 + eyeShiftY} rx="3" ry="3.6" fill={`url(#eyeGlow-${activeSection})`} />
+        <circle cx={36.2 + eyeShiftX * 0.7} cy={25.3 + eyeShiftY * 0.6} r="1.1" fill="#fff" opacity="0.95" />
+        <circle cx={50.2 + eyeShiftX * 0.7} cy={25.3 + eyeShiftY * 0.6} r="1.1" fill="#fff" opacity="0.95" />
+        <path d={mouthPath} fill="none" stroke={sectionGlow} strokeWidth="1.8" strokeLinecap="round" />
         <rect x="31" y="46" width="22" height="14" rx="7" fill="#17110d" stroke={`${sectionGlow}66`} strokeWidth="1.2" />
       </svg>
     </motion.div>
