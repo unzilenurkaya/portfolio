@@ -8,8 +8,9 @@ import { experiences, educations } from '@/data/experience';
 import { projects } from '@/data/projects';
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const internshipCount = experiences.filter((item) => item.type === 'internship').length;
+  const cvPath = language === 'en' ? '/cv/unzile-cv-en.pdf' : '/cv/unzile-cv-tr.pdf';
 
   const stats = [
     { labelKey: 'hero.stats.internship', value: String(internshipCount) },
@@ -75,7 +76,7 @@ export default function Hero() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => window.open('/cv.pdf', '_blank')}
+              onClick={() => window.open(cvPath, '_blank')}
             >
               {t('hero.downloadCV')}
             </Button>
