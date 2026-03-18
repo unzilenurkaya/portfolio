@@ -1,8 +1,14 @@
 ---
-title: "Python ile Veri Analizine Başlarken Gerçekten Nereden Başlanmalı?"
-description: "Veri analizine yeni giren biri için araç seçmekten çok, doğru çalışma alışkanlığı kurmanın neden önemli olduğunu anlattığım başlangıç notları."
+title:
+  tr: "Python ile Veri Analizine Başlarken Gerçekten Nereden Başlanmalı?"
+  en: "When Starting Data Analysis with Python, Where Should You Really Begin?"
+description:
+  tr: "Veri analizine yeni giren biri için araç seçmekten çok, doğru çalışma alışkanlığı kurmanın neden önemli olduğunu anlattığım başlangıç notları."
+  en: "Starter notes on why building the right working habits matters more than choosing the perfect tool when you are new to data analysis."
 date: 2025-09-12
-tags: ["Python", "Veri Analizi", "Pandas", "Başlangıç"]
+tags:
+  tr: ["Python", "Veri Analizi", "Pandas", "Başlangıç"]
+  en: ["Python", "Data Analysis", "Pandas", "Beginner"]
 published: true
 ---
 
@@ -96,3 +102,96 @@ Bu tempo hem sıkmadan ilerletiyor hem de gerçekten bir temel oluşturuyor.
 Python ile veri analizine başlamak için mükemmel bir plan gerekmiyor. Ama doğru bir başlangıç mantığı gerekiyor. Benim için bu mantık şu oldu: önce veriyi anlamak, sonra aracı büyütmek.
 
 Ne kadar erken “veriyle konuşmayı” öğrenirsen, sonraki tüm aşamalar o kadar rahat ilerliyor.
+
+<!--en-->
+
+When I first started learning data analysis, the hardest part was not choosing which library to study. It was understanding what I was doing and why. From the outside, everything looks tidy: data comes in, analysis happens, charts appear. But once you get into it, you realize the real challenge is learning how to work with data itself.
+
+My starting point became this: before expanding the toolset, shrink the problem. What is this data telling me? Which question am I trying to answer? What is missing? What is reliable?
+
+## The first goal is not drawing charts, but reading data
+
+Many beginners jump directly into visualization. That is completely natural because seeing results is motivating. But in practice, I think it is healthier to focus on these three steps first:
+
+1. Reading the data correctly
+2. Understanding columns and data types
+3. Spotting missing, incorrect, or duplicated rows
+
+Without that base, analyses often produce outputs that look good but do not feel trustworthy.
+
+## Why Pandas is a strong starting point
+
+For me, Pandas was a turning point in data analysis. Not only because it reads tables, but because it helps organize the way you think.
+
+The first commands I return to most often are usually these:
+
+```python
+import pandas as pd
+
+df = pd.read_csv("veri.csv")
+
+print(df.head())
+print(df.info())
+print(df.isnull().sum())
+```
+
+Even those few lines often give the first real picture of the dataset. Which column is missing values? Which field looks numeric but is actually text? Which parts arrived in an unexpected form? You begin seeing all of that immediately.
+
+## What sequence feels more efficient at the beginning?
+
+If I were advising someone who is starting from zero, I would recommend this order:
+
+### 1. Basic Python
+
+Lists, dictionaries, loops, conditions, functions. Without them, learning data analysis becomes harder because you constantly need small layers of logic while analyzing data.
+
+### 2. Reading and cleaning data with Pandas
+
+Opening CSV files, selecting columns, filtering, inspecting missing values, and understanding the logic of `groupby`.
+
+### 3. Asking simple data questions
+
+For example:
+
+- Which group has the highest value?
+- How does the distribution change by month?
+- Which records repeat most often?
+
+### 4. Visualization at the end
+
+Charts become more meaningful when they come later, because by then you already know what you are trying to show.
+
+## The most common beginner mistake
+
+I think the most common mistake is trying to move into "advanced" topics too quickly. Machine learning, dashboards, modeling, big data... all of them are exciting. But without basic habits in place, growth in data analysis usually does not stay sustainable.
+
+The healthiest development path I have seen is:
+
+- start with small analyses on clean data
+- then focus on solving problems
+- only after that expand the toolset
+
+Because good analysis usually comes less from complicated code and more from a clear question.
+
+## What improved me the most
+
+Working with my own small datasets improved me more than copying ready-made examples. Real learning starts when the data does not arrive the way you expected.
+
+Sometimes the date format is broken. Sometimes numbers arrive as text. Sometimes the same record appears three times. That is the point where data analysis stops being theory and becomes a skill.
+
+## A short suggestion for getting started
+
+If I were starting today, I would plan the first month like this:
+
+- Week one: review core Python
+- Week two: read and filter data with Pandas
+- Week three: missing values, duplicates, summary statistics
+- Week four: a mini analysis on sales, survey, or operations data
+
+That pace helps you move forward without burning out, while still creating a real foundation.
+
+## Final note
+
+You do not need a perfect plan to begin data analysis with Python. But you do need the right starting mindset. For me, that mindset was simple: first understand the data, then expand the tools.
+
+The earlier you learn how to "talk with data," the easier every next stage becomes.

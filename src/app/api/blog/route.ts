@@ -1,10 +1,17 @@
 import { NextResponse } from 'next/server';
 import { getAllPosts, getAllTags } from '@/lib/mdx';
+import { Language } from '@/types';
 
-export async function GET() {
+function getLanguage(input: string | null): Language {
+  return input === 'en' ? 'en' : 'tr';
+}
+
+export async function GET(request: Request) {
   try {
-    const posts = getAllPosts();
-    const tags = getAllTags();
+    const { searchParams } = new URL(request.url);
+    const language = getLanguage(searchParams.get('lang'));
+    const posts = getAllPosts(language);
+    const tags = getAllTags(language);
 
     return NextResponse.json({ posts, tags });
   } catch (error) {

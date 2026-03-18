@@ -65,7 +65,7 @@ export default function Footer() {
             <h4 className="text-white font-medium mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-2 text-sm text-gray-500">
               <li><Link href="/privacy" className="hover:text-primary transition-colors">{t('footer.privacy')}</Link></li>
-              <li><span className="cursor-not-allowed opacity-50">Terms of Service</span></li>
+              <li><span className="cursor-not-allowed opacity-50">{t('footer.terms')}</span></li>
             </ul>
           </div>
         </div>

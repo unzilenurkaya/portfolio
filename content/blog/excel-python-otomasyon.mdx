@@ -1,8 +1,14 @@
 ---
-title: "Excel'de Yürüyen Bir Süreci Python'a Taşımadan Önce Ne Düşünüyorum?"
-description: "Excel ile çalışan bir işi otomasyona çevirmeden önce baktığım işaretleri, riskleri ve karar noktalarını anlattığım pratik bir yazı."
+title:
+  tr: "Excel'de Yürüyen Bir Süreci Python'a Taşımadan Önce Ne Düşünüyorum?"
+  en: "What I Think About Before Moving an Excel-Based Process into Python"
+description:
+  tr: "Excel ile çalışan bir işi otomasyona çevirmeden önce baktığım işaretleri, riskleri ve karar noktalarını anlattığım pratik bir yazı."
+  en: "A practical note on the signals, risks, and decision points I look at before turning an Excel-driven workflow into automation."
 date: 2025-10-03
-tags: ["Python", "Excel", "Otomasyon", "Süreç Yönetimi"]
+tags:
+  tr: ["Python", "Excel", "Otomasyon", "Süreç Yönetimi"]
+  en: ["Python", "Excel", "Automation", "Process Management"]
 published: true
 ---
 
@@ -101,3 +107,101 @@ Excel'den Python'a geçiş bence teknik bir geçişten çok düşünme biçimi d
 Bu yüzden ben otomasyon kararını hep şu cümleyle test ediyorum: Bu işi yapan kişinin yükünü gerçekten azaltıyor muyum?
 
 Eğer cevap evetse, orada Python çoğu zaman doğru araç oluyor.
+
+<!--en-->
+
+Excel is still a very strong tool in many business processes. I think the right approach is not to underestimate it, but to use it where it actually fits. Still, after a certain point, the Excel file stops carrying the workload and the process survives mostly through human effort rather than file structure. That is the point that interests me most.
+
+Before I automate a process with Python, I first ask myself this: is there truly repetitive work here, or is it simply messy work?
+
+Because not every messy process is ready for automation. Sometimes the right first move is to simplify the process itself.
+
+## What signals tell me automation might make sense?
+
+If an Excel-based workflow shows signs like these, I start thinking about automation:
+
+- the same steps repeat every day or every week
+- people constantly copy and paste between multiple files
+- error checking depends on personal attention
+- preparing a report takes far too much time
+- the process becomes dependent on one person
+
+Signals like these usually mean not only "code can be written here," but more importantly, "a system should be built here."
+
+## I do not start by writing code immediately
+
+This is one of the most important points for me. If you start coding before you understand the process, you often end up automating the manual mistake instead of solving it.
+
+So I begin with questions like these:
+
+### 1. What is the input?
+
+What file arrives? Is the format consistent? Does it come every week with the same structure? Can columns be missing?
+
+### 2. Are the rules clear?
+
+What conditions make a row incorrect? Does everyone interpret that the same way?
+
+### 3. What is the output?
+
+Is the goal to generate a report, produce a checklist, or raise an alert?
+
+### 4. Is human approval still needed?
+
+Some processes can be fully automated. In others, the system should only flag issues while the final decision remains with a person. That distinction matters a lot.
+
+## The most critical topic in moving from Excel to Python: rule definition
+
+I think the quality of automation depends on the rule set even before it depends on the code. If business rules are not clear, Python will only produce confusion faster.
+
+For example:
+
+- In which case should a record count as incomplete?
+- In which case should the system trigger a warning?
+- What should be treated as normal?
+
+If those answers are not clear, the automation rarely becomes sustainable.
+
+## Starting small is usually better
+
+If I were doing this, I would not try to transform the entire process at once. I would separate the part that wastes the most time first, such as:
+
+- merging files
+- cleaning date formats
+- detecting duplicate records
+- generating a daily summary report
+
+Once those smaller parts settle into place, the larger system usually grows more naturally.
+
+## Why Python makes a difference here
+
+Because Python does more than process data. It standardizes the process.
+
+If three people can interpret the same file in three different ways, that means inefficiency already exists. But if the same check is performed by a script, the process becomes more consistent. That is where I see the real value of automation: consistency before speed.
+
+## Automation does not solve everything
+
+I especially want to underline this. The goal of automation is not to code every single thing. Sometimes the best solution is only a control layer. Sometimes fixing the file structure is enough.
+
+So good automation is not the solution with the most code. It is the solution that works with the least friction.
+
+## My approach
+
+When I move an Excel-driven process into Python, I usually follow this order:
+
+1. Observe the process
+2. Identify error sources
+3. Write down the rules
+4. Build a small prototype
+5. Review the output with the user
+6. Then turn it into a system
+
+When I move in that sequence, there is less rework and the automation becomes more usable.
+
+## Conclusion
+
+For me, moving from Excel to Python is less a technical shift and more a shift in thinking. The goal is not simply to process files. It is to make repeated work more reliable and more sustainable.
+
+That is why I always test an automation decision with one sentence: am I genuinely reducing the workload of the person doing this job?
+
+If the answer is yes, then Python is usually the right tool.

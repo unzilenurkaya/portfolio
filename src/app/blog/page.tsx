@@ -20,7 +20,7 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/api/blog');
+        const res = await fetch(`/api/blog?lang=${language}`);
         if (res.ok) {
           const data = await res.json();
           setPosts(data.posts);
@@ -32,7 +32,7 @@ export default function BlogPage() {
       }
     };
     fetchData();
-  }, []);
+  }, [language]);
 
   const tagCounts = posts.reduce<Record<string, number>>((acc, post) => {
     post.tags.forEach((tag) => {
@@ -42,15 +42,15 @@ export default function BlogPage() {
   }, {});
 
   const featuredTags = Object.entries(tagCounts)
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'tr'))
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], language === 'tr' ? 'tr' : 'en'))
     .slice(0, 4)
     .map(([tag]) => tag);
 
-  const aiSeriesTags = ['AI Engineering', 'LLM', 'Agent Systems', 'OpenClaw', 'Personal Assistant', 'System Design'];
-  const aiSeriesPosts = posts.filter((post) =>
-    post.tags.some((tag) => aiSeriesTags.includes(tag))
-  );
+  const aiSeriesPosts = posts.filter((post) => post.series === 'ai-engineering');
   const aiSeriesSlugs = new Set(aiSeriesPosts.slice(0, 3).map((post) => post.slug));
+  const heroTopics = language === 'tr'
+    ? ['AI Engineering', 'Agent Sistemleri', 'LLM Is Akislari']
+    : ['AI Engineering', 'Agent Systems', 'LLM Workflows'];
 
   const featuredPost = posts[0];
   const otherPosts = posts.slice(1);
@@ -110,16 +110,18 @@ export default function BlogPage() {
             <div className="max-w-md">
               <p className="text-[11px] uppercase tracking-[0.24em] text-primary/80 mb-4">{t('blog.featured')}</p>
               <h2 className="text-3xl md:text-4xl font-serif text-white leading-tight mb-4">
-                Yapay zeka araçlarını sadece denemek değil, çalışan sistemlere dönüştürmek ilgimi çekiyor.
+                {t('blog.featuredHeadline')}
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Bu alanda yazdığım notlar daha çok OpenClaw, kişisel asistan kurulumu, agent mantığı, LLM araçları ve AI engineering tarafında çalışırken gördüğüm pratik detaylardan oluşuyor.
+                {t('blog.featuredDescription')}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-sm text-white/70">
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">AI Engineering</span>
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Agent Systems</span>
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">LLM Workflows</span>
+              {heroTopics.map((topic) => (
+                <span key={topic} className="px-3 py-1 rounded-full border border-white/10 bg-black/20">
+                  {topic}
+                </span>
+              ))}
             </div>
           </motion.div>
         </section>
@@ -205,7 +207,7 @@ export default function BlogPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
                 >
-                  <BlogCard post={post} seriesLabel="AI Series" />
+                  <BlogCard post={post} seriesLabel={t('blog.seriesBadge')} />
                 </motion.div>
               ))}
             </div>

@@ -88,7 +88,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(true)}
             className="md:hidden w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white"
-            aria-label="Menüyü aç"
+            aria-label={t('common.openMenu')}
             aria-expanded={isMobileMenuOpen}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

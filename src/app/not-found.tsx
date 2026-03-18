@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function NotFound() {
+  const { t } = useLanguage();
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
       <div className="text-center">
@@ -28,11 +31,10 @@ export default function NotFound() {
           className="space-y-4 mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-serif text-white uppercase tracking-wider">
-            SAYFA BULUNAMADI / PAGE NOT FOUND
+            {t('notFound.subtitle')}
           </h2>
           <p className="text-gray-400 max-w-md mx-auto">
-            Aradığınız sayfa mevcut değil veya taşınmış olabilir.
-            The page you are looking for does not exist.
+            {t('notFound.description')}
           </p>
         </motion.div>
 
@@ -46,7 +48,7 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90 transition-opacity uppercase text-xs tracking-widest"
           >
-            Ana Sayfaya Dön / Back to Home
+            {t('notFound.backHome')}
           </Link>
         </motion.div>
 

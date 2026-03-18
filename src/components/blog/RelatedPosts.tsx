@@ -1,14 +1,16 @@
 import { getRelatedPosts } from '@/lib/mdx';
+import { Language } from '@/types';
 import BlogCard from './BlogCard';
 
 interface RelatedPostsProps {
     currentSlug: string;
     tags: string[];
     title: string;
+    language?: Language;
 }
 
-export default function RelatedPosts({ currentSlug, tags, title }: RelatedPostsProps) {
-    const relatedPosts = getRelatedPosts(currentSlug, tags);
+export default function RelatedPosts({ currentSlug, tags, title, language = 'tr' }: RelatedPostsProps) {
+    const relatedPosts = getRelatedPosts(currentSlug, tags, 2, language);
 
     if (relatedPosts.length === 0) return null;
 

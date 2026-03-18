@@ -1,8 +1,14 @@
 ---
-title: "Manuel Bir Süreci Otomasyona Çevirmeden Önce Kendime Sorduğum 6 Soru"
-description: "Her manuel işi otomatikleştirmeden önce sürecin gerçekten buna hazır olup olmadığını anlamak için kullandığım pratik kontrol listesi."
+title:
+  tr: "Manuel Bir Süreci Otomasyona Çevirmeden Önce Kendime Sorduğum 6 Soru"
+  en: "Six Questions I Ask Myself Before Turning a Manual Process into Automation"
+description:
+  tr: "Her manuel işi otomatikleştirmeden önce sürecin gerçekten buna hazır olup olmadığını anlamak için kullandığım pratik kontrol listesi."
+  en: "A practical checklist I use to understand whether a manual process is actually ready to be automated."
 date: 2025-12-02
-tags: ["Otomasyon", "Python", "Süreç Yönetimi", "İş Analizi"]
+tags:
+  tr: ["Otomasyon", "Python", "Süreç Yönetimi", "İş Analizi"]
+  en: ["Automation", "Python", "Process Management", "Business Analysis"]
 published: true
 ---
 
@@ -60,3 +66,60 @@ Bu sorulara evet diyebildiğimde, yazılan kod da daha anlamlı hale geliyor.
 Ben otomasyonu artık “işi kodla” yaklaşımından çok “süreç düşün” yaklaşımıyla ele alıyorum. Çünkü en iyi otomasyon, sadece çalışan değil; güven veren, anlaşılır ve sürdürülebilir olan otomasyondur.
 
 Kısacası, kodu biraz geç yazmak bazen çok daha doğru sonuç veriyor.
+
+<!--en-->
+
+The idea of automation is very attractive at first glance. Especially when a task repeats all the time, your mind immediately goes to "I can solve this with Python." I often think that way too. But over time I noticed something important: not every repetitive task is automatically ready for automation.
+
+That is why I now ask myself a few core questions before I sit down with a process.
+
+## 1. Is the process truly repeating?
+
+Sometimes what repeats is not the work itself, but the confusion around it. If data comes in a different format every week, if the control logic keeps changing, or if decisions vary from person to person, then the first step should be clarifying the process.
+
+## 2. Can the rules actually be written down?
+
+If the phrase "we usually do it like this" appears too often while describing a task, that usually means the process is not ready for automation yet. A system can only work well when the rule is independent of one person's interpretation.
+
+## 3. What is the cost of an error?
+
+A bad automation can sometimes create more harm than a manual mistake. That is why I think it is especially important to consider the impact of failure in areas related to people, finance, reporting, or decision support.
+
+## 4. Is human approval still necessary?
+
+In some cases, I think semi-automation makes more sense than full automation. The system flags issues first, and a person makes the final decision. That model tends to feel safer in risk-sensitive processes.
+
+## 5. Is the gain actually measurable?
+
+If I cannot clearly answer this question, I slow down: what exactly will this automation give us?
+
+For example:
+
+- time savings
+- more consistent reporting
+- earlier error detection
+- less dependency on one person
+
+If the benefit is not clear, the result sometimes stays only as "a project that was technically built."
+
+## 6. Will the person using the process be able to use it comfortably?
+
+I think this point matters a lot. Something can work well technically and still fail as a user experience. If outputs are hard to understand, if file names are confusing, or if error messages are too open to interpretation, the system simply does not get adopted.
+
+## My short internal checklist
+
+Before I start an automation project, the flow in my head now looks like this:
+
+- Is the problem clear?
+- Is the data structured?
+- Is the rule set defined?
+- Is the output truly needed?
+- Will the user actually own this process?
+
+When I can answer yes to those questions, the code I write becomes much more meaningful.
+
+## Conclusion
+
+I now approach automation less with a "just code the task" mindset and more with a "think through the process" mindset. Because the best automation is not only the one that runs. It is the one that feels reliable, understandable, and sustainable.
+
+In short, writing the code a little later sometimes leads to a much better result.

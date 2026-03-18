@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 const COOKIE_CONSENT_KEY = 'cookie-consent';
 
 type ConsentStatus = 'pending' | 'accepted' | 'rejected';
 
 export default function CookieBanner() {
+  const { t } = useLanguage();
   const [consentStatus, setConsentStatus] = useState<ConsentStatus>('pending');
   const [isVisible, setIsVisible] = useState(false);
 
@@ -84,18 +86,17 @@ export default function CookieBanner() {
                 {/* Content */}
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-1">
-                    Cerez Kullanimi
+                    {t('cookie.title')}
                   </h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    Deneyiminizi iyilestirmek icin cerezler kullaniyoruz. 
-                    Devam ederek{' '}
+                    {t('cookie.messagePrefix')}{' '}
                     <Link 
                       href="/privacy" 
                       className="text-primary hover:underline"
                     >
-                      gizlilik politikamizi
+                      {t('cookie.policyLink')}
                     </Link>
-                    {' '}kabul etmis olursunuz.
+                    {' '}{t('cookie.messageSuffix')}
                   </p>
                 </div>
 
@@ -105,13 +106,13 @@ export default function CookieBanner() {
                     onClick={handleReject}
                     className="flex-1 md:flex-none px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors border border-white/10 rounded-lg hover:border-white/20"
                   >
-                    Reddet
+                    {t('cookie.decline')}
                   </button>
                   <button
                     onClick={handleAccept}
                     className="flex-1 md:flex-none px-6 py-2 text-sm bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors"
                   >
-                    Kabul Et
+                    {t('cookie.accept')}
                   </button>
                 </div>
               </div>

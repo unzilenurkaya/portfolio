@@ -199,6 +199,12 @@ export const translations = {
       ctaSecondary: 'İletişime Geç',
       writtenBy: 'Yazan',
       featured: 'Öne Çıkan',
+      featuredHeadline: 'Yapay zeka araçlarını sadece denemek değil, çalışan sistemlere dönüştürmek ilgimi çekiyor.',
+      featuredDescription: 'Bu alanda yazdığım notlar daha çok OpenClaw, kişisel asistan kurulumu, agent mantığı, LLM araçları ve AI engineering tarafında çalışırken gördüğüm pratik detaylardan oluşuyor.',
+      seriesBadge: 'AI Serisi',
+      noteBadge: 'YBS / Veri / Yazılım Notları',
+      shareOnX: 'X üzerinde paylaş',
+      shareOnLinkedIn: 'LinkedIn üzerinde paylaş',
     },
 
     // CV Page
@@ -225,6 +231,7 @@ export const translations = {
       copyright: '© 2026 Ünzile Nur KAYA. Tüm hakları saklıdır.',
       madeWith: 'ile yapıldı',
       privacy: 'Gizlilik Politikası',
+      terms: 'Kullanim Kosullari',
       bio: 'AI destekli yazılım sistemleri geliştirmeyi hedefleyen Yönetim Bilişim Sistemleri öğrencisi.',
       quickLinks: 'Hızlı Erişim',
       legal: 'Yasal',
@@ -238,6 +245,10 @@ export const translations = {
       close: 'Kapat',
       menu: 'Menü',
       language: 'Dil',
+      switchToEnglish: 'İngilizceye geç',
+      switchToTurkish: 'Türkçeye geç',
+      openMenu: 'Menüyü aç',
+      closeMenu: 'Menüyü kapat',
     },
 
     // 404 Page
@@ -256,10 +267,14 @@ export const translations = {
 
     // Cookie Banner
     cookie: {
+      title: 'Çerez Kullanımı',
       message: 'Bu site deneyiminizi iyileştirmek için çerezler kullanır.',
       accept: 'Kabul Et',
       decline: 'Reddet',
       learnMore: 'Daha Fazla',
+      messagePrefix: 'Deneyiminizi iyileştirmek için çerezler kullanıyoruz. Devam ederek',
+      policyLink: 'gizlilik politikamızı',
+      messageSuffix: 'kabul etmiş olursunuz.',
     },
   },
 
@@ -463,6 +478,12 @@ export const translations = {
       ctaSecondary: 'Contact Me',
       writtenBy: 'Written by',
       featured: 'Featured',
+      featuredHeadline: 'What interests me is not just trying AI tools, but turning them into systems that actually work.',
+      featuredDescription: 'These notes mostly focus on OpenClaw, personal assistant setup, agent logic, LLM tooling, and the practical lessons I notice while building in AI engineering.',
+      seriesBadge: 'AI Series',
+      noteBadge: 'MIS / Data / Software Notes',
+      shareOnX: 'Share on X',
+      shareOnLinkedIn: 'Share on LinkedIn',
     },
 
     // CV Page
@@ -489,6 +510,7 @@ export const translations = {
       copyright: '© 2026 Ünzile Nur KAYA. All rights reserved.',
       madeWith: 'Made with',
       privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
       bio: 'Management Information Systems student aiming to develop AI-powered software systems.',
       quickLinks: 'Quick Links',
       legal: 'Legal',
@@ -502,6 +524,10 @@ export const translations = {
       close: 'Close',
       menu: 'Menu',
       language: 'Language',
+      switchToEnglish: 'Switch to English',
+      switchToTurkish: 'Switch to Turkish',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
     },
 
     // 404 Page
@@ -520,10 +546,14 @@ export const translations = {
 
     // Cookie Banner
     cookie: {
+      title: 'Cookie Usage',
       message: 'This site uses cookies to improve your experience.',
       accept: 'Accept',
       decline: 'Decline',
       learnMore: 'Learn More',
+      messagePrefix: 'We use cookies to improve your experience. By continuing, you agree to our',
+      policyLink: 'privacy policy',
+      messageSuffix: '.',
     },
   },
 } as const;

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/mdx';
@@ -12,11 +13,17 @@ import TableOfContents from '@/components/blog/TableOfContents';
 import BlogMeta from '@/components/blog/BlogMeta';
 import BlogNewsletter from '@/components/blog/BlogNewsletter';
 import RelatedPosts from '@/components/blog/RelatedPosts';
+import { translations } from '@/data/translations';
+import { Language } from '@/types';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://unzilenurkaya.com';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
+}
+
+function getLanguageFromCookie(value?: string): Language {
+  return value === 'en' ? 'en' : 'tr';
 }
 
 export async function generateStaticParams() {
@@ -28,11 +35,12 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const language = getLanguageFromCookie((await cookies()).get('portfolio-language')?.value);
+  const post = getPostBySlug(slug, language);
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: language === 'en' ? 'Post Not Found' : 'Yazi Bulunamadi',
     };
   }
 
@@ -73,7 +81,9 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const language = getLanguageFromCookie((await cookies()).get('portfolio-language')?.value);
+  const dictionary = translations[language];
+  const post = getPostBySlug(slug, language);
 
   if (!post || !post.published) {
     notFound();
@@ -113,7 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Blog
+            {dictionary.blog.backToBlog}
           </Link>
 
           {/* Header */}
@@ -141,7 +151,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {`Ünzile Nur KAYA`}
               </div>
               <div className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-400">
-                {`MIS / Data / Software Notes`}
+                {dictionary.blog.noteBadge}
               </div>
             </div>
 
@@ -177,7 +187,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Article Footer */}
           <footer className="mt-20">
             <BlogNewsletter />
-            <RelatedPosts currentSlug={post.slug} tags={post.tags} title="İlgili Yazılar" />
+            <RelatedPosts currentSlug={post.slug} tags={post.tags} title={dictionary.blog.relatedPosts} language={language} />
           </footer>
         </article>
 

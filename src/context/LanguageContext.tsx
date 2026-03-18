@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { Language, LanguageContextType } from '@/types';
 import { translations } from '@/data/translations';
 
@@ -11,6 +12,7 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
+  const router = useRouter();
   const [language, setLanguageState] = useState<Language>('tr');
   const [mounted, setMounted] = useState(false);
 
@@ -20,16 +22,27 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       const savedLang = localStorage.getItem('portfolio-language') as Language;
       if (savedLang && (savedLang === 'tr' || savedLang === 'en')) {
         setLanguageState(savedLang);
+        document.documentElement.lang = savedLang;
+        document.cookie = `portfolio-language=${savedLang}; path=/; max-age=31536000; samesite=lax`;
+        if (savedLang !== 'tr') {
+          router.refresh();
+        }
+        return;
       }
+
+      document.documentElement.lang = 'tr';
+      document.cookie = 'portfolio-language=tr; path=/; max-age=31536000; samesite=lax';
     });
 
     return () => cancelAnimationFrame(frameId);
-  }, []);
+  }, [router]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('portfolio-language', lang);
     document.documentElement.lang = lang;
+    document.cookie = `portfolio-language=${lang}; path=/; max-age=31536000; samesite=lax`;
+    router.refresh();
   };
 
   const t = (key: string): string => {

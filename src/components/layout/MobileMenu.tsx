@@ -49,7 +49,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <button
                 onClick={onClose}
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white"
-                aria-label="Menüyü kapat"
+                aria-label={t('common.closeMenu')}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -79,7 +79,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
             <div className="mt-auto pt-8 border-t border-white/10">
               <div className="flex items-center justify-between">
-                <span className="text-gray-400 text-sm">Dil / Language</span>
+                <span className="text-gray-400 text-sm">{t('common.language')}</span>
                 <LanguageToggle />
               </div>
             </div>

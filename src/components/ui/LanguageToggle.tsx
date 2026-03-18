@@ -5,7 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { Languages } from 'lucide-react';
 
 export default function LanguageToggle() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   const toggleLanguage = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr');
@@ -17,7 +17,7 @@ export default function LanguageToggle() {
       className="relative flex items-center gap-2 px-3 py-2 rounded-full glass-card hover:border-primary/30 transition-all duration-300 group"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      aria-label={`Switch to ${language === 'tr' ? 'English' : 'Turkish'}`}
+      aria-label={language === 'tr' ? t('common.switchToEnglish') : t('common.switchToTurkish')}
     >
       <Languages className="w-4 h-4 text-white/70 group-hover:text-primary transition-colors" />
       <span className="text-sm font-medium text-white/90 group-hover:text-white transition-colors">

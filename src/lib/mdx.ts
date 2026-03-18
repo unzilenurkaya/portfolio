@@ -2,8 +2,23 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
+import { Language } from '@/types';
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+
+interface LocalizedString {
+  tr?: string;
+  en?: string;
+}
+
+type LocalizedStringOrArray =
+  | string
+  | string[]
+  | LocalizedString
+  | {
+      tr?: string[];
+      en?: string[];
+    };
 
 export interface BlogPostMeta {
   slug: string;
@@ -14,6 +29,7 @@ export interface BlogPostMeta {
   readingTime: string;
   published: boolean;
   image?: string;
+  series?: string;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -33,11 +49,11 @@ export function getAllPostSlugs(): string[] {
 }
 
 // Get all blog posts metadata (for listing)
-export function getAllPosts(): BlogPostMeta[] {
+export function getAllPosts(language: Language = 'tr'): BlogPostMeta[] {
   const slugs = getAllPostSlugs();
 
   const posts = slugs
-    .map((slug) => getPostBySlug(slug))
+    .map((slug) => getPostBySlug(slug, language))
     .filter((post): post is BlogPost => post !== null && post.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -45,7 +61,7 @@ export function getAllPosts(): BlogPostMeta[] {
 }
 
 // Get a single blog post by slug
-export function getPostBySlug(slug: string): BlogPost | null {
+export function getPostBySlug(slug: string, language: Language = 'tr'): BlogPost | null {
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
 
   if (!fs.existsSync(filePath)) {
@@ -54,32 +70,34 @@ export function getPostBySlug(slug: string): BlogPost | null {
 
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(fileContent);
-  const stats = readingTime(content);
+  const localizedContent = getLocalizedContent(content, language);
+  const stats = readingTime(localizedContent);
 
   return {
     slug,
-    title: data.title || 'Untitled',
-    description: data.description || '',
+    title: getLocalizedString(data.title, language) || 'Untitled',
+    description: getLocalizedString(data.description, language) || '',
     date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
-    tags: data.tags || [],
+    tags: getLocalizedArray(data.tags, language),
     readingTime: `${Math.ceil(stats.minutes)}`,
     published: data.published !== false,
     image: data.image,
-    content,
+    series: data.series,
+    content: localizedContent,
   };
 }
 
 // Get posts by tag
-export function getPostsByTag(tag: string): BlogPostMeta[] {
-  const allPosts = getAllPosts();
+export function getPostsByTag(tag: string, language: Language = 'tr'): BlogPostMeta[] {
+  const allPosts = getAllPosts(language);
   return allPosts.filter((post) =>
-    post.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
+    post.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
   );
 }
 
 // Get all unique tags
-export function getAllTags(): string[] {
-  const allPosts = getAllPosts();
+export function getAllTags(language: Language = 'tr'): string[] {
+  const allPosts = getAllPosts(language);
   const tagsSet = new Set<string>();
 
   allPosts.forEach((post) => {
@@ -90,15 +108,15 @@ export function getAllTags(): string[] {
 }
 
 // Get related posts by tags
-export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2): BlogPostMeta[] {
-  const allPosts = getAllPosts();
+export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2, language: Language = 'tr'): BlogPostMeta[] {
+  const allPosts = getAllPosts(language);
 
   return allPosts
     .filter((post) => post.slug !== currentSlug) // Exclude current post
     .map((post) => {
       // Calculate how many tags match
       const matchCount = post.tags.filter((tag) =>
-        tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
+        tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
       ).length;
       return { ...post, matchCount };
     })
@@ -110,4 +128,42 @@ export function getRelatedPosts(currentSlug: string, tags: string[], limit = 2):
       void matchCount;
       return rest;
     });
+}
+
+function getLocalizedString(value: LocalizedStringOrArray | undefined, language: Language): string {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const localized = value as LocalizedString;
+    return localized[language] || localized.tr || localized.en || '';
+  }
+
+  return '';
+}
+
+function getLocalizedArray(value: LocalizedStringOrArray | undefined, language: Language): string[] {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (value && typeof value === 'object') {
+    const localized = value as { tr?: string[]; en?: string[] };
+    return localized[language] || localized.tr || localized.en || [];
+  }
+
+  return [];
+}
+
+function getLocalizedContent(content: string, language: Language): string {
+  const [trContent, enContent] = content.split('\n<!--en-->\n');
+  const trimmedTr = trContent.trim();
+  const trimmedEn = enContent?.trim();
+
+  if (language === 'en' && trimmedEn) {
+    return trimmedEn;
+  }
+
+  return trimmedTr;
 }
