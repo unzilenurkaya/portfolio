@@ -55,6 +55,7 @@ export default function VirtualAssistant() {
   const [isListening, setIsListening] = useState(false);
   const messageCounter = useRef(1);
   const wakeCounter = useRef(1);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const quickActions = useMemo(
     () => [
@@ -191,6 +192,18 @@ export default function VirtualAssistant() {
 
     return () => window.clearTimeout(timeoutId);
   }, [activeSection, isOpen, liveContext, t]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isOpen, messages, isThinking, isListening]);
 
   const toggleAssistant = () => {
     setIsOpen((current) => !current);
@@ -410,6 +423,7 @@ export default function VirtualAssistant() {
                       </div>
                     </div>
                   )}
+                  <div ref={messagesEndRef} />
                 </div>
 
                 <div className="mb-4 flex flex-wrap gap-2">
