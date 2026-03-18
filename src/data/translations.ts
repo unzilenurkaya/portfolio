@@ -180,7 +180,7 @@ export const translations = {
     // Blog
     blog: {
       title: 'Blog',
-      subtitle: 'Veri analizi, yazılım geliştirme, staj deneyimleri ve üretim sürecimde öğrendiklerimi paylaştığım notlar.',
+      subtitle: 'AI engineering, agent sistemleri, LLM araçları ve üretim sürecimde öğrendiklerimi paylaştığım çalışma notları.',
       readMore: 'Devamını Oku',
       readingTime: 'dk okuma',
       backToBlog: 'Bloga Dön',
@@ -442,7 +442,7 @@ export const translations = {
     // Blog
     blog: {
       title: 'Blog',
-      subtitle: 'Notes where I share what I learn in data analysis, software development, internships, and my production process.',
+      subtitle: 'Working notes where I share what I learn in AI engineering, agent systems, LLM tools, and my production process.',
       readMore: 'Read More',
       readingTime: 'min read',
       backToBlog: 'Back to Blog',

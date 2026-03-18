@@ -94,16 +94,16 @@ export default function BlogPage() {
             <div className="max-w-md">
               <p className="text-[11px] uppercase tracking-[0.24em] text-primary/80 mb-4">{t('blog.featured')}</p>
               <h2 className="text-3xl md:text-4xl font-serif text-white leading-tight mb-4">
-                Öğrendiğim şeyleri sadece not almak yerine, anlaşılır hale getirip paylaşmayı seviyorum.
+                Yapay zeka araçlarını sadece denemek değil, çalışan sistemlere dönüştürmek ilgimi çekiyor.
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Buradaki yazılar daha çok gerçek deneyimlerden, staj süreçlerinden, veri tarafında karşılaştığım sorunlardan ve üretirken öğrendiğim küçük ama etkili detaylardan oluşuyor.
+                Bu alanda yazdığım notlar daha çok OpenClaw, kişisel asistan kurulumu, agent mantığı, LLM araçları ve AI engineering tarafında çalışırken gördüğüm pratik detaylardan oluşuyor.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-sm text-white/70">
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Python</span>
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Veri Analizi</span>
-              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Kariyer Notları</span>
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">AI Engineering</span>
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">Agent Systems</span>
+              <span className="px-3 py-1 rounded-full border border-white/10 bg-black/20">LLM Workflows</span>
             </div>
           </motion.div>
         </section>
