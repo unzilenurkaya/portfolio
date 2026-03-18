@@ -6,7 +6,10 @@ const siteContext = `
 You are the on-site assistant for Unzile Nur Kaya's portfolio.
 
 Facts about the site:
-- The owner focuses on AI engineering, automation, data-driven systems, and software development.
+- The correct full name is "Ünzile Nur KAYA". Always preserve Turkish characters correctly.
+- Never write the name as "Unzile", "Unzile Nur", or any ASCII-only variation.
+- The owner is not a professional engineer. Do not call her "mühendis", "engineer", or imply she already holds an engineering title.
+- The owner is a Management Information Systems student focused on AI engineering, automation, data-driven systems, and software development.
 - Main sections on the home page: about, skills, projects, experience, certificates, contact.
 - There is a dedicated blog page with AI engineering posts, including OpenClaw, personal assistant systems, and LLM workflow notes.
 - There is a CV/resume page.
@@ -23,6 +26,9 @@ Return JSON only in this exact shape:
 {"reply":"...","action":"projects|cv|blog|contact|about|fallback"}
 
 Keep replies short, warm, and practical.
+If the current language is Turkish, reply in natural Turkish with proper Turkish characters.
+If the current language is English, reply in natural English.
+Prefer wording like "Yönetim Bilişim Sistemleri öğrencisi", "AI odaklı geliştirici", "AI engineering odağı", "software developer", or "MIS student" where appropriate.
 `;
 
 function extractTextFromCandidate(data: unknown): string {
@@ -54,6 +60,16 @@ function parseAssistantResponse(raw: string) {
       action: 'fallback' as AssistantAction,
     };
   }
+}
+
+function sanitizeReply(reply: string, language: 'tr' | 'en' = 'tr') {
+  return reply
+    .replace(/\bUnzile\b/g, 'Ünzile')
+    .replace(/\bUnzile Nur\b/g, 'Ünzile Nur')
+    .replace(/\bUnzile Nur Kaya\b/g, 'Ünzile Nur KAYA')
+    .replace(/\bÜnzile Nur Kaya\b/g, 'Ünzile Nur KAYA')
+    .replace(/\bmühendis\b/gi, language === 'tr' ? 'geliştirici' : 'developer')
+    .replace(/\bengineer\b/gi, language === 'en' ? 'developer' : 'geliştirici');
 }
 
 async function requestGemini(prompt: string, apiKey: string) {
@@ -168,7 +184,10 @@ User message: ${message}
     if (geminiApiKey) {
       try {
         const geminiResult = await requestGemini(prompt, geminiApiKey);
-        return NextResponse.json(geminiResult);
+        return NextResponse.json({
+          ...geminiResult,
+          reply: sanitizeReply(geminiResult.reply, language),
+        });
       } catch (error) {
         if (!openRouterApiKey) {
           return NextResponse.json(
@@ -189,7 +208,10 @@ User message: ${message}
     if (openRouterApiKey) {
       try {
         const openRouterResult = await requestOpenRouter(prompt, openRouterApiKey);
-        return NextResponse.json(openRouterResult);
+        return NextResponse.json({
+          ...openRouterResult,
+          reply: sanitizeReply(openRouterResult.reply, language),
+        });
       } catch (error) {
         return NextResponse.json(
           {
