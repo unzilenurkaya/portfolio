@@ -84,7 +84,7 @@ export default function CVPage() {
             {/* Profile Photo */}
             <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-primary/50 flex-shrink-0 relative print:border-gray-300">
               <Image
-                src="/images/cv-profile.png"
+                src="/images/cv-photo.jpg"
                 alt="Ünzile Nur KAYA"
                 fill
                 className="object-cover"
