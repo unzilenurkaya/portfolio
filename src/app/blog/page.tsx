@@ -14,7 +14,6 @@ import { formatDate } from '@/lib/utils';
 export default function BlogPage() {
   const { t, language } = useLanguage();
   const [posts, setPosts] = useState<BlogPostMeta[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,17 +24,27 @@ export default function BlogPage() {
         if (res.ok) {
           const data = await res.json();
           setPosts(data.posts);
-          setTags(data.tags);
         }
       } catch {
         setPosts([]);
-        setTags([]);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  const tagCounts = posts.reduce<Record<string, number>>((acc, post) => {
+    post.tags.forEach((tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+    });
+    return acc;
+  }, {});
+
+  const featuredTags = Object.entries(tagCounts)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'tr'))
+    .slice(0, 4)
+    .map(([tag]) => tag);
 
   const featuredPost = posts[0];
   const otherPosts = posts.slice(1);
@@ -76,7 +85,7 @@ export default function BlogPage() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500 mb-2">{t('blog.focusLabel')}</p>
-                <p className="text-3xl font-serif text-white">{tags.length || '0'}</p>
+                <p className="text-3xl font-serif text-white">{featuredTags.length || '0'}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500 mb-2">{t('blog.writtenBy')}</p>
@@ -173,29 +182,31 @@ export default function BlogPage() {
 
         {/* Filters & Grid Container */}
         <section>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-            <h2 className="text-2xl font-serif text-white">
+          <div className="flex flex-col items-start gap-6 mb-12">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full">
+              <h2 className="text-2xl font-serif text-white">
               {selectedTag ? `${t('projects.filters.all')} / ${selectedTag}` : t('blog.latestPosts')}
-            </h2>
+              </h2>
+            </div>
 
             {/* Tags Filter */}
-            <div className="flex flex-wrap justify-center md:justify-end gap-2">
+            <div className="flex flex-wrap gap-2 max-w-3xl">
               <button
                 onClick={() => setSelectedTag(null)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${selectedTag === null
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedTag === null
                     ? 'bg-primary text-black shadow-lg shadow-primary/20'
-                    : 'bg-white/5 text-white/50 hover:bg-white/10 border border-white/10'
+                    : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
                   }`}
               >
                 {t('projects.filters.all')}
               </button>
-              {tags.map((tag) => (
+              {featuredTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${selectedTag === tag
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedTag === tag
                       ? 'bg-primary text-black shadow-lg shadow-primary/20'
-                      : 'bg-white/5 text-white/50 hover:bg-white/10 border border-white/10'
+                      : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
                     }`}
                 >
                   {tag}
