@@ -6,6 +6,7 @@ import Footer from './Footer';
 import FluidCursor from '../ui/FluidCursor';
 import ScrollToTop from '../ui/ScrollToTop';
 import CookieBanner from '../ui/CookieBanner';
+import VirtualAssistant from '../ui/VirtualAssistant';
 import { Toaster } from 'sonner';
 
 interface ClientLayoutProps {
@@ -22,6 +23,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             </main>
             <Footer />
             <ScrollToTop />
+            <VirtualAssistant />
             <CookieBanner />
             <Toaster
                 position="top-right"

@@ -276,6 +276,37 @@ export const translations = {
       policyLink: 'gizlilik politikamızı',
       messageSuffix: 'kabul etmiş olursunuz.',
     },
+
+    assistant: {
+      name: "Ünzile'nin Asistanı",
+      status: 'Site rehberi aktif',
+      intro: 'Merhaba. Projeler, blog, CV ve iletisim gibi alanlarda sana hizlica rehberlik edebilirim.',
+      placeholder: 'Bir sey sor...',
+      openLabel: 'Asistani ac',
+      closeLabel: 'Asistani kapat',
+      sendLabel: 'Mesaji gonder',
+      hint: 'Projeleri acabilir, CV sayfasina goturebilir veya AI blog yazilarini one cikarabilirim.',
+      chips: {
+        projects: 'Projeler',
+        cv: 'CV',
+        blog: 'AI Blog',
+        contact: 'Iletisim',
+      },
+      prompts: {
+        projects: 'Projeleri goster',
+        cv: 'CV sayfasina git',
+        blog: 'AI blog yazilarini ac',
+        contact: 'Iletisim bolumune git',
+      },
+      replies: {
+        projects: 'Projeler bolumune gidiyorum. Burada otomasyon, makine ogrenmesi ve sosyal etki odakli islerini gorebilirsin.',
+        cv: 'CV sayfasi hazir. Egitim, deneyim ve teknik odagini tek yerde inceleyebilirsin.',
+        blog: 'AI engineering serisini aciyorum. OpenClaw, kisisel asistan ve LLM sistemleri notlari ustte seni karsilar.',
+        contact: 'Iletisim bolumune gidiyorum. Buradan e-posta ya da form uzerinden kolayca ulasabilirsin.',
+        about: 'Hakkimda bolumune gidiyorum. Burada odagin, egitim cizgin ve calisma tarzini daha net gorebilirsin.',
+        fallback: 'Seni site icinde yonlendirebilirim. Projeler, blog, CV, hakkimda veya iletisim yazman yeterli.',
+      },
+    },
   },
 
   en: {
@@ -554,6 +585,37 @@ export const translations = {
       messagePrefix: 'We use cookies to improve your experience. By continuing, you agree to our',
       policyLink: 'privacy policy',
       messageSuffix: '.',
+    },
+
+    assistant: {
+      name: "Ünzile's Assistant",
+      status: 'Site guide active',
+      intro: 'Hello. I can quickly guide you through projects, blog posts, the resume page, and contact options.',
+      placeholder: 'Ask something...',
+      openLabel: 'Open assistant',
+      closeLabel: 'Close assistant',
+      sendLabel: 'Send message',
+      hint: 'I can open projects, take you to the resume page, or highlight AI-focused blog posts.',
+      chips: {
+        projects: 'Projects',
+        cv: 'Resume',
+        blog: 'AI Blog',
+        contact: 'Contact',
+      },
+      prompts: {
+        projects: 'Show the projects',
+        cv: 'Go to the resume page',
+        blog: 'Open the AI blog posts',
+        contact: 'Go to the contact section',
+      },
+      replies: {
+        projects: 'Taking you to the projects section. You can explore work focused on automation, machine learning, and social impact there.',
+        cv: 'Opening the resume page. You can review education, experience, and technical focus in one place.',
+        blog: 'Opening the AI engineering series. OpenClaw, personal assistant, and LLM system notes will greet you first.',
+        contact: 'Taking you to the contact section. You can reach out quickly by form or email from there.',
+        about: 'Taking you to the about section. It gives a clearer view of the focus, education path, and working style behind the portfolio.',
+        fallback: 'I can guide you around the site. Try asking for projects, blog, resume, about, or contact.',
+      },
     },
   },
 } as const;
