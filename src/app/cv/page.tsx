@@ -16,7 +16,8 @@ export default function CVPage() {
   };
 
   const handleDownload = () => {
-    window.open('/cv.pdf', '_blank');
+    const cvPath = language === 'en' ? '/cv/unzile-cv-en.pdf' : '/cv/unzile-cv-tr.pdf';
+    window.open(cvPath, '_blank');
   };
 
   const experienceEntries = experiences.filter((e) => e.type !== 'education');
